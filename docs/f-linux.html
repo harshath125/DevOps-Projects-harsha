@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linux · DevOps Academy — learn DevOps by shipping 11 real projects</title>
+<meta name="description" content="The server is your workspace. This page is the whole survival kit: filesystem, permissions, processes, ports, services, logs, disk.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%230f172a%22/%3E%3Ctext%20x%3D%2216%22%20y%3D%2221%22%20font-family%3D%22ui-monospace%2Cmonospace%22%20font-size%3D%2212%22%20font-weight%3D%22700%22%20fill%3D%22%235eead4%22%20text-anchor%3D%22middle%22%3E%26gt%3B_%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="canonical" href="">
+<script src="assets/js/app.js" defer></script>
+<script>(function(){try{var t=localStorage.getItem("aca.theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}})();</script>
+</head>
+<body data-page="f-linux" data-kind="page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <button class="iconbtn menubtn" data-drawer="1" aria-label="Open navigation">
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <a class="brand" href="index.html"><span class="mark">ACA</span><span class="brandtext">DevOps Academy</span></a>
+  <nav class="topnav"><a href="roadmap.html">Roadmap</a><a href="p1-cloud-core.html">Cloud core concepts</a><a href="projects.html">Projects index</a><a href="p2-devsecops-core.html">DevSecOps core</a><a href="labs.html">Virtual labs</a><a href="interview.html">Interview bank</a><a href="troubleshoot.html">Troubleshooting</a></nav>
+  <div class="topright">
+    <button class="iconbtn" data-search-open aria-label="Search" title="Search (/ )">
+      <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" d="M16 16l4.5 4.5"/></svg>
+    </button>
+    <button class="iconbtn" data-theme-toggle aria-label="Switch light or dark theme" title="Theme">
+      <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M12 3v2m0 14v2m9-9h-2M5 12H3m14.5-6.5-1.4 1.4M8.9 15.1l-1.4 1.4m0-12 1.4 1.4m6.2 6.2 1.4 1.4M12 8.2a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6Z"/></svg>
+    </button>
+  </div>
+</header>
+<div class="progress" data-progress-bar aria-hidden="true"></div>
+<div class="layout">
+  <aside class="sidebar" data-drawer-target>
+    <div class="sidehead">
+      <span class="sidetitle">Curriculum</span>
+      <span class="sideprogress" data-progress-label></span>
+    </div>
+    <nav class="nav"><p class="navsec">Start here</p><a class="" href="roadmap.html" data-nav-page="roadmap"><span class="pdot" data-done-dot="roadmap"></span>Roadmap</a><p class="navsec">Foundation</p><a class="current" href="f-linux.html" data-nav-page="f-linux"><span class="pdot" data-done-dot="f-linux"></span>Linux<em class="tag linux">LINUX</em></a><a class="" href="f-networking.html" data-nav-page="f-networking"><span class="pdot" data-done-dot="f-networking"></span>Networking + shell<em class="tag net">NET</em></a><a class="" href="f-git-github.html" data-nav-page="f-git-github"><span class="pdot" data-done-dot="f-git-github"></span>Git + GitHub<em class="tag git">GIT</em></a><a class="" href="f-docker.html" data-nav-page="f-docker"><span class="pdot" data-done-dot="f-docker"></span>Docker + Compose<em class="tag docker">DOCKER</em></a><p class="navsec">Phase 1 · Core DevOps</p><a class="" href="p1-cloud-core.html" data-nav-page="p1-cloud-core"><span class="pdot" data-done-dot="p1-cloud-core"></span>Cloud core concepts<em class="tag cloud">CLOUD</em></a><a class="" href="p1-aws.html" data-nav-page="p1-aws"><span class="pdot" data-done-dot="p1-aws"></span>AWS<em class="tag aws">AWS</em></a><a class="" href="p1-azure-gcp.html" data-nav-page="p1-azure-gcp"><span class="pdot" data-done-dot="p1-azure-gcp"></span>Azure + GCP<em class="tag azure">AZURE</em></a><a class="" href="p1-terraform.html" data-nav-page="p1-terraform"><span class="pdot" data-done-dot="p1-terraform"></span>Terraform<em class="tag iac">IAC</em></a><a class="" href="p1-kubernetes.html" data-nav-page="p1-kubernetes"><span class="pdot" data-done-dot="p1-kubernetes"></span>Kubernetes<em class="tag k8s">K8S</em></a><a class="" href="p1-cicd.html" data-nav-page="p1-cicd"><span class="pdot" data-done-dot="p1-cicd"></span>CI/CD<em class="tag cicd">CICD</em></a><a class="" href="p1-observability.html" data-nav-page="p1-observability"><span class="pdot" data-done-dot="p1-observability"></span>Observability<em class="tag obs">OBS</em></a><a class="" href="p1-multicloud.html" data-nav-page="p1-multicloud"><span class="pdot" data-done-dot="p1-multicloud"></span>Multicloud<em class="tag cloud">CLOUD</em></a><p class="navsec">Projects</p><a class="" href="projects.html" data-nav-page="projects"><span class="pdot" data-done-dot="projects"></span>Projects index<em class="tag proj">PROJ</em></a><a class="" href="proj-01-healthcare.html" data-nav-page="proj-01-healthcare"><span class="pdot" data-done-dot="proj-01-healthcare"></span>01 · Healthcare on a Linux VM<em class="tag proj">PROJ</em></a><a class="" href="proj-02-ecommerce.html" data-nav-page="proj-02-ecommerce"><span class="pdot" data-done-dot="proj-02-ecommerce"></span>02 · E-commerce in Docker<em class="tag docker">DOCKER</em></a><a class="" href="proj-03-banking.html" data-nav-page="proj-03-banking"><span class="pdot" data-done-dot="proj-03-banking"></span>03 · Banking with Terraform<em class="tag iac">IAC</em></a><a class="" href="proj-04-retail.html" data-nav-page="proj-04-retail"><span class="pdot" data-done-dot="proj-04-retail"></span>04 · Retail on ECS<em class="tag aws">AWS</em></a><a class="" href="proj-05-telecom.html" data-nav-page="proj-05-telecom"><span class="pdot" data-done-dot="proj-05-telecom"></span>05 · Telecom on Kubernetes<em class="tag k8s">K8S</em></a><a class="" href="proj-06-fintech.html" data-nav-page="proj-06-fintech"><span class="pdot" data-done-dot="proj-06-fintech"></span>06 · FinTech microservices<em class="tag sec">SEC</em></a><a class="" href="proj-07-insurance.html" data-nav-page="proj-07-insurance"><span class="pdot" data-done-dot="proj-07-insurance"></span>07 · Insurance on Azure DevOps<em class="tag azure">AZURE</em></a><a class="" href="proj-08-saas.html" data-nav-page="proj-08-saas"><span class="pdot" data-done-dot="proj-08-saas"></span>08 · SaaS multi-tenant<em class="tag aws">AWS</em></a><a class="" href="proj-09-multicloud.html" data-nav-page="proj-09-multicloud"><span class="pdot" data-done-dot="proj-09-multicloud"></span>09 · Multicloud<em class="tag cloud">CLOUD</em></a><a class="" href="proj-10-capstone.html" data-nav-page="proj-10-capstone"><span class="pdot" data-done-dot="proj-10-capstone"></span>10 · Capstone<em class="tag proj">PROJ</em></a><a class="" href="proj-11-mega.html" data-nav-page="proj-11-mega"><span class="pdot" data-done-dot="proj-11-mega"></span>11 · Mega project<em class="tag sec">SEC</em></a><p class="navsec">Phase 2 · DevSecOps</p><a class="" href="p2-devsecops-core.html" data-nav-page="p2-devsecops-core"><span class="pdot" data-done-dot="p2-devsecops-core"></span>DevSecOps core<em class="tag sec">SEC</em></a><a class="" href="p2-secrets-iam.html" data-nav-page="p2-secrets-iam"><span class="pdot" data-done-dot="p2-secrets-iam"></span>Secrets + IAM<em class="tag sec">SEC</em></a><a class="" href="p2-scanning.html" data-nav-page="p2-scanning"><span class="pdot" data-done-dot="p2-scanning"></span>Scanning + gates<em class="tag sec">SEC</em></a><a class="" href="p2-runtime-sec.html" data-nav-page="p2-runtime-sec"><span class="pdot" data-done-dot="p2-runtime-sec"></span>Runtime + K8s security<em class="tag sec">SEC</em></a><a class="" href="aiops.html" data-nav-page="aiops"><span class="pdot" data-done-dot="aiops"></span>AIOps on GCP<em class="tag gcp">GCP</em></a><a class="" href="mlops.html" data-nav-page="mlops"><span class="pdot" data-done-dot="mlops"></span>MLOps on GCP<em class="tag gcp">GCP</em></a><p class="navsec">Practice</p><a class="" href="labs.html" data-nav-page="labs"><span class="pdot" data-done-dot="labs"></span>Virtual labs<em class="tag lab">LAB</em></a><a class="" href="revision.html" data-nav-page="revision"><span class="pdot" data-done-dot="revision"></span>Revision sheets</a><a class="" href="test-me.html" data-nav-page="test-me"><span class="pdot" data-done-dot="test-me"></span>Test me<em class="tag test">TEST</em></a><p class="navsec">Career</p><a class="" href="interview.html" data-nav-page="interview"><span class="pdot" data-done-dot="interview"></span>Interview bank<em class="tag int">INT</em></a><a class="" href="interview-scenarios.html" data-nav-page="interview-scenarios"><span class="pdot" data-done-dot="interview-scenarios"></span>Scenario rounds<em class="tag int">INT</em></a><a class="" href="troubleshoot.html" data-nav-page="troubleshoot"><span class="pdot" data-done-dot="troubleshoot"></span>Troubleshooting<em class="tag ops">OPS</em></a><a class="" href="resume.html" data-nav-page="resume"><span class="pdot" data-done-dot="resume"></span>Resume + portfolio<em class="tag career">CAREER</em></a><p class="navsec">Site</p><a class="" href="resources.html" data-nav-page="resources"><span class="pdot" data-done-dot="resources"></span>Resources</a><a class="" href="deployment-guide.html" data-nav-page="deployment-guide"><span class="pdot" data-done-dot="deployment-guide"></span>Publish this site</a></nav>
+    <div class="sidefoot">
+      <p>Everything here is offline-first: no account, no tracking, no backend. Your progress and answers stay in this browser.</p>
+    </div>
+  </aside>
+  <main id="main">
+    <article class="page">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span>Foundation<span>/</span><b>Linux</b></nav>
+      <header class="hero"><p class="kicker">Foundation</p><h1>Linux for DevOps engineers: the 35 commands and the failures they explain</h1><p class="herotext">The server is your workspace. This page is the whole survival kit: filesystem, permissions, processes, ports, services, logs, disk.</p><div class="herometa"><span class="mchip">3 h</span><span class="mchip tag linux">LINUX</span></div></header>
+      <details class="toc" open><summary>On this page</summary><ul><li class="l2"><a href="#what-a-linux-server-is-from-a-devops-point-of-view">What a Linux server is, from a DevOps point of view</a></li><li class="l2"><a href="#the-35-commands-grouped-by-job">The 35 commands, grouped by job</a></li><li class="l2"><a href="#step-1-look-around-before-you-touch-anything">STEP 1 — Look around before you touch anything</a></li><li class="l2"><a href="#step-2-users-permissions-and-the-classic-it-works-as-root">STEP 2 — Users, permissions, and the classic “it works as root”</a></li><li class="l2"><a href="#step-3-systemd-how-an-application-survives-a-reboot">STEP 3 — systemd: how an application survives a reboot</a></li><li class="l2"><a href="#step-4-processes-ports-disk-the-three-checks-of-any-incident">STEP 4 — Processes, ports, disk: the three checks of any incident</a></li><li class="l3"><a href="#processes">Processes</a></li><li class="l3"><a href="#ports">Ports</a></li><li class="l3"><a href="#disk">Disk</a></li><li class="l2"><a href="#step-5-read-logs-like-a-professional-three-commands">STEP 5 — Read logs like a professional (three commands)</a></li><li class="l2"><a href="#step-6-a-15-line-shell-script-that-is-actually-production-shaped">STEP 6 — A 15-line shell script that is actually production-shaped</a></li><li class="l2"><a href="#production-scenario-the-appointment-search-is-slow-every-morning-at-9">Production scenario — “the appointment search is slow every morning at 9”</a></li><li class="l2"><a href="#common-mistakes">Common mistakes</a></li><li class="l2"><a href="#best-practices-you-can-adopt-from-day-one">Best practices you can adopt from day one</a></li><li class="l2"><a href="#interview-answer-60-seconds-out-loud">Interview answer (60 seconds, out loud)</a></li><li class="l2"><a href="#virtual-lab-linux-drill-simulated-terminal">Virtual lab — Linux drill (simulated terminal)</a></li><li class="l2"><a href="#commands-to-remember">Commands to remember</a></li></ul></details>
+      <div class="prose"><p class="lead">You will live in this shell for your whole DevOps career. Not to become a Linux administrator — you are not here to manage 500 servers by hand — but because every application you receive, every container you build and every cloud VM you provision sits on Linux, and when something breaks at 2 a.m. the only thing between you and the answer is <code>ssh</code> plus these commands.</p>
+<p>You need roughly 35 Linux commands. Not 300. This page is those 35, in the order you will actually use them, with the failure patterns that beginners lose whole days to.</p>
+<h2 id="what-a-linux-server-is-from-a-devops-point-of-view">What a Linux server is, from a DevOps point of view</h2>
+<div class="callout why"><p class="ctitle"><strong>WHAT IT IS, IN ONE PARAGRAPH</strong></p><p>A Linux server is just another person's computer that you control through a text door (SSH). It has a filesystem, users, running processes, listening ports, disks and log files. That is your entire mental model. Everything else — systemd, SELinux, cgroups, namespaces — is detail you learn when it blocks you.</p></div>
+<div class="flow"><span class="fnode">You (laptop)</span><span class="farrow">→</span><span class="fnode">ssh</span><span class="farrow">→</span><span class="fnode">cloud VM (Linux)</span><span class="farrow">→</span><span class="fnode wide">inside the VM: a process listens on a port</span><span class="fnode wide">a firewall / security group decides who may reach that port</span><span class="fnode wide">the app writes logs to /var/log (or journald)</span><span class="fnode">disk, CPU and memory are finite</span><span class="farrow">→</span><span class="fnode">70% of “mysterious” failures live here</span><span class="farrow">→</span></div>
+<p><strong>Mental model to keep.</strong> An application on a server does exactly three observable things:</p>
+<ol class="numlist"><li>it runs as a <strong>process</strong> (<code>ps</code>, <code>top</code>, <code>systemctl status</code>),</li><li>it listens on a <strong>port</strong> (<code>ss -lntp</code>, <code>curl</code>),</li><li>it writes to <strong>files and logs</strong> (<code>ls</code>, <code>cat</code>, <code>tail</code>, <code>journalctl</code>).</li></ol>
+<p>When something is “down”, one of those three is wrong. Always.</p>
+<h2 id="the-35-commands-grouped-by-job">The 35 commands, grouped by job</h2>
+<div class="tablewrap"><table><thead><tr><th class="al-left">Job</th><th class="al-left">Commands</th><th class="al-left">You will use them</th></tr></thead><tbody><tr><td class="al-left">Where am I?</td><td class="al-left"><code>pwd</code> <code>ls -la</code> <code>cd</code> <code>find . -maxdepth 2 -type f</code> <code>du -sh *</code></td><td class="al-left">every day</td></tr><tr><td class="al-left">Read files</td><td class="al-left"><code>cat</code> <code>less</code> <code>head</code> <code>tail -f</code> <code>grep -R</code> <code>wc -l</code> <code>sort</code> <code>uniq -c</code> <code>cut</code></td><td class="al-left">every day</td></tr><tr><td class="al-left">Edit / create</td><td class="al-left"><code>nano</code> <code>touch</code> <code>cp</code> <code>mv</code> <code>mkdir -p</code> <code>sed -i</code></td><td class="al-left">daily</td></tr><tr><td class="al-left">Who may do what</td><td class="al-left"><code>id</code> <code>whoami</code> <code>ls -l</code> <code>chmod</code> <code>chown</code> <code>sudo -l</code></td><td class="al-left">whenever “Permission denied” appears</td></tr><tr><td class="al-left">Processes</td><td class="al-left"><code>ps aux</code> <code>top</code> <code>htop</code> <code>pgrep -af</code> <code>kill</code> <code>kill -9</code> <code>pkill -f</code></td><td class="al-left">every incident</td></tr><tr><td class="al-left">Services</td><td class="al-left"><code>systemctl status/start/stop/restart/enable</code> <code>journalctl -u</code> <code>systemctl cat</code></td><td class="al-left">every deploy</td></tr><tr><td class="al-left">Networking</td><td class="al-left"><code>ip a</code> <code>ip r</code> <code>ss -lntp</code> <code>ping</code> <code>curl -v</code> <code>dig</code> <code>nc -zv</code></td><td class="al-left">every “unreachable”</td></tr><tr><td class="al-left">Disks</td><td class="al-left"><code>df -h</code> <code>df -i</code> <code>du -sh</code> <code>lsblk</code> <code>lsof +L1</code> <code>mount</code></td><td class="al-left">the silent killer</td></tr><tr><td class="al-left">Users/groups</td><td class="al-left"><code>useradd</code> <code>usermod -aG</code> <code>getent group</code> <code>passwd -l</code></td><td class="al-left">hardening, CI agents</td></tr><tr><td class="al-left">Archives</td><td class="al-left"><code>tar -czvf</code> <code>tar -xzvf</code> <code>gzip</code> <code>scp</code> <code>rsync -avz</code></td><td class="al-left">backups, moving builds</td></tr><tr><td class="al-left">Packages</td><td class="al-left"><code>apt-get install -y</code> <code>dnf/yum install</code> <code>apt list --installed</code></td><td class="al-left">setup scripts</td></tr></tbody></table></div>
+<div class="callout note"><p class="ctitle"><strong>You do not need more than this to start</strong></p><p>If you can read a directory listing, follow a log, check what is listening and restart a service, you are already more useful than a large fraction of the “Linux experienced” lines on CVs. Depth comes from doing; the lab below is the doing.</p></div>
+<h2 id="step-1-look-around-before-you-touch-anything">STEP 1 — Look around before you touch anything</h2>
+<div class="step"><p class="ctitle"><strong>STEP 1 — Orientation</strong></p><div class="cols"><div class="col"><p><strong>CONTEXT.</strong> You logged into a VM somebody else created, running an application somebody else wrote. Do not type <code>rm</code>, do not “just restart it”. Look first.</p>
+<p><strong>COMMAND</strong></p>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">pwd
+ls -la
+find . -maxdepth 2 -type f | head -40
+du -sh * 2&gt;/dev/null | sort -h | tail -10</code></pre></div></div>
+<div class="col"><p><strong>EXPECTED OUTPUT</strong></p>
+<div class="term"><div class="toutwrap"><div class="tl cmd"><span class="promptline">devops@ip-10-0-1-23:~$ pwd</span></div><div class="tl out">/home/devops</div><div class="tl cmd"><span class="promptline">devops@ip-10-0-1-23:~$ ls -la</span></div><div class="tl out">total 28</div><div class="tl out">drwxr-x---  4 devops devops 4096 Mar  4 09:12 .</div><div class="tl out">drwxr-xr-x  5 root   root   4096 Mar  4 08:55 ..</div><div class="tl out">drwxr-xr-x  3 devops devops 4096 Mar  4 09:12 apps</div><div class="tl out">-rw-r--r--  1 devops devops  220 Mar  4 08:55 .bashrc</div><div class="tl out">-rw-r--r--  1 devops devops 1486 Mar  4 09:12 deploy-notes.md</div><div class="tl cmd"><span class="promptline">devops@ip-10-0-1-23:~$ du -sh *</span></div><div class="tl out">4.0K	deploy-notes.md</div><div class="tl out">612M	apps</div></div></div>
+<p><strong>WHAT.</strong> Print the working directory, list everything including hidden files, peek two levels deep, then find what is eating disk.</p>
+<p><strong>WHY.</strong> Because most “the server is broken” reports turn out to be “the disk is full” or “the app is not where I thought it was”. <code>du</code> answers the disk question in five seconds.</p>
+<p><strong>WHAT JUST HAPPENED.</strong> The app lives in <code>~/apps/medbook</code>, someone left a note, and 612 MB sits in the app directory — usually logs or build artefacts.</p>
+<p><strong>WHAT CAN GO WRONG.</strong> <code>Permission denied</code> on some paths. You are not root; that is normal and correct.</p></div>
+<p><strong>How to read <code>ls -l</code> without memorising a chart</strong></p>
+<div class="term"><div class="toutwrap"><div class="tl cmd"><span class="promptline">devops@lab:~$ ls -l medbook.jar</span></div><div class="tl out">-rw-r--r-- 1 devops devops 61M Mar  4 09:12 medbook.jar</div><div class="tl out">└┬┘└┬┘└┬┘ └─┬─┘ └─┬─┘        └┬┘ └──┬──┘</div><div class="tl out">type perms  owner  group      size  date</div></div></div>
+<ul class="plain"><li><code>d</code> at the start = directory, <code>-</code> = file, <code>l</code> = symlink.</li><li><code>rwx</code> = read, write, execute, in three groups: owner, group, everyone else.</li><li>Execute on a <em>directory</em> means “I may enter it”. That is why <code>700</code> on a home directory still lets you <code>cd</code> while <code>600</code> does not.</li></ul>
+<div class="tablewrap"><table><thead><tr><th class="al-left">Mode</th><th class="al-left">Meaning</th><th class="al-left">Typical use</th></tr></thead><tbody><tr><td class="al-left"><code>600</code></td><td class="al-left">owner read/write only</td><td class="al-left">SSH private key, secret file</td></tr><tr><td class="al-left"><code>640</code></td><td class="al-left">owner rw, group r, others none</td><td class="al-left">config file with a credential in it</td></tr><tr><td class="al-left"><code>644</code></td><td class="al-left">owner writes, others read</td><td class="al-left">jar, HTML, docs</td></tr><tr><td class="al-left"><code>700</code></td><td class="al-left">owner only, can enter/execute</td><td class="al-left"><code>~/.ssh</code></td></tr><tr><td class="al-left"><code>755</code></td><td class="al-left">owner full, others read+execute</td><td class="al-left">web dir, most scripts</td></tr><tr><td class="al-left"><code>777</code></td><td class="al-left">everyone can do anything</td><td class="al-left"><strong>never in production</strong> — flag it when you see it</td></tr></tbody></table></div>
+<p><strong>Command explanation</strong>, line by line:</p>
+<div class="tablewrap"><table><thead><tr><th class="al-left">Command</th><th class="al-left">What each part does</th></tr></thead><tbody><tr><td class="al-left"><code>ls -la</code></td><td class="al-left"><code>-a</code> include hidden (dot) files, <code>-l</code> long form</td></tr><tr><td class="al-left"><code>find . -maxdepth 2 -type f</code></td><td class="al-left">start here, two levels, files only</td></tr><tr><td class="al-left"><code>du -sh *</code></td><td class="al-left">summarise one total per argument, human units</td></tr><tr><td class="al-left"><code>sort -h</code></td><td class="al-left">sort sizes correctly (1K &lt; 1M &lt; 1G) — plain <code>sort</code> gets this wrong</td></tr><tr><td class="al-left"><code>tail -f app.log</code></td><td class="al-left">follow as it grows; <code>Ctrl+C</code> stops</td></tr><tr><td class="al-left"><code>grep -Rin "error" .</code></td><td class="al-left">recurse, ignore case, line numbers; <code>-A 5</code> = 5 lines after</td></tr><tr><td class="al-left"><code>journalctl -u medbook -f</code></td><td class="al-left">follow one systemd unit's log</td></tr></tbody></table></div>
+<h2 id="step-2-users-permissions-and-the-classic-it-works-as-root">STEP 2 — Users, permissions, and the classic “it works as root”</h2>
+<div class="step"><p class="ctitle"><strong>STEP 2 — Fix a service that cannot read its own file</strong></p><p><strong>CONTEXT.</strong> The developer's app is installed but the service starts and dies immediately. Log line: <code>java.nio.file.AccessDeniedException: /opt/medbook/config/application.yml</code>.</p>
+<p><strong>HOW TO INVESTIGATE (this order, always)</strong></p>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">systemctl status medbook --no-pager                # what did the unit say?
+journalctl -u medbook -n 50 --no-pager             # what did the app say?
+ls -l /opt/medbook/config/                         # owner + bits
+systemctl cat medbook | grep -E 'User|ExecStart'   # which user does systemd run it as?
+sudo -u medbook cat /opt/medbook/config/application.yml   # can that user read it?</code></pre></div>
+<p><strong>EXPECTED OUTPUT</strong></p>
+<div class="term"><div class="toutwrap"><div class="tl cmd"><span class="promptline">devops@lab:~$ ls -l /opt/medbook/config/application.yml</span></div><div class="tl out">-rw------- 1 root root 1486 Mar  4 09:12 /opt/medbook/config/application.yml</div><div class="tl cmd"><span class="promptline">devops@lab:~$ systemctl cat medbook | grep -E 'User|ExecStart'</span></div><div class="tl out">User=medbook</div><div class="tl out">ExecStart=/usr/bin/java -jar /opt/medbook/app/medbook.jar</div></div></div>
+<p><strong>WHAT HAPPENED.</strong> The file is readable only by <code>root</code>, but systemd runs the app as <code>medbook</code>. Nothing is broken — permissions are doing their job. Somebody copied the config in with <code>sudo</code>.</p>
+<p><strong>THE FIX</strong></p>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">sudo chown medbook:medbook /opt/medbook/config/application.yml
+sudo chmod 640 /opt/medbook/config/application.yml
+sudo systemctl restart medbook
+systemctl is-active medbook                 # active
+curl -fsS http://localhost:8080/health      # {"status":"UP"}</code></pre></div>
+<p><strong>WHY <code>chown</code> and not <code>chmod 666</code>.</strong> Widening permissions for everybody is how a config file with a database password ends up readable by any process on the box. Change the <em>owner</em> so the right user can read it, then keep the bits tight.</p></div>
+<div class="callout warn"><p class="ctitle"><strong>PRODUCTION SCENARIO — the story you will repeat for years</strong></p><p>A developer says “it works on my machine”. On the server the service exits at boot. Root cause, 8 times in 10: (1) files owned by root because they were copied with <code>sudo</code>; (2) the wrong port, because the previous process still holds it; (3) a missing environment variable, because the developer's shell exports it but systemd knows nothing. Check <code>ls -l</code>, <code>ss -lntp</code> and <code>systemctl show -p Environment</code> in that order — before you touch the application.</p></div>
+<h2 id="step-3-systemd-how-an-application-survives-a-reboot">STEP 3 — systemd: how an application survives a reboot</h2>
+<div class="step"><p class="ctitle"><strong>STEP 3 — The unit file that turns “run it in a terminal” into a deployment</strong></p><p>Running <code>java -jar app.jar</code> in an SSH session is a tutorial: close the terminal and the process dies. <code>systemd</code> is the supervisor Linux already has — it starts the app at boot, restarts it when it crashes, and keeps its logs.</p>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">ini</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-ini"># /etc/systemd/system/medbook.service
+[Unit]
+Description=MedBook appointment API
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=medbook
+Group=medbook
+WorkingDirectory=/opt/medbook
+EnvironmentFile=/etc/medbook/medbook.env
+ExecStart=/usr/bin/java -jar /opt/medbook/app/medbook.jar --server.port=${APP_PORT}
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target</code></pre></div>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">sudo systemctl daemon-reload            # REQUIRED after editing any unit file
+sudo systemctl enable --now medbook     # start now + start on every boot
+systemctl status medbook --no-pager
+journalctl -u medbook --since "-10 min" --no-pager</code></pre></div>
+<p><strong>Command explanation.</strong> <code>enable</code> = start on boot; <code>--now</code> = also start now; <code>daemon-reload</code> = tell systemd the file changed (forgetting this is the #1 beginner trap); <code>status</code> = state, PID and the last log lines; <code>Restart=always</code> + <code>RestartSec=5</code> = self-healing with a pause so a crash loop doesn't spin the CPU.</p></div>
+<h2 id="step-4-processes-ports-disk-the-three-checks-of-any-incident">STEP 4 — Processes, ports, disk: the three checks of any incident</h2>
+<div class="cols"><div class="col"><h3 id="processes">Processes</h3>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">ps aux | grep -i medbook | grep -v grep
+top            # then P (CPU), M (memory), q
+pgrep -af java
+sudo kill 2451          # polite: SIGTERM
+sudo kill -9 2451       # last resort: SIGKILL
+pkill -f "medbook.jar"</code></pre></div>
+<p>Columns that matter in <code>ps aux</code>: <code>USER</code> (who), <code>%CPU</code>/<code>%MEM</code> (pressure), <code>RSS</code> (real RAM), <code>START</code>, <code>COMMAND</code> (with which args). A state of <code>Z</code> is a zombie: already dead, waiting for its parent; harmless alone, suspicious in hundreds.</p></div>
+<div class="col"><h3 id="ports">Ports</h3>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">ss -lntp                    # all listening sockets + PID
+ss -lntp | grep 8080        # who owns the port I want?
+curl -v http://localhost:8080/health
+nc -zv db.internal 5432     # is the TCP path open?
+ip a ; ip r                 # addresses, routes</code></pre></div>
+<p>If the port is not in <code>ss -lntp</code>, <em>no firewall rule on earth will help you.</em> Fix the process first. That one sentence saves hours.</p></div>
+<div class="col"><h3 id="disk">Disk</h3>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">df -h                    # filesystem usage — check / and /var
+df -i                    # inodes: "no space left" with free GB?
+du -sh /var/log/* | sort -h | tail
+sudo truncate -s 0 /var/log/app/app.log
+lsof +L1                 # deleted files still held open
+sudo systemctl restart rsyslog</code></pre></div></div>
+<div class="callout fix"><p class="ctitle"><strong>HOW TO FIX THE FOUR OUTPUTS YOU WILL SEE MOST</strong></p><ul class="plain"><li><strong><code>Address already in use</code></strong> → <code>ss -lntp | grep &lt;port&gt;</code> → kill the old process or change <code>APP_PORT</code>.</li><li><strong><code>Permission denied (publickey)</code></strong> over SSH → wrong key or wrong user → <code>ssh -i ~/.ssh/app.pem ubuntu@host -v</code>; on AWS it is usually <code>ec2-user</code> or <code>ubuntu</code>, never <code>root</code>.</li><li><strong><code>No space left on device</code> but <code>df -h</code> shows room</strong> → inodes (<code>df -i</code>), a huge deleted-but-open log (<code>lsof +L1</code>), or a mount hiding data beneath it.</li><li><strong>Service “active” but site returns 502</strong> → the app is up, the <em>proxy</em> cannot reach it → <code>curl localhost:8080</code> on the box, then the proxy's <code>error.log</code> for <code>connect() failed (111: Connection refused)</code>.</li></ul></div>
+<h2 id="step-5-read-logs-like-a-professional-three-commands">STEP 5 — Read logs like a professional (three commands)</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">journalctl -u medbook --since "10 min ago" --no-pager
+journalctl -f -u medbook
+grep -nE "ERROR|Exception|Caused by" /var/log/medbook/app.log | tail -30</code></pre></div>
+<p>Then the two lines you actually want: the <strong>first</strong> error in the burst and the <strong>deepest <code>Caused by:</code></strong> under it. The first stack trace is usually the symptom; the last cause is the cause. <code>tail -f</code> plus scrolling is how beginners lose whole mornings; <code>grep -A 20 "Caused by"</code> finds it in seconds.</p>
+<div class="step"><p class="ctitle"><strong>STEP 5b — Log rotation, so this never happens again</strong></p><div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">cat /etc/logrotate.d/medbook
+/var/log/medbook/*.log {
+    daily
+    rotate 14
+    compress
+    delaycompress
+    missingok
+    notifempty
+    copytruncate
+}</code></pre></div>
+<p><code>copytruncate</code> lets the app keep its file handle; without it you must signal the app after rotation. <code>rotate 14</code> = two weeks of history. <code>du -sh /var/log</code> after a month tells you whether you chose well.</p></div>
+<h2 id="step-6-a-15-line-shell-script-that-is-actually-production-shaped">STEP 6 — A 15-line shell script that is actually production-shaped</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">#!/usr/bin/env bash
+set -euo pipefail                 # exit on error / unset var / failure inside a pipe
+LOG() { printf '%s [%s] %s\n' "$(date -u +%H:%M:%S)" "$1" "$2"; }
+
+APP="${APP:-medbook}"
+HEALTH_URL="${HEALTH_URL:-http://localhost:8080/health}"
+command -v systemctl &gt;/dev/null || { LOG ERROR "systemctl missing"; exit 1; }
+
+LOG INFO "restarting $APP"
+systemctl is-active "$APP" &gt;/dev/null &amp;&amp; LOG INFO "was active" || LOG WARN "was NOT active"
+sudo systemctl restart "$APP"
+for i in {1..30}; do
+  if curl -fsS "$HEALTH_URL" &gt;/dev/null; then LOG OK "healthy after ${i}s"; exit 0; fi
+  sleep 1
+done
+LOG ERROR "still unhealthy after 30s — last 40 log lines:"
+journalctl -u "$APP" -n 40 --no-pager
+exit 1                            # a failing script that tells the truth beats a green lie</code></pre></div>
+<p><strong>Command explanation.</strong> <code>set -euo pipefail</code> is the single most valuable line in any script you will ever write. <code>${VAR:-default}</code> gives a default, <code>${VAR:?msg}</code> fails loudly if the environment forgot it. <code>curl -fsS</code> returns non-zero on HTTP errors — that is what makes the retry loop a real check. <code>exit 1</code> at the end is what turns this into a Jenkins/GitHub Actions step that can fail.</p>
+<h2 id="production-scenario-the-appointment-search-is-slow-every-morning-at-9">Production scenario — “the appointment search is slow every morning at 9”</h2>
+<ol class="numlist"><li><code>top</code>: CPU pegged, but mostly in <code>sys</code> time → not application logic, it is kernel/IO.</li><li><code>iostat -x 1 5</code>: <code>%util</code> near 100% on the EBS volume, <code>await</code> 45 ms → disk-bound.</li><li><code>df -h</code>: <code>/</code> at 96% because a debug log was left enabled — the app is thrashing the same volume the OS needs.</li><li>Now: <code>sudo truncate -s 0 /var/log/medbook/debug.log</code>, <code>sed -i 's/^logging.level=DEBUG/logging.level=INFO/' /etc/medbook/medbook.env</code>, restart the service.</li><li>Forever: log rotation, app logs on a separate volume, a disk alert at 80%, and debug logging gated behind an env var.</li><li>Verify: <code>iostat</code> normal, <code>/health</code> p95 back from 4.2 s to 180 ms.</li></ol>
+<p>The DevOps answer was not “add more CPU”. Look, then measure, then act. That sequence <strong>is</strong> the job.</p>
+<h2 id="common-mistakes">Common mistakes</h2>
+<ul class="checklist"><li class=''><span class='box'></span><span>Running the application as <code>root</code> “because permissions” — then every permission problem gets worse. Create a service user: <code>sudo useradd -r -s /usr/sbin/nologin medbook</code>.</span></li><li class=''><span class='box'></span><span><code>chmod 777</code> to make an error go away. The error is gone; the security finding is now yours.</span></li><li class=''><span class='box'></span><span>Editing a unit file without <code>systemctl daemon-reload</code> → “I changed it but nothing happened”.</span></li><li class=''><span class='box'></span><span>Starting the app in a terminal and walking away — it dies on logout without <code>nohup</code>/systemd.</span></li><li class=''><span class='box'></span><span><code>kill -9</code> as the first move: no cleanup, no graceful drain, orphaned connections. SIGTERM, wait 10 s, then escalate.</span></li><li class=''><span class='box'></span><span>Reading the last line of a stack trace instead of the deepest <code>Caused by</code>.</span></li><li class=''><span class='box'></span><span><code>sudo</code> reflexively on every command → root-owned files that then break your service user (STEP 2).</span></li><li class=''><span class='box'></span><span>Forgetting <code>/var/log</code> grows → disk full → everything on the box fails at once, including the monitoring agent.</span></li></ul>
+<h2 id="best-practices-you-can-adopt-from-day-one">Best practices you can adopt from day one</h2>
+<div class="grid2"><p><strong>One service user per app.</strong> <code>nologin</code> shell, no password, home under <code>/opt/&lt;app&gt;</code>. <strong>Config outside the artefact.</strong> <code>/etc/&lt;app&gt;/</code>, owned <code>root:&lt;appgroup&gt;</code> mode <code>640</code>; secrets in a file with <code>600</code> or, better, a secret store. <strong>Logs to stdout in containers, journald on VMs.</strong> Never to a file inside the image. <strong>Name things identically everywhere.</strong> App dir = service name = repo name = container name. <code>medbook</code>, not <code>medbook-final-new2</code>. <strong>A 15-line runbook per server, in the repo.</strong> How to start, stop, find logs, find config. It is your future self's lifeline.</p></div>
+<h2 id="interview-answer-60-seconds-out-loud">Interview answer (60 seconds, out loud)</h2>
+<div class="callout aha"><p class="ctitle"><strong>“What Linux commands do you use daily as a DevOps engineer?”</strong></p><p>“Mostly diagnosis. <code>systemctl status</code> and <code>journalctl -u</code> to see whether the service is even alive; <code>ps aux</code> and <code>top</code> for processes and resource pressure; <code>ss -lntp</code> to see what is actually listening on which port — before I touch any firewall; <code>df -h</code> and <code>du -sh</code>, because a full disk looks exactly like an application bug; <code>grep</code>, <code>tail</code>, <code>less</code> on logs to find the first error and the deepest <code>Caused by</code>; and <code>chown</code>/<code>chmod</code> to fix the service-user problems that appear whenever somebody installed as root. For example, on my healthcare project the API kept exiting at boot: <code>journalctl</code> showed an <code>AccessDeniedException</code> on the config file, <code>ls -l</code> showed root ownership, and <code>chown medbook:medbook</code> plus <code>chmod 640</code> fixed it. I didn't restart the server hoping — I read the log, checked the owner, and verified with <code>is-active</code> and a health curl.”</p></div>
+<div class="grid2"><p><strong>Follow-up: “How do you find what is using port 8080?”</strong> → <code>ss -lntp | grep 8080</code>, then <code>ps -fp &lt;pid&gt;</code> for the full command, then decide kill vs move the port. <strong>Follow-up: “Service is running but the site is down. First three commands?”</strong> → <code>curl localhost:8080/health</code> (is the app OK), <code>ss -lntp</code> (bound to <code>127.0.0.1</code> or <code>0.0.0.0</code>?), and the proxy error log (is Nginx returning 502 because it can't connect?). <strong>Follow-up: “What does <code>chmod 750</code> mean?”</strong> → owner rwx, group r-x, others nothing — right for a directory the deploy user writes and the app user reads. <strong>Follow-up: “Soft vs hard link?”</strong> → a symlink is its own inode, can cross filesystems and point at directories; a hard link is another name for the same inode, so deleting the original leaves the data. For config swaps: symlink a versioned file and atomically repoint it.</p></div>
+<h2 id="virtual-lab-linux-drill-simulated-terminal">Virtual lab — Linux drill (simulated terminal)</h2>
+<p>Run the lab twice: once with hints, once from memory. Do not move on until the second pass is clean.</p>
+<div class="labhost"><div class="labbar"><span class="labname">Virtual terminal</span><span class="labstep" data-lab-progress></span></div><div class="labterm" data-lab="lab" data-lab-id="linux-1"></div></div>
+<h2 id="commands-to-remember">Commands to remember</h2>
+<div class="grid2"><div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">ls -la            # everything, including hidden
+find . -maxdepth 2 -type f
+du -sh *          # who is eating disk
+df -h ; df -i     # space ; inodes</code></pre></div>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">ps aux | grep app
+ss -lntp          # ports + PID
+systemctl status app
+journalctl -u app -f</code></pre></div>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">chmod 640 f ; chown u:g f
+tail -F app.log   # follow across rotation
+grep -nE "ERROR|Caused by" app.log | tail
+scp -i key.pem file user@host:/tmp</code></pre></div></div>
+<div class="callout note"><p class="ctitle"><strong>WHAT I MUST REMEMBER (three lines — that is the exam)</strong></p><ol class="numlist"><li>An app on a server = a process, a port, some files, and logs. Check those four before you guess.</li><li><code>chown</code> the right owner instead of <code>chmod 777</code> for everybody.</li><li>The fix is not done until you <strong>verify</strong> it (<code>is-active</code>, <code>curl /health</code>) and <strong>prevent</strong> it (rotation, alert, runbook).</li></ol></div>
+<div class="revision"><p class="ctitle"><strong>REVISION — 5 minutes</strong></p><p><strong>Concepts:</strong> service user and group · permission bits (owner/group/other, <code>rwx</code>) · execute-on-directory · systemd unit + <code>daemon-reload</code> · journald vs log files · listening socket vs firewall rule · inode exhaustion · log rotation with <code>copytruncate</code> · SIGTERM vs SIGKILL · load average · <code>set -euo pipefail</code>. <strong>Architecture to remember:</strong> client → security group/firewall → listener (port) → process → files (config, logs) → disk. A failure sits at one of those boundaries, and each has a command above that proves it is or is not the culprit. <strong>Common mistakes:</strong> running as root · <code>777</code> · forgetting <code>daemon-reload</code> · <code>kill -9</code> first · reading the wrong line of a stack trace · ignoring <code>df -h</code> when a service “randomly” fails. <strong>Troubleshooting checklist:</strong> is it running? (<code>systemctl status</code>) is it listening? (<code>ss -lntp</code>) can I reach it locally? (<code>curl -v</code>) are the logs clean? (<code>journalctl -u</code>) is there disk? (<code>df -h</code>) is the owner right? (<code>ls -l</code>) — six commands, and 80% of tickets end there.</p></div>
+<p>Next: <a href="f-networking.html">Networking + shell scripting →</a></p></div></div></div></div>
+      <div class="pagefoot">
+        <p class="pagefootnote">Part of the DevOps Academy built from the 41-project reference repository · offline · no tracking</p>
+        <div class="pager">
+          <a class="pg prev" href="roadmap.html"><span>Previous</span><strong>Roadmap</strong></a>
+          <a class="pg next" href="f-networking.html"><span>Next</span><strong>Networking + shell</strong></a>
+        </div>
+        <p class="markread"><label class="tickall"><input type="checkbox" data-mark-done> <span>Mark this page as done</span></label></p>
+      </div>
+    </article>
+  </main>
+</div>
+<div class="searchmodal" data-search-modal hidden>
+  <div class="searchbox">
+    <input type="search" data-search-input placeholder="Search the course: OOMKilled, terraform state lock, ALB 502, Jenkinsfile…" aria-label="Search">
+    <ul class="searchresults" data-search-results></ul>
+    <p class="searchhint">Press <kbd>Esc</kbd> to close · <kbd>/</kbd> to open</p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Docker + Compose · DevOps Academy — learn DevOps by shipping 11 real projects</title>
+<meta name="description" content="Read any Dockerfile, build small and secure images, run them like production does, and use Compose as your local parity harness.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%230f172a%22/%3E%3Ctext%20x%3D%2216%22%20y%3D%2221%22%20font-family%3D%22ui-monospace%2Cmonospace%22%20font-size%3D%2212%22%20font-weight%3D%22700%22%20fill%3D%22%235eead4%22%20text-anchor%3D%22middle%22%3E%26gt%3B_%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="canonical" href="">
+<script src="assets/js/app.js" defer></script>
+<script>(function(){try{var t=localStorage.getItem("aca.theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}})();</script>
+</head>
+<body data-page="f-docker" data-kind="page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <button class="iconbtn menubtn" data-drawer="1" aria-label="Open navigation">
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <a class="brand" href="index.html"><span class="mark">ACA</span><span class="brandtext">DevOps Academy</span></a>
+  <nav class="topnav"><a href="roadmap.html">Roadmap</a><a href="p1-cloud-core.html">Cloud core concepts</a><a href="projects.html">Projects index</a><a href="p2-devsecops-core.html">DevSecOps core</a><a href="labs.html">Virtual labs</a><a href="interview.html">Interview bank</a><a href="troubleshoot.html">Troubleshooting</a></nav>
+  <div class="topright">
+    <button class="iconbtn" data-search-open aria-label="Search" title="Search (/ )">
+      <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" d="M16 16l4.5 4.5"/></svg>
+    </button>
+    <button class="iconbtn" data-theme-toggle aria-label="Switch light or dark theme" title="Theme">
+      <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M12 3v2m0 14v2m9-9h-2M5 12H3m14.5-6.5-1.4 1.4M8.9 15.1l-1.4 1.4m0-12 1.4 1.4m6.2 6.2 1.4 1.4M12 8.2a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6Z"/></svg>
+    </button>
+  </div>
+</header>
+<div class="progress" data-progress-bar aria-hidden="true"></div>
+<div class="layout">
+  <aside class="sidebar" data-drawer-target>
+    <div class="sidehead">
+      <span class="sidetitle">Curriculum</span>
+      <span class="sideprogress" data-progress-label></span>
+    </div>
+    <nav class="nav"><p class="navsec">Start here</p><a class="" href="roadmap.html" data-nav-page="roadmap"><span class="pdot" data-done-dot="roadmap"></span>Roadmap</a><p class="navsec">Foundation</p><a class="" href="f-linux.html" data-nav-page="f-linux"><span class="pdot" data-done-dot="f-linux"></span>Linux<em class="tag linux">LINUX</em></a><a class="" href="f-networking.html" data-nav-page="f-networking"><span class="pdot" data-done-dot="f-networking"></span>Networking + shell<em class="tag net">NET</em></a><a class="" href="f-git-github.html" data-nav-page="f-git-github"><span class="pdot" data-done-dot="f-git-github"></span>Git + GitHub<em class="tag git">GIT</em></a><a class="current" href="f-docker.html" data-nav-page="f-docker"><span class="pdot" data-done-dot="f-docker"></span>Docker + Compose<em class="tag docker">DOCKER</em></a><p class="navsec">Phase 1 · Core DevOps</p><a class="" href="p1-cloud-core.html" data-nav-page="p1-cloud-core"><span class="pdot" data-done-dot="p1-cloud-core"></span>Cloud core concepts<em class="tag cloud">CLOUD</em></a><a class="" href="p1-aws.html" data-nav-page="p1-aws"><span class="pdot" data-done-dot="p1-aws"></span>AWS<em class="tag aws">AWS</em></a><a class="" href="p1-azure-gcp.html" data-nav-page="p1-azure-gcp"><span class="pdot" data-done-dot="p1-azure-gcp"></span>Azure + GCP<em class="tag azure">AZURE</em></a><a class="" href="p1-terraform.html" data-nav-page="p1-terraform"><span class="pdot" data-done-dot="p1-terraform"></span>Terraform<em class="tag iac">IAC</em></a><a class="" href="p1-kubernetes.html" data-nav-page="p1-kubernetes"><span class="pdot" data-done-dot="p1-kubernetes"></span>Kubernetes<em class="tag k8s">K8S</em></a><a class="" href="p1-cicd.html" data-nav-page="p1-cicd"><span class="pdot" data-done-dot="p1-cicd"></span>CI/CD<em class="tag cicd">CICD</em></a><a class="" href="p1-observability.html" data-nav-page="p1-observability"><span class="pdot" data-done-dot="p1-observability"></span>Observability<em class="tag obs">OBS</em></a><a class="" href="p1-multicloud.html" data-nav-page="p1-multicloud"><span class="pdot" data-done-dot="p1-multicloud"></span>Multicloud<em class="tag cloud">CLOUD</em></a><p class="navsec">Projects</p><a class="" href="projects.html" data-nav-page="projects"><span class="pdot" data-done-dot="projects"></span>Projects index<em class="tag proj">PROJ</em></a><a class="" href="proj-01-healthcare.html" data-nav-page="proj-01-healthcare"><span class="pdot" data-done-dot="proj-01-healthcare"></span>01 · Healthcare on a Linux VM<em class="tag proj">PROJ</em></a><a class="" href="proj-02-ecommerce.html" data-nav-page="proj-02-ecommerce"><span class="pdot" data-done-dot="proj-02-ecommerce"></span>02 · E-commerce in Docker<em class="tag docker">DOCKER</em></a><a class="" href="proj-03-banking.html" data-nav-page="proj-03-banking"><span class="pdot" data-done-dot="proj-03-banking"></span>03 · Banking with Terraform<em class="tag iac">IAC</em></a><a class="" href="proj-04-retail.html" data-nav-page="proj-04-retail"><span class="pdot" data-done-dot="proj-04-retail"></span>04 · Retail on ECS<em class="tag aws">AWS</em></a><a class="" href="proj-05-telecom.html" data-nav-page="proj-05-telecom"><span class="pdot" data-done-dot="proj-05-telecom"></span>05 · Telecom on Kubernetes<em class="tag k8s">K8S</em></a><a class="" href="proj-06-fintech.html" data-nav-page="proj-06-fintech"><span class="pdot" data-done-dot="proj-06-fintech"></span>06 · FinTech microservices<em class="tag sec">SEC</em></a><a class="" href="proj-07-insurance.html" data-nav-page="proj-07-insurance"><span class="pdot" data-done-dot="proj-07-insurance"></span>07 · Insurance on Azure DevOps<em class="tag azure">AZURE</em></a><a class="" href="proj-08-saas.html" data-nav-page="proj-08-saas"><span class="pdot" data-done-dot="proj-08-saas"></span>08 · SaaS multi-tenant<em class="tag aws">AWS</em></a><a class="" href="proj-09-multicloud.html" data-nav-page="proj-09-multicloud"><span class="pdot" data-done-dot="proj-09-multicloud"></span>09 · Multicloud<em class="tag cloud">CLOUD</em></a><a class="" href="proj-10-capstone.html" data-nav-page="proj-10-capstone"><span class="pdot" data-done-dot="proj-10-capstone"></span>10 · Capstone<em class="tag proj">PROJ</em></a><a class="" href="proj-11-mega.html" data-nav-page="proj-11-mega"><span class="pdot" data-done-dot="proj-11-mega"></span>11 · Mega project<em class="tag sec">SEC</em></a><p class="navsec">Phase 2 · DevSecOps</p><a class="" href="p2-devsecops-core.html" data-nav-page="p2-devsecops-core"><span class="pdot" data-done-dot="p2-devsecops-core"></span>DevSecOps core<em class="tag sec">SEC</em></a><a class="" href="p2-secrets-iam.html" data-nav-page="p2-secrets-iam"><span class="pdot" data-done-dot="p2-secrets-iam"></span>Secrets + IAM<em class="tag sec">SEC</em></a><a class="" href="p2-scanning.html" data-nav-page="p2-scanning"><span class="pdot" data-done-dot="p2-scanning"></span>Scanning + gates<em class="tag sec">SEC</em></a><a class="" href="p2-runtime-sec.html" data-nav-page="p2-runtime-sec"><span class="pdot" data-done-dot="p2-runtime-sec"></span>Runtime + K8s security<em class="tag sec">SEC</em></a><a class="" href="aiops.html" data-nav-page="aiops"><span class="pdot" data-done-dot="aiops"></span>AIOps on GCP<em class="tag gcp">GCP</em></a><a class="" href="mlops.html" data-nav-page="mlops"><span class="pdot" data-done-dot="mlops"></span>MLOps on GCP<em class="tag gcp">GCP</em></a><p class="navsec">Practice</p><a class="" href="labs.html" data-nav-page="labs"><span class="pdot" data-done-dot="labs"></span>Virtual labs<em class="tag lab">LAB</em></a><a class="" href="revision.html" data-nav-page="revision"><span class="pdot" data-done-dot="revision"></span>Revision sheets</a><a class="" href="test-me.html" data-nav-page="test-me"><span class="pdot" data-done-dot="test-me"></span>Test me<em class="tag test">TEST</em></a><p class="navsec">Career</p><a class="" href="interview.html" data-nav-page="interview"><span class="pdot" data-done-dot="interview"></span>Interview bank<em class="tag int">INT</em></a><a class="" href="interview-scenarios.html" data-nav-page="interview-scenarios"><span class="pdot" data-done-dot="interview-scenarios"></span>Scenario rounds<em class="tag int">INT</em></a><a class="" href="troubleshoot.html" data-nav-page="troubleshoot"><span class="pdot" data-done-dot="troubleshoot"></span>Troubleshooting<em class="tag ops">OPS</em></a><a class="" href="resume.html" data-nav-page="resume"><span class="pdot" data-done-dot="resume"></span>Resume + portfolio<em class="tag career">CAREER</em></a><p class="navsec">Site</p><a class="" href="resources.html" data-nav-page="resources"><span class="pdot" data-done-dot="resources"></span>Resources</a><a class="" href="deployment-guide.html" data-nav-page="deployment-guide"><span class="pdot" data-done-dot="deployment-guide"></span>Publish this site</a></nav>
+    <div class="sidefoot">
+      <p>Everything here is offline-first: no account, no tracking, no backend. Your progress and answers stay in this browser.</p>
+    </div>
+  </aside>
+  <main id="main">
+    <article class="page">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span>Foundation<span>/</span><b>Docker + Compose</b></nav>
+      <header class="hero"><p class="kicker">Foundation</p><h1>Docker: turning a stranger&#x27;s repository into an immutable artefact</h1><p class="herotext">Read any Dockerfile, build small and secure images, run them like production does, and use Compose as your local parity harness.</p><div class="herometa"><span class="mchip">3.5 h</span><span class="mchip tag docker">DOCKER</span></div></header>
+      <details class="toc" open><summary>On this page</summary><ul><li class="l2"><a href="#what-it-is-why-we-need-it">What it is / why we need it</a></li><li class="l2"><a href="#read-any-dockerfile-the-eight-lines-that-decide-everything">Read any Dockerfile — the eight lines that decide everything</a></li><li class="l2"><a href="#build-run-push-with-the-flags-you-will-actually-need">Build, run, push — with the flags you will actually need</a></li><li class="l2"><a href="#push-it-somewhere-the-registry-is-a-handoff-point">Push it somewhere: the registry is a handoff point</a></li><li class="l2"><a href="#docker-compose-the-two-service-harness-you-need-before-kubernetes">Docker Compose — the two-service harness you need before Kubernetes</a></li><li class="l2"><a href="#why-is-my-image-1-4-gb-and-the-shrinking-order">“Why is my image 1.4 GB?” — and the shrinking order</a></li><li class="l2"><a href="#production-scenario-imagepullbackoff-right-after-a-deploy">Production scenario — ImagePullBackOff right after a deploy</a></li><li class="l2"><a href="#common-mistakes">Common mistakes</a></li><li class="l2"><a href="#best-practices">Best practices</a></li><li class="l2"><a href="#interview-answer">Interview answer</a></li><li class="l2"><a href="#virtual-lab-package-a-stranger-s-application-simulated-terminal">Virtual lab — package a stranger&#x27;s application (simulated terminal)</a></li><li class="l2"><a href="#commands-to-remember">Commands to remember</a></li></ul></details>
+      <div class="prose"><p class="lead">Docker is the hinge of this course. It is the moment a developer's “it runs on my machine” becomes something a pipeline can build, scan, sign, ship and start anywhere with the same result. You are not learning to write applications in containers — you are learning to <em>receive</em> an application and turn it into an artefact that never lies about what is inside.</p>
+<h2 id="what-it-is-why-we-need-it">What it is / why we need it</h2>
+<div class="tablewrap"><table><thead><tr><th class="al-left">Question</th><th class="al-left">Answer</th></tr></thead><tbody><tr><td class="al-left"><strong>What?</strong></td><td class="al-left">A way to package an app with its runtime into an <strong>image</strong>: a read-only, layered filesystem plus a start command. A <strong>container</strong> is that image running as ordinary processes on the host kernel, inside namespaces (isolation) with cgroup limits.</td></tr><tr><td class="al-left"><strong>Why?</strong></td><td class="al-left">“Works on my machine” is a deployment bug; the image removes the machine from the equation. You also get a scan target, an immutable artefact, rollback by tag, and one format every registry, orchestrator and CI runner understands.</td></tr><tr><td class="al-left"><strong>What it is NOT?</strong></td><td class="al-left">Not a VM (no guest kernel), not a config manager, not a database host for production data, and not a substitute for infrastructure as code.</td></tr><tr><td class="al-left"><strong>Why do interviewers ask?</strong></td><td class="al-left">If you cannot read a Dockerfile and explain why the image is 1.4 GB and how you would shrink it, you cannot own a pipeline.</td></tr></tbody></table></div>
+<div class="flow"><span class="fnode">source (developer's repo)</span><span class="farrow">→</span><span class="fnode">Dockerfile (the recipe)</span><span class="farrow">→</span><span class="fnode">docker build (cached layers)</span><span class="farrow">→</span><span class="fnode">image in a registry (immutable, tagged, signed, scanned)</span><span class="farrow">→</span><span class="fnode">docker run (a writable top layer + namespaces + cgroups)</span><span class="farrow">→</span><span class="fnode">container (exec into it, tail it, stop it, delete it)</span><span class="farrow">→</span></div>
+<p><strong>Mental model that fixes most confusion:</strong> <em>the image is the deployment artefact; the container is a disposable instance of it.</em> You never “fix” a container — you fix the image and start a new container. Say it until it is automatic; it is the cultural difference between VM-era and container-era operations.</p>
+<h2 id="read-any-dockerfile-the-eight-lines-that-decide-everything">Read <em>any</em> Dockerfile — the eight lines that decide everything</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">dockerfile</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-dockerfile"># 1. base: small, patched, pinned
+FROM eclipse-temurin:17.0.10_7-jdk-jammy AS builder
+
+# 2. build-only inputs, ordered so the cache survives code edits
+WORKDIR /workspace
+COPY pom.xml mvnw ./
+COPY .mvn .mvn
+RUN ./mvnw -B dependency:go-offline          # cached until pom.xml changes
+
+# 3. now source; a code change busts only this layer and below
+COPY src src
+RUN ./mvnw -B -DskipTests package            # -&gt; target/*.jar
+
+# 4. multi-stage: ship the jar, not the toolchain
+FROM eclipse-temurin:17.0.10_7-jre-jammy
+RUN useradd -r -u 10001 -s /usr/sbin/nologin appuser
+WORKDIR /app
+COPY --from=builder --chown=10001 /workspace/target/medbook-0.0.1-SNAPSHOT.jar app.jar
+ENV JAVA_OPTS="-XX:MaxRAMPercentage=75.0" \
+    SPRING_CONFIG_ADDITIONAL_LOCATION="file:/config/"
+EXPOSE 8080
+USER 10001
+HEALTHCHECK --interval=15s --timeout=3s --start-period=30s --retries=3 \
+  CMD curl -fsS http://127.0.0.1:8080/actuator/health || exit 1
+ENTRYPOINT ["sh","-c","exec java $JAVA_OPTS -jar /app/app.jar"]</code></pre></div>
+<div class="tablewrap"><table><thead><tr><th class="al-left">Line</th><th class="al-left">What a DevOps engineer takes from it</th></tr></thead><tbody><tr><td class="al-left"><code>FROM …:17.0.10_7-jre-jammy</code></td><td class="al-left">A pinned base = reproducible builds and a known CVE baseline. <code>FROM openjdk</code> alone is a maintenance problem.</td></tr><tr><td class="al-left"><code>AS builder</code> + second <code>FROM</code></td><td class="al-left">Multi-stage: the toolchain never ships. Typically 900 MB → 210 MB, and ~40 fewer CVEs to triage.</td></tr><tr><td class="al-left"><code>COPY pom.xml</code> before <code>COPY src</code></td><td class="al-left">Layer-cache order. The other way round, every commit re-downloads every dependency — about 6 minutes lost per pipeline run.</td></tr><tr><td class="al-left"><code>useradd</code> + <code>USER 10001</code></td><td class="al-left">Blast radius for escapes and for file permissions. Note the coupling: mounted config must be <em>readable by 10001</em>, or you set <code>securityContext.runAsUser</code> in the cluster. Pick one and document it.</td></tr><tr><td class="al-left"><code>ENV</code> defaults, no secrets</td><td class="al-left">Defaults are fine; secrets are not — they persist in <code>docker history</code> and in the image config. Inject at runtime.</td></tr><tr><td class="al-left"><code>EXPOSE</code></td><td class="al-left"><strong>Documentation only.</strong> Publishing is <code>-p host:container</code>. A classic interview trap.</td></tr><tr><td class="al-left"><code>HEALTHCHECK</code></td><td class="al-left">Makes <code>docker ps</code> honest and lets Compose's <code>depends_on: condition: service_healthy</code> wait for a real start.</td></tr><tr><td class="al-left"><code>exec java …</code> in the entrypoint</td><td class="al-left">Without <code>exec</code>, <code>sh</code> is PID 1 and SIGTERM dies with the shell: <code>docker stop</code> waits 10 s and SIGKILLs your app mid-request. Use <code>exec</code> or <code>--init</code>.</td></tr></tbody></table></div>
+<h2 id="build-run-push-with-the-flags-you-will-actually-need">Build, run, push — with the flags you will actually need</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">docker build \
+  -t 123456789012.dkr.ecr.eu-west-1.amazonaws.com/medbook:v1.4.0 \
+  -t 123456789012.dkr.ecr.eu-west-1.amazonaws.com/medbook:main-a1f9c2d \
+  --label org.opencontainers.image.revision=a1f9c2d \
+  --label org.opencontainers.image.source=https://github.com/acme/medbook \
+  .
+
+docker run -d --name medbook \
+  -p 8080:8080 \
+  --env-file /etc/medbook/dev.env \
+  -v /etc/medbook/config:/config:ro \
+  --memory 768m --cpus 1.5 \
+  --restart unless-stopped \
+  --read-only --tmpfs /tmp \
+  --log-opt max-size=10m --log-opt max-file=3 \
+  123456789012.dkr.ecr.eu-west-1.amazonaws.com/medbook:v1.4.0</code></pre></div>
+<div class="cols"><div class="col"><p><strong>Build flags</strong></p>
+<ul class="plain"><li><code>.</code> = the <strong>build context</strong>: this whole directory is archived and sent to the daemon. Hence <code>.dockerignore</code>.</li><li>two <code>-t</code> = two tags, one image: an immutable release tag plus a <code>main-&lt;sha&gt;</code> tag. Push both.</li><li><code>--label org.opencontainers.image.revision</code> — now <code>docker inspect</code> answers “which commit is this?”: a free audit trail.</li><li><code>--progress=plain</code> when a layer fails; the fancy UI hides the real error.</li></ul></div>
+<div class="col"><p><strong>Run flags</strong></p>
+<ul class="plain"><li><code>-p 8080:8080</code> is <code>host:container</code>. <code>-p 127.0.0.1:8080:8080</code> if only a local proxy may reach it. <code>-p 80</code> alone picks a random host port (tests, not prod).</li><li><code>--env-file</code> keeps secrets out of <code>docker inspect</code> args and shell history.</li><li><code>-v host:container:ro</code> for config; named volume for anything that must survive; <strong>never</strong> DB data in the container's writable layer.</li><li><code>--read-only --tmpfs /tmp</code> = the process writes only to declared paths. Some apps break — that is the point; find out here, not at 2 a.m.</li><li><code>--memory</code>/<code>--cpus</code> are cgroup limits. Without them one leak takes the box.</li></ul></div>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash"># the debug five — you will use these daily
+docker logs -f --tail 100 medbook
+docker exec -it medbook sh              # distroless images have no shell: use kubectl debug / a sidecar
+docker inspect medbook --format '{{json .State.Health}}' | jq
+docker stats --no-stream medbook
+docker history --no-trunc medbook:v1.4.0 | head -20</code></pre></div>
+<h2 id="push-it-somewhere-the-registry-is-a-handoff-point">Push it somewhere: the registry is a handoff point</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash"># AWS ECR — the pattern used by DevOps-Project-04 in the reference repository
+aws ecr create-repository \
+    --repository-name medbook \
+    --image-scanning-configuration scanOnPush=true \
+    --image-tag-mutability IMMUTABLE \
+    --region eu-west-1
+aws ecr get-login-password --region eu-west-1 | \
+  docker login --username AWS --password-stdin 123456789012.dkr.ecr.eu-west-1.amazonaws.com
+docker push 123456789012.dkr.ecr.eu-west-1.amazonaws.com/medbook:v1.4.0</code></pre></div>
+<div class="tablewrap"><table><thead><tr><th class="al-left">Cloud</th><th class="al-left">Registry</th><th class="al-left">Two things worth knowing</th></tr></thead><tbody><tr><td class="al-left">AWS</td><td class="al-left">ECR</td><td class="al-left"><code>scanOnPush=true</code> + <code>IMMUTABLE</code> save you a policy argument later. Add a lifecycle policy: 40 000 images is a real bill.</td></tr><tr><td class="al-left">Azure</td><td class="al-left">ACR</td><td class="al-left"><code>az acr build</code> builds <em>in the cloud</em> (no local Docker needed); tasks rebuild on base-image updates.</td></tr><tr><td class="al-left">GCP</td><td class="al-left">Artifact Registry</td><td class="al-left">Replaces Container Registry; holds Helm charts too; <code>gcloud auth configure-docker</code> once per machine.</td></tr><tr><td class="al-left">Any</td><td class="al-left">Harbor / Artifactory</td><td class="al-left">Harbor: projects, cosign signing, robot accounts. Artifactory: remote caches, so a registry outage doesn't stop builds.</td></tr></tbody></table></div>
+<p><strong>Tag policy for every project here:</strong> <code>vX.Y.Z</code> for releases, <code>main-&lt;shortsha&gt;</code> for dev, and <strong>never</strong> <code>:latest</code> in a deployment manifest — with <code>:latest</code> nobody can tell what is running, and <code>rollout undo</code> may restart the very image that broke.</p>
+<h2 id="docker-compose-the-two-service-harness-you-need-before-kubernetes">Docker Compose — the two-service harness you need before Kubernetes</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">yaml</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-yaml"># docker-compose.yml — local/dev parity for app + database
+services:
+  api:
+    build: { context: ., dockerfile: Dockerfile }
+    image: medbook:dev
+    ports: ["8080:8080"]
+    env_file: .env.dev
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/medbook
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASS:?set DB_PASS in .env.dev}
+    depends_on:
+      db: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/actuator/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 25s
+    restart: unless-stopped
+    deploy: { resources: { limits: { cpus: "1.5", memory: 768M } } }
+
+  db:
+    image: postgres:16.2-alpine3.19
+    environment:
+      POSTGRES_DB: medbook
+      POSTGRES_USER: medbook
+      POSTGRES_PASSWORD: ${DB_PASS}
+    volumes:
+      - dbdata:/var/lib/postgresql/data          # survives `down`; `down -v` deletes it
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U medbook -d medbook"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  dbdata:</code></pre></div>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">docker compose config -q          # resolve + interpolate FIRST: catches missing env in 0.2s
+docker compose up -d --build
+docker compose ps
+docker compose logs -f api
+docker compose exec db psql -U medbook -d medbook -c 'select count(*) from appointment;'
+docker compose down               # keep data ·  `down -v` deletes volumes (say it out loud first)</code></pre></div>
+<p><strong>What just happened, in order:</strong> <code>config</code> fails fast on a missing <code>${DB_PASS}</code> instead of leaving a container in a restart loop; <code>depends_on: service_healthy</code> waits for <code>pg_isready</code> so the app's first connection succeeds; the named volume means <code>down</code>/<code>up</code> doesn't lose rows; <code>up -d --build</code> is the loop you will repeat forty times per project.</p>
+<h2 id="why-is-my-image-1-4-gb-and-the-shrinking-order">“Why is my image 1.4 GB?” — and the shrinking order</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">docker history medbook:v1.4.0 | head -25
+docker buildx build --progress=plain -t medbook:v1.4.0 . 2&gt;&amp;1 | tail -40</code></pre></div>
+<ol class="numlist"><li><strong>Multi-stage</strong> — drop the build toolchain. ~-60 %.</li><li><strong>Smaller base</strong> — <code>-jre</code> → alpine → distroless/Chainguard.</li><li><code>apt-get install -y --no-install-recommends &amp;&amp; rm -rf /var/lib/apt/lists/*</code>.</li><li>One <code>RUN</code> per logical step with <code>&amp;&amp; \</code> continuations (fewer layers, each self-cleaning).</li><li><code>.dockerignore</code> (below).</li><li><code>COPY --link --chown=10001:10001</code> so you don't need a <code>chown -R</code> layer that duplicates every file.</li></ol>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">gitignore</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-gitignore"># .dockerignore — the file that fixes slow, fat and leaky builds at once
+.git
+.gitignore
+target/
+**/node_modules
+**/*.log
+.dockerignore
+Dockerfile
+docker-compose.yml
+.env
+.env.*
+!.env.example
+secrets/
+*.pem
+id_rsa</code></pre></div>
+<div class="callout warn"><p class="ctitle"><strong>THE SECRET-IN-LAYERS TRAP (asked in nearly every security review)</strong></p><p><code>COPY . .</code> from a directory containing <code>.env</code> or <code>~/.aws/credentials</code> puts those files <strong>in a layer</strong>. A later <code>RUN rm .env</code> does not remove them — <code>docker history</code>, <code>docker save</code>, or anyone with pull access can read that layer forever. Fixes: <code>.dockerignore</code> (prevention), BuildKit secrets <code>RUN --mount=type=secret,id=dbpass …</code> (runtime only, never a layer), and no <code>AWS_ACCESS_KEY_ID</code> baked into a task definition — use an IAM role.</p></div>
+<h2 id="production-scenario-imagepullbackoff-right-after-a-deploy">Production scenario — <code>ImagePullBackOff</code> right after a deploy</h2>
+<p>21:04, <code>kubectl get pods</code> shows <code>ImagePullBackOff</code> on the new deployment.</p>
+<ol class="numlist"><li><code>kubectl describe pod medbook-… | sed -n '/Events/,$p'</code> → <code>pull access denied for 123…dkr.ecr.eu-west-1.amazonaws.com/medbook, repository does not exist or may require 'docker login'</code>.</li><li>That message means one of three things: <strong>the tag was never pushed</strong>, <strong>auth</strong> (node role lost <code>ecr:GetAuthorizationToken</code>/<code>BatchGetImage</code>, or the 12-hour token expired), or <strong>network</strong> (private subnet with no route to ECR → needs a VPC endpoint or NAT).</li><li>Disambiguate on the node: log in and <code>docker pull</code> the same reference → <em>works</em>. So creds and path are fine → <strong>the tag doesn't exist</strong>: the pipeline pushed <code>medbook:v1.4.0</code> while the manifest, after a repo rename, referenced <code>medbook-api:v1.4.0</code>.</li><li>Fix forward: correct the image reference in Helm values, redeploy, <code>kubectl rollout status deployment/medbook</code>.</li><li>Prevent: the pipeline computes the reference from the <em>same variable</em> it pushes to; a post-push <code>aws ecr describe-images --repository-name medbook --image-ids imageTag=v1.4.0</code> step so the <strong>build</strong> fails, not the cluster; ECR VPC endpoint for private subnets.</li><li>Runbook line: “ImagePullBackOff → describe pod → does the tag exist in the registry? → node auth → subnet route.”</li></ol>
+<h2 id="common-mistakes">Common mistakes</h2>
+<ul class="checklist"><li class=''><span class='box'></span><span><code>COPY . .</code> with no <code>.dockerignore</code>: fat images, leaked <code>.env</code>, 900 MB context per build.</span></li><li class=''><span class='box'></span><span><code>RUN npm ci</code> <strong>after</strong> <code>COPY . .</code> — cache busted on every commit. Copy the lockfile, install, then copy source.</span></li><li class=''><span class='box'></span><span>App data in the container layer → gone at the next <code>docker rm</code>.</span></li><li class=''><span class='box'></span><span><code>docker stop</code> “hanging 10 seconds”: PID 1 isn't forwarding SIGTERM. Use <code>exec</code>/<code>--init</code> and handle it in the app (same reason K8s has <code>terminationGracePeriodSeconds</code>).</span></li><li class=''><span class='box'></span><span><code>:latest</code> in a deployment manifest → no rollback, no traceability.</span></li><li class=''><span class='box'></span><span>Publishing a port to <code>0.0.0.0</code> on a VM “for testing” and forgetting. That is how a database ends up on the internet.</span></li><li class=''><span class='box'></span><span>No memory limit next to other containers → one leak and the kernel OOM-kills something random.</span></li><li class=''><span class='box'></span><span>Logging to a file inside the container → log rotation can't reach it. Log to stdout; let the platform own the file.</span></li><li class=''><span class='box'></span><span><code>sudo docker</code> on the laptop and <code>USER root</code> in the image. Rootless Docker or your user in the <code>docker</code> group; always a non-root <code>USER</code>.</span></li></ul>
+<h2 id="best-practices">Best practices</h2>
+<div class="grid2"><p><strong>Pin everything.</strong> Base image by digest (<code>FROM …jammy@sha256:…</code>) plus a scheduled Dependabot/Renovate PR to move it: reproducible <em>and</em> patchable. <strong>One concern per image.</strong> The app image contains the app. Config comes from env/files; the database is a managed service in every project here. <strong>Healthcheck in the image AND a probe in the platform.</strong> Compose/<code>docker ps</code> honour <code>HEALTHCHECK</code>; Kubernetes ignores it and needs its own readiness/liveness probes. <strong>Build in CI only.</strong> Iterate locally with <code>docker compose up --build</code>; the artefact anyone may deploy is the one CI pushed, tagged and labelled. <strong>Scan and sign at build time</strong>: Trivy in the same stage as the build, cosign sign before push. An unscanned, unsigned image should be <em>undeployable by policy</em>, not by discipline.</p></div>
+<h2 id="interview-answer">Interview answer</h2>
+<div class="callout aha"><p class="ctitle"><strong>“What do you actually do with Docker on a project?”</strong></p><p>“I take the developer's source and turn it into a deployable artefact. First I read the repo for the build system and runtime version, then I write or fix the Dockerfile: a pinned small base image, dependencies installed before the source copy so the layer cache works, a multi-stage build so the toolchain never ships, a non-root <code>USER</code>, a real <code>HEALTHCHECK</code>, and an entrypoint that forwards SIGTERM. I add a <code>.dockerignore</code> so the context stays small and no <code>.env</code> ends up in a layer. I build with two tags — release and <code>main-&lt;sha&gt;</code> — and put the git revision into image labels so <code>docker inspect</code> answers “what commit is running”. Before pushing I scan with Trivy and sign with cosign; the registry enforces immutable tags. To run it I publish only the ports that must be reachable, use <code>--env-file</code> for config, mount config read-only, set memory and CPU limits, and cap the log driver's size. State never goes in the container. Compose is my local parity harness for app + dependency, and the same image then goes to ECS, AKS or EKS unchanged.”</p></div>
+<div class="grid2"><p><strong>Follow-up: “Image vs container?”</strong> → image = immutable layered filesystem + config; container = that image with a writable top layer plus its own namespaces and cgroup limits. <strong>Follow-up: “Why is my build slow, and how do you fix it?”</strong> → cache order and context size: install dependencies from the lockfile before copying source, <code>.dockerignore</code>, BuildKit cache mounts or a registry cache, and multi-stage so heavy layers never appear in the final image. <strong>Follow-up: “A container exits immediately. Your steps?”</strong> → <code>docker logs</code>, then <code>docker inspect --format '{{.State.ExitCode}} {{.State.OOMKilled}}'</code>; 137 + OOMKilled = memory limit, 1 with a stack trace = config/app, and <em>empty</em> logs means it wrote to a file instead of stdout. Reproduce interactively with <code>--entrypoint sh</code>.</p></div>
+<h2 id="virtual-lab-package-a-stranger-s-application-simulated-terminal">Virtual lab — package a stranger's application (simulated terminal)</h2>
+<div class="labhost"><div class="labbar"><span class="labname">Virtual terminal</span><span class="labstep" data-lab-progress></span></div><div class="labterm" data-lab="lab" data-lab-id="docker-1"></div></div>
+<h2 id="commands-to-remember">Commands to remember</h2>
+<div class="grid2"><div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">docker build -t repo/app:v1.0.0 \
+  --label org.opencontainers.image.revision=$SHA .
+docker history --no-trunc repo/app:v1.0.0
+docker image ls --format '{{.Repository}}:{{.Tag}} {{.Size}}'
+docker builder prune -f</code></pre></div>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">docker run -d --name app -p 8080:8080 \
+  --env-file .env --memory 768m --cpus 1.5 \
+  --read-only --tmpfs /tmp \
+  --log-opt max-size=10m --restart unless-stopped \
+  repo/app:v1.0.0
+docker exec -it app sh ; docker logs -f app</code></pre></div>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">docker compose config -q
+docker compose up -d --build
+docker compose ps ; docker compose logs -f api
+docker compose exec db pg_isready -U app
+docker compose down      # down -v deletes volumes</code></pre></div></div>
+<div class="callout note"><p class="ctitle"><strong>WHAT I MUST REMEMBER</strong></p><ol class="numlist"><li>Image = the artefact you deploy; container = a disposable instance. Fix the image, never the container.</li><li>Cache order and <code>.dockerignore</code> are 80 % of build speed and half of image security.</li><li>Config comes from env/secret stores, data from volumes or managed services, and deployments reference an immutable tag or digest — never <code>:latest</code>.</li></ol></div>
+<div class="revision"><p class="ctitle"><strong>REVISION — 5 minutes</strong></p><p><strong>Concepts:</strong> layers and caching · build context vs <code>.dockerignore</code> · multi-stage · <code>EXPOSE</code> ≠ publish · namespaces/cgroups vs a VM · PID 1 signal handling · digest vs tag · registry auth (IAM/token/<code>docker login</code>) · image <code>HEALTHCHECK</code> vs platform probes · named volume vs bind mount vs tmpfs · log drivers · <code>depends_on: service_healthy</code> · rootless and non-root. <strong>Architecture to remember:</strong> repo → Dockerfile → build (cached layers) → scan/sign → registry → orchestrator pulls by digest → container with limits and read-only FS → logs to stdout → health endpoint gates traffic. <strong>Common mistakes:</strong> secrets in layers · <code>:latest</code> in prod · state in the writable layer · <code>sleep</code> instead of a healthcheck · unquoted <code>${VAR}</code> in compose · shipping the build toolchain. <strong>Troubleshooting checklist:</strong> <code>docker logs</code> → <code>docker inspect</code> (exit code, OOMKilled, health, mounts) → <code>docker history</code> (size/layers) → <code>docker exec</code>/override entrypoint → <code>docker build --progress=plain</code> → registry: does the tag exist? auth? route?</p></div>
+<p>Next: <a href="p1-cloud-core.html">Cloud core concepts →</a></p></div></div>
+      <div class="pagefoot">
+        <p class="pagefootnote">Part of the DevOps Academy built from the 41-project reference repository · offline · no tracking</p>
+        <div class="pager">
+          <a class="pg prev" href="f-git-github.html"><span>Previous</span><strong>Git + GitHub</strong></a>
+          <a class="pg next" href="p1-cloud-core.html"><span>Next</span><strong>Cloud core concepts</strong></a>
+        </div>
+        <p class="markread"><label class="tickall"><input type="checkbox" data-mark-done> <span>Mark this page as done</span></label></p>
+      </div>
+    </article>
+  </main>
+</div>
+<div class="searchmodal" data-search-modal hidden>
+  <div class="searchbox">
+    <input type="search" data-search-input placeholder="Search the course: OOMKilled, terraform state lock, ALB 502, Jenkinsfile…" aria-label="Search">
+    <ul class="searchresults" data-search-results></ul>
+    <p class="searchhint">Press <kbd>Esc</kbd> to close · <kbd>/</kbd> to open</p>
+  </div>
+</div>
+</body>
+</html>
