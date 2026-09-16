@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terraform · DevOps Academy — learn DevOps by shipping 11 real projects</title>
+<meta name="description" content="State, plan, lock, drift, replace. The four commands you use daily and the habits that keep them boring.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%230f172a%22/%3E%3Ctext%20x%3D%2216%22%20y%3D%2221%22%20font-family%3D%22ui-monospace%2Cmonospace%22%20font-size%3D%2212%22%20font-weight%3D%22700%22%20fill%3D%22%235eead4%22%20text-anchor%3D%22middle%22%3E%26gt%3B_%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="canonical" href="">
+<script src="assets/js/app.js" defer></script>
+<script>(function(){try{var t=localStorage.getItem("aca.theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}})();</script>
+</head>
+<body data-page="p1-terraform" data-kind="page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <button class="iconbtn menubtn" data-drawer="1" aria-label="Open navigation">
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <a class="brand" href="index.html"><span class="mark">ACA</span><span class="brandtext">DevOps Academy</span></a>
+  <nav class="topnav"><a href="roadmap.html">Roadmap</a><a href="p1-cloud-core.html">Cloud core concepts</a><a href="projects.html">Projects index</a><a href="p2-devsecops-core.html">DevSecOps core</a><a href="labs.html">Virtual labs</a><a href="interview.html">Interview bank</a><a href="troubleshoot.html">Troubleshooting</a></nav>
+  <div class="topright">
+    <button class="iconbtn" data-search-open aria-label="Search" title="Search (/ )">
+      <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" d="M16 16l4.5 4.5"/></svg>
+    </button>
+    <button class="iconbtn" data-theme-toggle aria-label="Switch light or dark theme" title="Theme">
+      <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M12 3v2m0 14v2m9-9h-2M5 12H3m14.5-6.5-1.4 1.4M8.9 15.1l-1.4 1.4m0-12 1.4 1.4m6.2 6.2 1.4 1.4M12 8.2a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6Z"/></svg>
+    </button>
+  </div>
+</header>
+<div class="progress" data-progress-bar aria-hidden="true"></div>
+<div class="layout">
+  <aside class="sidebar" data-drawer-target>
+    <div class="sidehead">
+      <span class="sidetitle">Curriculum</span>
+      <span class="sideprogress" data-progress-label></span>
+    </div>
+    <nav class="nav"><p class="navsec">Start here</p><a class="" href="roadmap.html" data-nav-page="roadmap"><span class="pdot" data-done-dot="roadmap"></span>Roadmap</a><p class="navsec">Foundation</p><a class="" href="f-linux.html" data-nav-page="f-linux"><span class="pdot" data-done-dot="f-linux"></span>Linux<em class="tag linux">LINUX</em></a><a class="" href="f-networking.html" data-nav-page="f-networking"><span class="pdot" data-done-dot="f-networking"></span>Networking + shell<em class="tag net">NET</em></a><a class="" href="f-git-github.html" data-nav-page="f-git-github"><span class="pdot" data-done-dot="f-git-github"></span>Git + GitHub<em class="tag git">GIT</em></a><a class="" href="f-docker.html" data-nav-page="f-docker"><span class="pdot" data-done-dot="f-docker"></span>Docker + Compose<em class="tag docker">DOCKER</em></a><p class="navsec">Phase 1 · Core DevOps</p><a class="" href="p1-cloud-core.html" data-nav-page="p1-cloud-core"><span class="pdot" data-done-dot="p1-cloud-core"></span>Cloud core concepts<em class="tag cloud">CLOUD</em></a><a class="" href="p1-aws.html" data-nav-page="p1-aws"><span class="pdot" data-done-dot="p1-aws"></span>AWS<em class="tag aws">AWS</em></a><a class="" href="p1-azure-gcp.html" data-nav-page="p1-azure-gcp"><span class="pdot" data-done-dot="p1-azure-gcp"></span>Azure + GCP<em class="tag azure">AZURE</em></a><a class="current" href="p1-terraform.html" data-nav-page="p1-terraform"><span class="pdot" data-done-dot="p1-terraform"></span>Terraform<em class="tag iac">IAC</em></a><a class="" href="p1-kubernetes.html" data-nav-page="p1-kubernetes"><span class="pdot" data-done-dot="p1-kubernetes"></span>Kubernetes<em class="tag k8s">K8S</em></a><a class="" href="p1-cicd.html" data-nav-page="p1-cicd"><span class="pdot" data-done-dot="p1-cicd"></span>CI/CD<em class="tag cicd">CICD</em></a><a class="" href="p1-observability.html" data-nav-page="p1-observability"><span class="pdot" data-done-dot="p1-observability"></span>Observability<em class="tag obs">OBS</em></a><a class="" href="p1-multicloud.html" data-nav-page="p1-multicloud"><span class="pdot" data-done-dot="p1-multicloud"></span>Multicloud<em class="tag cloud">CLOUD</em></a><p class="navsec">Projects</p><a class="" href="projects.html" data-nav-page="projects"><span class="pdot" data-done-dot="projects"></span>Projects index<em class="tag proj">PROJ</em></a><a class="" href="proj-01-healthcare.html" data-nav-page="proj-01-healthcare"><span class="pdot" data-done-dot="proj-01-healthcare"></span>01 · Healthcare on a Linux VM<em class="tag proj">PROJ</em></a><a class="" href="proj-02-ecommerce.html" data-nav-page="proj-02-ecommerce"><span class="pdot" data-done-dot="proj-02-ecommerce"></span>02 · E-commerce in Docker<em class="tag docker">DOCKER</em></a><a class="" href="proj-03-banking.html" data-nav-page="proj-03-banking"><span class="pdot" data-done-dot="proj-03-banking"></span>03 · Banking with Terraform<em class="tag iac">IAC</em></a><a class="" href="proj-04-retail.html" data-nav-page="proj-04-retail"><span class="pdot" data-done-dot="proj-04-retail"></span>04 · Retail on ECS<em class="tag aws">AWS</em></a><a class="" href="proj-05-telecom.html" data-nav-page="proj-05-telecom"><span class="pdot" data-done-dot="proj-05-telecom"></span>05 · Telecom on Kubernetes<em class="tag k8s">K8S</em></a><a class="" href="proj-06-fintech.html" data-nav-page="proj-06-fintech"><span class="pdot" data-done-dot="proj-06-fintech"></span>06 · FinTech microservices<em class="tag sec">SEC</em></a><a class="" href="proj-07-insurance.html" data-nav-page="proj-07-insurance"><span class="pdot" data-done-dot="proj-07-insurance"></span>07 · Insurance on Azure DevOps<em class="tag azure">AZURE</em></a><a class="" href="proj-08-saas.html" data-nav-page="proj-08-saas"><span class="pdot" data-done-dot="proj-08-saas"></span>08 · SaaS multi-tenant<em class="tag aws">AWS</em></a><a class="" href="proj-09-multicloud.html" data-nav-page="proj-09-multicloud"><span class="pdot" data-done-dot="proj-09-multicloud"></span>09 · Multicloud<em class="tag cloud">CLOUD</em></a><a class="" href="proj-10-capstone.html" data-nav-page="proj-10-capstone"><span class="pdot" data-done-dot="proj-10-capstone"></span>10 · Capstone<em class="tag proj">PROJ</em></a><a class="" href="proj-11-mega.html" data-nav-page="proj-11-mega"><span class="pdot" data-done-dot="proj-11-mega"></span>11 · Mega project<em class="tag sec">SEC</em></a><p class="navsec">Phase 2 · DevSecOps</p><a class="" href="p2-devsecops-core.html" data-nav-page="p2-devsecops-core"><span class="pdot" data-done-dot="p2-devsecops-core"></span>DevSecOps core<em class="tag sec">SEC</em></a><a class="" href="p2-secrets-iam.html" data-nav-page="p2-secrets-iam"><span class="pdot" data-done-dot="p2-secrets-iam"></span>Secrets + IAM<em class="tag sec">SEC</em></a><a class="" href="p2-scanning.html" data-nav-page="p2-scanning"><span class="pdot" data-done-dot="p2-scanning"></span>Scanning + gates<em class="tag sec">SEC</em></a><a class="" href="p2-runtime-sec.html" data-nav-page="p2-runtime-sec"><span class="pdot" data-done-dot="p2-runtime-sec"></span>Runtime + K8s security<em class="tag sec">SEC</em></a><a class="" href="aiops.html" data-nav-page="aiops"><span class="pdot" data-done-dot="aiops"></span>AIOps on GCP<em class="tag gcp">GCP</em></a><a class="" href="mlops.html" data-nav-page="mlops"><span class="pdot" data-done-dot="mlops"></span>MLOps on GCP<em class="tag gcp">GCP</em></a><p class="navsec">Practice</p><a class="" href="labs.html" data-nav-page="labs"><span class="pdot" data-done-dot="labs"></span>Virtual labs<em class="tag lab">LAB</em></a><a class="" href="revision.html" data-nav-page="revision"><span class="pdot" data-done-dot="revision"></span>Revision sheets</a><a class="" href="test-me.html" data-nav-page="test-me"><span class="pdot" data-done-dot="test-me"></span>Test me<em class="tag test">TEST</em></a><p class="navsec">Career</p><a class="" href="interview.html" data-nav-page="interview"><span class="pdot" data-done-dot="interview"></span>Interview bank<em class="tag int">INT</em></a><a class="" href="interview-scenarios.html" data-nav-page="interview-scenarios"><span class="pdot" data-done-dot="interview-scenarios"></span>Scenario rounds<em class="tag int">INT</em></a><a class="" href="troubleshoot.html" data-nav-page="troubleshoot"><span class="pdot" data-done-dot="troubleshoot"></span>Troubleshooting<em class="tag ops">OPS</em></a><a class="" href="resume.html" data-nav-page="resume"><span class="pdot" data-done-dot="resume"></span>Resume + portfolio<em class="tag career">CAREER</em></a><p class="navsec">Site</p><a class="" href="resources.html" data-nav-page="resources"><span class="pdot" data-done-dot="resources"></span>Resources</a><a class="" href="deployment-guide.html" data-nav-page="deployment-guide"><span class="pdot" data-done-dot="deployment-guide"></span>Publish this site</a></nav>
+    <div class="sidefoot">
+      <p>Everything here is offline-first: no account, no tracking, no backend. Your progress and answers stay in this browser.</p>
+    </div>
+  </aside>
+  <main id="main">
+    <article class="page">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span>Phase 1 · Core DevOps<span>/</span><b>Terraform</b></nav>
+      <header class="hero"><p class="kicker">Phase 1 · Core DevOps</p><h1>Terraform: infrastructure as code, safely</h1><p class="herotext">State, plan, lock, drift, replace. The four commands you use daily and the habits that keep them boring.</p><div class="herometa"><span class="mchip">4 h</span><span class="mchip tag iac">IAC</span></div></header>
+      <details class="toc" open><summary>On this page</summary><ul><li class="l2"><a href="#the-mental-model-in-six-sentences">The mental model, in six sentences</a></li><li class="l2"><a href="#every-command-you-need-in-the-order-you-ll-meet-them">Every command you need, in the order you&#x27;ll meet them</a></li><li class="l2"><a href="#the-hcl-you-will-actually-write">The HCL you will actually write</a></li><li class="l2"><a href="#terraform-tfstate-the-file-you-must-respect">terraform.tfstate: the file you must respect</a></li><li class="l3"><a href="#terraform-import-and-import-blocks-the-two-ways-to-adopt-reality">terraform import and import blocks (the two ways to adopt reality)</a></li><li class="l2"><a href="#drift-lock-files-and-versions-the-three-that-make-a-team-safe">Drift, lock files and versions: the three that make a team safe</a></li><li class="l2"><a href="#modules-reusable-versioned-and-worth-the-ceremony">Modules: reusable, versioned, and worth the ceremony</a></li><li class="l2"><a href="#workspaces-vs-directories-vs-stacks">Workspaces vs directories vs stacks</a></li><li class="l2"><a href="#ci-plan-on-prs-apply-on-merge-the-safe-pattern">CI: plan on PRs, apply on merge — the safe pattern</a></li><li class="l2"><a href="#production-scenario-destroy-ran-because-of-a-rename-and-the-fix-is-a-3-line-file">Production scenario — destroy ran because of a rename, and the fix is a 3-line file</a></li><li class="l2"><a href="#common-mistakes">Common mistakes</a></li><li class="l2"><a href="#best-practices-you-can-start-today">Best practices you can start today</a></li><li class="l2"><a href="#interview-answer">Interview answer</a></li><li class="l2"><a href="#virtual-lab-build-and-destroy-a-network-from-code-simulated-terminal">Virtual lab — build and destroy a network from code (simulated terminal)</a></li><li class="l2"><a href="#commands-to-remember">Commands to remember</a></li></ul></details>
+      <div class="prose"><p class="lead">Terraform is not “cloud in a text file”. It is a <strong>diff engine with a safety pin</strong>: it remembers what exists, you describe what should exist, and it prints the gap. Everything good about infrastructure as code — review, reuse, rollback, drift detection — comes from that one mechanism. Learn to read the plan and the state and you can work in any cloud.</p>
+<div class="flow"><span class="fnode">your .tf files (desired state) + terraform.tfstate (what exists, from the last apply)</span><span class="farrow">→</span><span class="fnode"><code>terraform plan</code> (the diff)</span><span class="farrow">→</span><span class="fnode">review</span><span class="farrow">→</span><span class="fnode"><code>apply</code></span><span class="farrow">→</span><span class="fnode">provider API calls, one dependency edge at a time</span><span class="farrow">→</span><span class="fnode">refreshed state file</span><span class="farrow">→</span><span class="fnode">next run diffs against reality again</span><span class="farrow">→</span></div>
+<h2 id="the-mental-model-in-six-sentences">The mental model, in six sentences</h2>
+<p>Terraform builds a graph of your <strong>resources</strong>; each node knows its provider, its type and its config. On <code>plan</code> it <strong>refreshes</strong> (reads live API state into memory), compares with what's recorded, then computes an ordered set of create / update / <strong>replace</strong> actions. Because that diff needs a reliable record of “what I own”, state is not optional — it's the product Terraform actually maintains, and it's why concurrent runs must be serialised with a lock. Providers are plugins with their own version numbers, which is why lock files are committed. Once you accept “Terraform is a diff tool that owns its inventory”, everything else — modules, workspaces, remote backends, import blocks, <code>moved</code> blocks, <code>terraform plan -out</code> — is bookkeeping around that one idea.</p>
+<h2 id="every-command-you-need-in-the-order-you-ll-meet-them">Every command you need, in the order you'll meet them</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">terraform init                    # download providers into .terraform/, honour .terraform.lock.hcl
+terraform validate                # syntax + types, offline; runs in CI before anything touches the cloud
+terraform fmt -recursive -check   # the diff a reviewer should never have to comment on
+terraform plan -out=tfplan        # the artefact you show a human
+terraform show tfplan | less
+terraform apply tfplan            # apply EXACTLY what was reviewed — this pairing is the whole point
+terraform state list
+terraform import 'aws_instance.app' i-0abc123     # adopt one existing resource
+terraform refresh                 # state vs reality, no changes
+terraform destroy -target=aws_cloudfront_distribution.cdn   # targeted teardown, double-check the plan</code></pre></div>
+<div class="callout note"><p class="ctitle"><strong>THE TWO-STEP <code>plan</code> → <code>apply tfplan</code> RULE</strong></p><p><code>terraform plan &amp;&amp; terraform apply</code> looks safe and isn't: someone (or an autoscaler, or the console) changes the world between those two runs, and the second plan — the one nobody read — is applied. In CI you always do <code>plan -out=tfplan</code> (artefact it, comment the diff on the PR) and <code>apply tfplan</code> in the next job, so what gets created is literally what was reviewed. Add <code>-detailed-exitcode</code>: exit 2 means “changes pending”, which lets a pipeline fail if nobody approved the plan.</p></div>
+<h2 id="the-hcl-you-will-actually-write">The HCL you will actually write</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terraform</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-hcl">terraform {
+  required_version = "&gt;= 1.9, &lt; 2.0"
+  required_providers {
+    aws = { source = "hashicorp/aws", version = "~&gt; 5.60" }
+  }
+  backend "s3" {                      # static values only: no variables here
+    bucket         = "acme-tf-state"
+    key            = "medbook/prod.tfstate"
+    region         = "eu-west-1"
+    dynamodb_table = "acme-tf-locks"  # the lock that prevents two applies at once
+    encrypt        = true
+  }
+}
+
+provider "aws" {
+  region = var.region
+  default_tags { tags = { App = "medbook", Env = terraform.workspace, ManagedBy = "terraform" } }
+}
+
+variable "db_instance_class" {
+  type        = string
+  description = "RDS instance class; keep small in dev, see AWS pricing for prod"
+  default     = "db.t4g.micro"
+  validation {
+    condition     = can(regex("^db\\.(t4g|m7g|r7g)\\.", var.db_instance_class))
+    error_message = "Use a burstable or Graviton class so costs stay predictable."
+  }
+}
+
+variable "cidr_public" { type = list(string) }   # no default: force the caller to decide
+
+locals {
+  name_prefix = "${var.project}-${terraform.workspace}"
+  all_subnets = zipmap(range(length(var.azs)), [for i, az in var.azs : cidrsubnet(var.vpc_cidr, 4, i)])
+}
+
+data "aws_ssm_parameter" "al2023" {
+  name = "/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64"
+}
+
+resource "aws_security_group" "app" {
+  name_prefix = "${local.name_prefix}-app-"
+  vpc_id      = aws_vpc.main.id
+  description = "App tier"
+  ingress { from_port = 8080, to_port = 8080, protocol = "tcp", description = "only from the ALB SG",
+            security_groups = [aws_security_group.alb.id] }
+  egress { from_port = 0, to_port = 0, protocol = "-1", cidr_blocks = ["0.0.0.0/0"], description = "egress for image pulls and APIs" }
+  lifecycle { create_before_destroy = true }        # required with name_prefix
+}
+
+resource "aws_instance" "app" {
+  for_each                    = { for i, az in var.azs : az =&gt; { az = az, subnet = values(local.all_subnets)[i] } }
+  ami                         = data.aws_ssm_parameter.al2023.non_encoded_value
+  instance_type               = var.instance_type
+  subnet_id                   = each.value.subnet
+  key_name                    = var.key_name
+  vpc_security_group_ids      = [aws_security_group.app.id]
+  iam_instance_profile        = aws_iam_instance_profile.app.name
+  metadata_options { http_tokens = "required" }    # IMDSv2
+  root_block_device { volume_size = 30, volume_type = "gp3", encrypted = true }
+  tags = { Name = "${local.name_prefix}-app-${each.key}" }
+  depends_on = [aws_security_group.app]            # almost never needed; usually a smell
+}
+
+output "ssh_command" {
+  value = "aws ssm start-session --target ${values(aws_instance.app)[0].id}"
+}</code></pre></div>
+<div class="cols"><div class="col"><p><strong>The six constructs, and the trap in each</strong></p>
+<ul class="plain"><li><code>variable</code> — typed, <code>nullable</code>, <code>validation</code>, <code>sensitive = true</code> (only hides it in output; it's still in state).</li><li><code>locals</code> — DRY without a module. <code>for</code>/<code>for_each</code>/<code>[for …]</code>/<code>zipmap</code>/<code>try()</code>.</li><li><code>resource</code> — args = desired config; exported attributes = what you can reference.</li><li><code>data</code> — read-only lookup from the provider; the clean way to avoid hard-coded ids.</li><li><code>output</code> — the module's contract; <code>sensitive</code>, <code>description</code>, and only what the caller needs.</li><li><code>module</code> — composition with an explicit interface; a version pinned in the source address.</li></ul></div>
+<div class="col"><p><strong><code>count</code> vs <code>for_each</code> — the rule that prevents an outage</strong> <code>count = 3</code> → resources keyed by index. Delete list item 1 and Terraform <em>destroys and recreates</em> items 2 and 3 to keep indexes contiguous: on a database or an ENI, that is a production incident. <code>for_each = toset(var.subnets)</code> → keyed by value; removing an entry destroys <strong>only that one</strong>. Use <code>for_each</code> whenever the collection can change order or lose members; use <code>count</code> only for a fixed number, and only with <code>count.index</code>-stable semantics. If you must switch, use a <code>moved</code> block — don't destroy.</p></div>
+<h2 id="terraform-tfstate-the-file-you-must-respect"><code>terraform.tfstate</code>: the file you must respect</h2>
+<p>State holds <strong>every attribute of every managed resource</strong> — including DB passwords, private keys and tokens — in plain JSON, locally or in the backend. That single fact explains all the rules:</p>
+<div class="tablewrap"><table><thead><tr><th class="al-left">Rule</th><th class="al-left">Why</th></tr></thead><tbody><tr><td class="al-left">Never commit state</td><td class="al-left">Secrets + drift + two people fighting over one file. <code>.gitignore</code> it; commit <code>.terraform.lock.hcl</code> instead.</td></tr><tr><td class="al-left">Remote backend, encrypted, versioned</td><td class="al-left">S3 + <code>encrypt = true</code> + versioning + DynamoDB lock (or GCS + object versioning + a lock object; or Terraform Cloud/Enterprise, which also gives run UIs, policy-as-code and ephemeral runners).</td></tr><tr><td class="al-left">No <code>terraform.tfvars</code> with secrets</td><td class="al-left"><code>-var</code>, <code>-var-file</code> outside Git, SSM/env injection, or TF Cloud variable sets marked sensitive.</td></tr><tr><td class="al-left"><code>terraform state</code> subcommands for surgery</td><td class="al-left"><code>mv</code>, <code>rm</code>, <code>replace-provider</code>, <code>pull</code>/<code>push</code> (last two only in emergencies, with a backup copy).</td></tr><tr><td class="al-left">Read it when debugging</td><td class="al-left"><code>terraform state show aws_instance.app</code>, <code>terraform show -json</code> for policy tooling.</td></tr></tbody></table></div>
+<div class="callout warn"><p class="ctitle"><strong>IF YOU USE S3 AS A BACKEND, DO THE BORING THING RIGHT</strong></p><p>Versioned bucket + SSE-KMS + public access blocked + a bucket policy that denies anything but TLS and the CI role + <code>dynamodb_table</code> for locking + a lifecycle rule to expire old non-current versions + <strong>state files are also your blast radius</strong>: <code>terraform destroy</code> on a 4 MB JSON in a wrong account can delete everything, so lock writes to humans (a <code>apply</code> runs from a pipeline, not a laptop) and enable CloudTrail data events for the state key so <code>who touched prod state</code> has an answer. Also: never <code>terraform force-unlock</code> while a run may still be live. And if the DynamoDB table disappears, the lock silently degrades to nothing — which is how “state was overwritten” stories start.</p></div>
+<h3 id="terraform-import-and-import-blocks-the-two-ways-to-adopt-reality"><code>terraform import</code> and <code>import</code> blocks (the two ways to adopt reality)</h3>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terraform</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-hcl"># Terraform 1.5+: generate code from the live object, no hand-written skeleton
+import {
+  id     = "i-0abc123"
+  to     = aws_instance.app
+}
+resource "aws_instance" "app" {
+  # config copied from `terraform plan -generate-config-out=gen.tf`
+}</code></pre></div>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">terraform plan -generate-config-out=gen.tf   # 1 · produce config from the live resource
+terraform plan                                # 2 · read gen.tf: the diff must now be EMPTY or small
+terraform state list                          # 3 · confirm the address</code></pre></div>
+<p>Order matters: <strong>write the resource block to match reality first</strong>, then import; otherwise the import “succeeds” and the next plan destroys the resource because your empty config disagrees with the world. And for modules, the address includes the module path: <code>aws_kms_key.this[0]</code> inside <code>module.kms</code> becomes <code>module.kms["prod"].aws_kms_key.this[0]</code> — get that wrong and <code>import</code> says “resource not found”.</p>
+<h2 id="drift-lock-files-and-versions-the-three-that-make-a-team-safe">Drift, lock files and versions: the three that make a team safe</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash"># nightly, in CI — the alert that saves the 2 a.m. “who changed the SG?” call
+terraform plan -detailed-exitcode
+#   0 = no changes · 2 = drift (or a real change waiting) · 1 = error
+terraform providers lock -platform=linux_amd64 -platform=darwin_arm64   # reproducible across laptops/CI
+terraform init -upgrade   # only when you *decide* to move a provider version</code></pre></div>
+<div class="grid2"><p><strong>Why <code>.terraform.lock.hcl</code> is committed:</strong> it pins provider versions + checksums per platform. Without it, a provider release with a renamed attribute or a new default (<code>aws_vpc</code>'s <code>assign_generate_mac</code> change, <code>azurerm_subnet</code>'s enforcement toggles) silently changes semantics for everyone at once. <strong>Why <code>required_version</code> matters:</strong> state format and function behaviour change across minor versions (1.0 → 1.9 added <code>moved</code>, changed <code>import</code> blocks and how <code>optional()</code> works), and your backend may be written by a newer Terraform than your CI runs — a downgrade is how you “lose” resources from state. <strong>Why drift matters more than “clean plans”:</strong> the goal is not to <em>prevent</em> manual change (you can't), it's to make it <em>visible within one night</em> so it gets folded back into code — or reverted deliberately.</p></div>
+<h2 id="modules-reusable-versioned-and-worth-the-ceremony">Modules: reusable, versioned, and worth the ceremony</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">text</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-text">infra/
+├── modules/
+│   ├── vpc/            # network only: vpc, subnets, route tables, IGW/NAT, flow logs, endpoints
+│   │   ├── main.tf  variables.tf  outputs.tf  README.md  versions.tf  examples/
+│   ├── iam-role/       # assume-role policy + tags, one opinion, small surface
+│   └── app-service/    # ALB + target group + listener + ASG + SG + CloudWatch log group
+└── envs/
+    ├── dev/     # vpc + iam-role + app-service, 2 nodes, t3.small
+    └── prod/    # same three modules, 4 nodes, m6i.large, RDS Proxy on</code></pre></div>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash"># how a consumer pins a module — the part most tutorials leave out
+module "vpc" {
+  source     = "git::ssh://git@github.com/acme/infra.git//modules/vpc?ref=v1.4.2"
+  cidr       = "10.0.0.0/16"
+  az_count   = 2
+}</code></pre></div>
+<p><strong>Rules that come from pain:</strong> a module needs an output for everything a caller reasonably needs (ids, ARNs, the security-group id, the DNS name); inputs get sensible defaults but <strong>no</strong> credentials; anything a caller may want to override (<code>instance_type</code>, <code>min_size</code>, <code>enable_cross_zone</code>) is an input, and anything that must never be overridden (<code>encrypted = true</code>) is not; <code>versions.tf</code> declares the provider range so a module doesn't explode on a version mismatch; and a module's <code>README.md</code> says which cloud assumptions are baked in, because “VPC module” with an AWS-only <code>data aws_availability_zones</code> is a lie when Azure comes.</p>
+<p><strong>When NOT to write a module:</strong> one use, or two uses of something you're still figuring out. Copy twice, abstract on the third — premature modules become a <code>var.flag_for_everything</code> monster that no one dares change. Also: don't module-wrap every resource 1:1 (a “<code>aws_s3_bucket</code> module” with 30 pass-through variables adds no information).</p>
+<h2 id="workspaces-vs-directories-vs-stacks">Workspaces vs directories vs stacks</h2>
+<div class="tablewrap"><table><thead><tr><th class="al-left">Approach</th><th class="al-left">Isolation</th><th class="al-left">State</th><th class="al-left">CI</th><th class="al-left">Verdict</th></tr></thead><tbody><tr><td class="al-left"><code>terraform workspace new prod</code></td><td class="al-left">same config, different state key</td><td class="al-left"><code>prod.tfstate</code> in the same backend prefix</td><td class="al-left">needs <code>terraform workspace select</code> in the pipeline; one bad <code>apply -workspace=prod</code> from a laptop is a prod change</td><td class="al-left">fine for dev/qa/stage; avoid for prod vs dev</td></tr><tr><td class="al-left">Directory per environment (<code>envs/prod</code>)</td><td class="al-left">separate root modules, separate backends, often separate accounts</td><td class="al-left">own <code>key</code></td><td class="al-left">one pipeline per directory, approval on prod only</td><td class="al-left"><strong>the default for real teams</strong></td></tr><tr><td class="al-left">Terraform Cloud/Enterprise stacks</td><td class="al-left">explicit VCS-driven runs, policy, ephemeral runs</td><td class="al-left">managed</td><td class="al-left">plan/apply split with UI approval and <code>remote-state</code> data sources between stacks</td><td class="al-left">best when you have the budget</td></tr></tbody></table></div>
+<p><strong>Cross-environment references</strong> should use the <code>remote_state_data_sources</code>/<code>terraform_remote_state</code> read of a <em>non-sensitive</em> output (VPC id, SG id), never a hand-copied string. If you find yourself reading <code>prod.tfstate</code> to get an ARN, you've created a coupling that will break during a state migration; the clean version is an SSM parameter or an export written by the prod stack.</p>
+<div class="callout fix"><p class="ctitle"><strong>DEPENDENCY / REMOTE-STATE PATTERNS THAT DON'T BIT BACK</strong></p><p><code>terraform_remote_state</code> reads only <strong>outputs</strong> of another root module's state — so the network team must export <code>vpc_id</code>, <code>private_subnet_ids</code>, <code>alb_sg_id</code> as outputs and versions them with the module. Do <strong>not</strong> read <code>state show</code> from a script or parse JSON with <code>jq</code> — that turns an internal file format into an interface. If the state lives in S3, restrict the read to the CI role, and if you have Terraform Cloud, use <code>tfe_outputs</code> instead; it doesn't hand out the whole state document.</p></div>
+<h2 id="ci-plan-on-prs-apply-on-merge-the-safe-pattern">CI: plan on PRs, apply on merge — the safe pattern</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">yaml</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-yaml"># .github/workflows/terraform.yml (abridged — the full file is in Project 03 and 09)
+name: terraform
+on:
+  pull_request: { paths: ['infra/**', '.github/workflows/terraform.yml'] }
+  push: { branches: [main], paths: ['infra/**'] }
+permissions: { id-token: write, contents: read, pull-requests: write }   # OIDC, no stored AWS keys
+jobs:
+  plan-apply:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event_name == 'push' &amp;&amp; 'prod-infra' || '' }}
+    defaults: { run: { working-directory: infra/envs/prod } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with: { terraform_wrapper: false }        # needed for -detailed-exitcode parsing
+      - run: terraform init -input=false -lock=true
+      - run: terraform fmt -check -recursive &amp;&amp; terraform validate
+      - name: Plan
+        run: terraform plan -input=false -out=tfplan -detailed-exitcode
+        id: plan
+        continue-on-error: true                   # exit 2 = changes, and we want to comment
+      - uses: actions/upload-artifact@v4
+        with: { name: tfplan, path: tfplan, retention-days: 1 }
+      - name: Comment diff on PR
+        if: github.event_name == 'pull_request'
+        run: terraform show -no-color tfplan &gt; plan.txt; gh pr comment "$PR" --body-file plan.txt
+      - name: Security gates
+        run: |
+          tfsec ./ --tfvars-file terraform.tfvars   # or: checkov -d . -o json &gt; checkov.json
+          tfsec-check() { test "$(jq -r '.results | length' &lt;(tfsec --format json .))" = "0"; }
+      - name: Apply
+        if: github.event_name == 'push' &amp;&amp; steps.plan.outcome == '2'
+        run: |
+          gh run download -n tfplan .            # the EXACT plan humans reviewed
+          terraform apply -input=false tfplan</code></pre></div>
+<p><strong>What this buys:</strong> no cloud credentials at plan time for humans; a reviewed diff as the unit of change; formatting and validation as a <em>build</em> failure not a comment; and a security scanner whose findings block a merge. The three pipeline mistakes that ruin it: applying without the plan file, <code>terraform apply -auto-approve</code> on a push to <code>main</code> (so any merge can destroy prod), and running the same state from two workflows (locks collide and one run fails with <code>Error acquiring the state lock</code>, which people “fix” by removing the lock table).</p>
+<h2 id="production-scenario-destroy-ran-because-of-a-rename-and-the-fix-is-a-3-line-file">Production scenario — <code>destroy</code> ran because of a rename, and the fix is a 3-line file</h2>
+<p>A developer “tidied” <code>aws_db_instance.main</code> into <code>aws_db_instance.core</code> and the plan said:</p>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">text</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-text">  # aws_db_instance.main must be replaced
+-/+ resource "aws_db_instance" "main" { ... }   # forces replacement
+Plan: 1 to add, 0 to change, 1 to destroy.</code></pre></div>
+<p>Because a rename is, to Terraform, a new resource plus a removed one, and the removed one is <strong>destroyed</strong>. The right fix is not “don't rename” (real projects refactor constantly) — it's <code>moved</code>:</p>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terraform</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-hcl"># refactors.tf — read by the next plan, applied to state, no API call
+moved {
+  from = aws_db_instance.main
+  to   = aws_db_instance.core
+}
+moved {
+  from = module.app.aws_security_group.this
+  to   = aws_security_group.app            # un-nesting a module
+}
+import { id = "prod-db"  to = aws_db_instance.core }   # and adopt the one created by hand last quarter</code></pre></div>
+<p>Plan output after a correct <code>moved</code> block: <code>~ 1 to move</code> and <strong><code>0 to add, 0 to change, 0 to destroy</code></strong>. Reviewers should be trained to hunt for exactly that line.</p>
+<p>Other war stories, each with its one-line fix:</p>
+<div class="tablewrap"><table><thead><tr><th class="al-left">Failure</th><th class="al-left">The plan/apply said</th><th class="al-left">Fix</th></tr></thead><tbody><tr><td class="al-left">Provider upgrade deleted a resource</td><td class="al-left"><code># forces replacement</code> on a subnet because <code>map_public_ip_on_launch</code> changed meaning</td><td class="al-left">Pin provider versions; upgrade in a PR whose <em>only</em> job is the upgrade; read the changelog before merging.</td></tr><tr><td class="al-left">“Lost” resource, apply errors</td><td class="al-left"><code>Error: Cannot import non-existent remote object</code> / <code>InvalidGroup.NotFound</code></td><td class="al-left">State drifted from reality (someone deleted in the console). <code>terraform refresh</code>, decide whether reality or code wins, fold into code.</td></tr><tr><td class="al-left">Apply half-completed, state locked</td><td class="al-left"><code>Error acquiring the state lock ... ConditionalRequestFailed</code></td><td class="al-left">Someone's run is still live or crashed. Check the lock owner in DynamoDB; only then <code>terraform force-unlock &lt;ID&gt;</code>. Never in the middle of an unknown run.</td></tr><tr><td class="al-left">Two applies in parallel corrupted inventory</td><td class="al-left"><code>CodeSnapshotCreateTime</code> mismatch, phantom diffs forever</td><td class="al-left">One apply per environment at a time: locking + a pipeline concurrency group. Terraform has no multi-writer safety.</td></tr><tr><td class="al-left"><code>for_each</code> over a computed value</td><td class="al-left"><code>Invalid for_each argument ... depends on resource attributes that cannot be determined until apply</code></td><td class="al-left">Break the cycle: use a fixed set of AZ names, or a second <code>apply</code> (the value is computed by a prior step whose output you pass as a variable).</td></tr><tr><td class="al-left">“Nothing changed” but the app is broken</td><td class="al-left"><code>No changes. Your infrastructure matches the configuration.</code></td><td class="al-left">Terraform only knows what it manages. Manual config, app-level changes and PaaS UI toggles are invisible — hence Config rules / Azure Policy / <code>aws configservice</code> + drift alarms.</td></tr></tbody></table></div>
+<h2 id="common-mistakes">Common mistakes</h2>
+<ul class="checklist"><li class=''><span class='box'></span><span><code>-auto-apply</code> / <code>-auto-approve</code> on every branch. Auto-approve is for a <em>human-reviewed plan artefact</em> in a controlled job, not for “the pipeline decides”.</span></li><li class=''><span class='box'></span><span>State in a Git repo, in an S3 bucket without versioning, or without a lock table.</span></li><li class=''><span class='box'></span><span><code>count</code> on a list that can reorder, then a surprise database replacement.</span></li><li class=''><span class='box'></span><span>Hard-coded AMI/account ids/<code>eu-west-1a</code> — use data sources and variables, and never AZ letters in reusable modules.</span></li><li class=''><span class='box'></span><span>Secrets in <code>default_tags</code>, <code>user_data</code>, or RDS <code>password</code> (they're in state). Use a secret manager + a data source marked sensitive, and accept that the <em>reference</em> is in state, not the value.</span></li><li class=''><span class='box'></span><span>One giant root module: every plan takes 6 minutes, every apply touches 800 resources, and nobody can review it. One root module per blast radius.</span></li><li class=''><span class='box'></span><span><code>terraform apply</code> from a laptop on prod, with local variables nobody can see. Reproducibility dies with the laptop.</span></li><li class=''><span class='box'></span><span>Ignoring <code>terraform fmt</code>/<code>validate</code>, so a 900-line diff hides a <code>depends_on</code> typo someone added at 23:50.</span></li><li class=''><span class='box'></span><span>No <code>prevent_destroy</code>/<code>deletion protection</code> on the database, bucket or state bucket, so one bad <code>destroy -target</code> is final.</span></li><li class=''><span class='box'></span><span>Version-less modules (<code>source = "../modules/vpc"</code>) so a module change silently affects every environment on their next run.</span></li></ul>
+<h2 id="best-practices-you-can-start-today">Best practices you can start today</h2>
+<div class="grid2"><p><strong>Small, reviewable changes with <code>-replace</code> on purpose.</strong> When you <em>must</em> replace a resource, <code>terraform plan -replace=aws_instance.app</code> shows the blast radius before anyone merges. <strong><code>prevent_destroy</code> on anything stateful</strong> (<code>terraform { lifecycle { prevent_destroy = true } }</code>) plus cloud-side deletion protection. Belt, braces, and a written exception process. <strong>One plan file, everywhere.</strong> CI, local, and any “emergency” run uses <code>apply &lt;plan&gt;</code>. Never re-plan at apply time. <strong>Name and tag by convention.</strong> <code>identifier = "${var.project}-${terraform.workspace}"</code> used in every resource name, so <code>terraform state list | grep medbook-prod</code> is a query you can run at 2 a.m.</p></div>
+<h2 id="interview-answer">Interview answer</h2>
+<div class="callout aha"><p class="ctitle"><strong>“How do you use Terraform on a real project?”</strong></p><p>“Modules first: I keep a small library — network, iam-role, app-service, database — each with an explicit set of variables and outputs, versioned in Git, and one root module per environment so the state file and the blast radius match the team's approval boundary. State lives in an encrypted, versioned S3 bucket with a DynamoDB lock, so two applies can't interleave and I can read the previous state after a bad run. Nothing is applied from a laptop: a PR runs <code>fmt -check</code>, <code>validate</code>, <code>plan -out</code> and security scans, posts the diff as a comment, and on merge a separate job downloads <em>that exact plan</em> and applies it. I deliberately avoid <code>-auto-approve</code> on pushes and instead require a reviewed plan artefact plus a manual approval gate for prod. For refactors I use <code>moved</code> blocks so a rename is a state move, not a destroy — and I've seen a rename destroy a database on a project, so I now check every plan's <code>to destroy:</code> line before I let anything apply. I pin provider versions with a committed lock file and do provider upgrades in their own PR. And because Terraform only manages what it knows, I run a nightly <code>plan -detailed-exitcode</code> as a drift alarm plus cloud-side guardrails: SCP/Azure Policy for the things I refuse to allow at all.”</p></div>
+<div class="grid2"><p><strong>Follow-up: “What happens if you delete a resource from your config?”</strong> → plan says <code>1 to destroy</code>, apply removes it from the cloud <em>and</em> from state. That's exactly why code review reads that line, and why stateful resources carry <code>prevent_destroy</code>. <strong>Follow-up: “Terraform vs CloudFormation/Pulumi?”</strong> → CFN: native, IAM-native, no state file, but weaker module/DRY story and slower cross-cloud; Pulumi: real languages and real tests, with a state file of its own to run; Terraform: the widest provider coverage and the ecosystem everyone can read. <strong>Follow-up: “How do you manage secrets?”</strong> → don't: pass references. Secrets Manager/Key Vault data sources + <code>sensitive = true</code> outputs, and the state itself protected like a database. <strong>Follow-up: “How do you handle a tainted resource?”</strong> → <code>terraform state rm</code> if you intentionally adopt it manually, or <code>-replace</code> if it's half-created; and never edit state JSON by hand on a shared backend.</p></div>
+<h2 id="virtual-lab-build-and-destroy-a-network-from-code-simulated-terminal">Virtual lab — build and destroy a network from code (simulated terminal)</h2>
+<div class="labhost"><div class="labbar"><span class="labname">Virtual terminal</span><span class="labstep" data-lab-progress></span></div><div class="labterm" data-lab="lab" data-lab-id="terraform-1"></div></div>
+<h2 id="commands-to-remember">Commands to remember</h2>
+<div class="grid2"><div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">terraform init -upgrade=false
+terraform fmt -recursive -check &amp;&amp; terraform validate
+terraform plan  -input=false -out=tfplan -detailed-exitcode
+terraform apply -input=false tfplan</code></pre></div>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">terraform state list
+terraform state show aws_instance.app
+terraform import aws_instance.app i-0abc123
+terraform force-unlock 4a1f-...      # only after confirming no live run
+terraform graph | dot -Tsvg &gt; g.svg</code></pre></div>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash"># recovery trio — in this order, always
+cp prod.tfstate prod.tfstate.bak
+terraform refresh &amp;&amp; terraform plan   # see what reality says now
+terraform apply -replace=aws_instance.app</code></pre></div></div>
+<div class="callout note"><p class="ctitle"><strong>WHAT I MUST REMEMBER</strong></p><ol class="numlist"><li>Terraform's output is a <strong>diff</strong>; “read the plan” is the skill, not “write the HCL”.</li><li>State is the product: remote, encrypted, versioned, locked, and never in Git.</li><li><code>for_each</code> over <code>count</code>; <code>moved</code> over “don't refactor”; <code>plan</code> file over re-planning at apply.</li><li>IaC governs what Terraform owns. Everything else needs drift alarms and policies.</li></ol></div>
+<div class="revision"><p class="ctitle"><strong>REVISION — 5 minutes</strong></p><p><strong>Concepts:</strong> providers, resources, data sources, locals, variables, outputs; state + locking; plan = diff; <code>count</code> vs <code>for_each</code>; <code>depends_on</code> as a smell; <code>lifecycle</code> (<code>create_before_destroy</code>, <code>ignore_changes</code>, <code>prevent_destroy</code>); drift; lock file; module versioning; workspaces vs directories; <code>moved</code>/<code>import</code> blocks; <code>-detailed-exitcode</code>; tfsec/Checkov/<code>tf plan json</code> policy gates. <strong>Architecture to remember:</strong> modules (network · security · app · data) + <code>envs/{dev,prod}</code> roots + S3 state with a DynamoDB lock + CI that plans on PR and applies the reviewed plan on merge, gated by an environment approval. <strong>Common mistakes:</strong> auto-approve on main · state in Git · <code>count</code> on an orderable list · secrets in user data/vars · one giant root module · no <code>prevent_destroy</code> on stateful things · laptop applies. <strong>Troubleshooting checklist:</strong> <code>fmt/validate</code> first → <code>refresh</code> and re-plan → read the <code>forces replacement</code> lines → is the lock held (check the owner) → is the resource real (<code>describe-*</code>) → is the address right (<code>state list</code>) → <code>-replace</code> targeted → restore from state version if you must.</p></div>
+<p>Next: <a href="p1-kubernetes.html">Kubernetes — the deployment layer →</a></p></div></div>
+      <div class="pagefoot">
+        <p class="pagefootnote">Part of the DevOps Academy built from the 41-project reference repository · offline · no tracking</p>
+        <div class="pager">
+          <a class="pg prev" href="p1-azure-gcp.html"><span>Previous</span><strong>Azure + GCP</strong></a>
+          <a class="pg next" href="p1-kubernetes.html"><span>Next</span><strong>Kubernetes</strong></a>
+        </div>
+        <p class="markread"><label class="tickall"><input type="checkbox" data-mark-done> <span>Mark this page as done</span></label></p>
+      </div>
+    </article>
+  </main>
+</div>
+<div class="searchmodal" data-search-modal hidden>
+  <div class="searchbox">
+    <input type="search" data-search-input placeholder="Search the course: OOMKilled, terraform state lock, ALB 502, Jenkinsfile…" aria-label="Search">
+    <ul class="searchresults" data-search-results></ul>
+    <p class="searchhint">Press <kbd>Esc</kbd> to close · <kbd>/</kbd> to open</p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CI/CD · DevOps Academy — learn DevOps by shipping 11 real projects</title>
+<meta name="description" content="One pipeline shape in three tools: declare every input, gate on quality, publish one artefact, promote it, verify after deploy.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%230f172a%22/%3E%3Ctext%20x%3D%2216%22%20y%3D%2221%22%20font-family%3D%22ui-monospace%2Cmonospace%22%20font-size%3D%2212%22%20font-weight%3D%22700%22%20fill%3D%22%235eead4%22%20text-anchor%3D%22middle%22%3E%26gt%3B_%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="canonical" href="">
+<script src="assets/js/app.js" defer></script>
+<script>(function(){try{var t=localStorage.getItem("aca.theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}})();</script>
+</head>
+<body data-page="p1-cicd" data-kind="page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <button class="iconbtn menubtn" data-drawer="1" aria-label="Open navigation">
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <a class="brand" href="index.html"><span class="mark">ACA</span><span class="brandtext">DevOps Academy</span></a>
+  <nav class="topnav"><a href="roadmap.html">Roadmap</a><a href="p1-cloud-core.html">Cloud core concepts</a><a href="projects.html">Projects index</a><a href="p2-devsecops-core.html">DevSecOps core</a><a href="labs.html">Virtual labs</a><a href="interview.html">Interview bank</a><a href="troubleshoot.html">Troubleshooting</a></nav>
+  <div class="topright">
+    <button class="iconbtn" data-search-open aria-label="Search" title="Search (/ )">
+      <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" d="M16 16l4.5 4.5"/></svg>
+    </button>
+    <button class="iconbtn" data-theme-toggle aria-label="Switch light or dark theme" title="Theme">
+      <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M12 3v2m0 14v2m9-9h-2M5 12H3m14.5-6.5-1.4 1.4M8.9 15.1l-1.4 1.4m0-12 1.4 1.4m6.2 6.2 1.4 1.4M12 8.2a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6Z"/></svg>
+    </button>
+  </div>
+</header>
+<div class="progress" data-progress-bar aria-hidden="true"></div>
+<div class="layout">
+  <aside class="sidebar" data-drawer-target>
+    <div class="sidehead">
+      <span class="sidetitle">Curriculum</span>
+      <span class="sideprogress" data-progress-label></span>
+    </div>
+    <nav class="nav"><p class="navsec">Start here</p><a class="" href="roadmap.html" data-nav-page="roadmap"><span class="pdot" data-done-dot="roadmap"></span>Roadmap</a><p class="navsec">Foundation</p><a class="" href="f-linux.html" data-nav-page="f-linux"><span class="pdot" data-done-dot="f-linux"></span>Linux<em class="tag linux">LINUX</em></a><a class="" href="f-networking.html" data-nav-page="f-networking"><span class="pdot" data-done-dot="f-networking"></span>Networking + shell<em class="tag net">NET</em></a><a class="" href="f-git-github.html" data-nav-page="f-git-github"><span class="pdot" data-done-dot="f-git-github"></span>Git + GitHub<em class="tag git">GIT</em></a><a class="" href="f-docker.html" data-nav-page="f-docker"><span class="pdot" data-done-dot="f-docker"></span>Docker + Compose<em class="tag docker">DOCKER</em></a><p class="navsec">Phase 1 · Core DevOps</p><a class="" href="p1-cloud-core.html" data-nav-page="p1-cloud-core"><span class="pdot" data-done-dot="p1-cloud-core"></span>Cloud core concepts<em class="tag cloud">CLOUD</em></a><a class="" href="p1-aws.html" data-nav-page="p1-aws"><span class="pdot" data-done-dot="p1-aws"></span>AWS<em class="tag aws">AWS</em></a><a class="" href="p1-azure-gcp.html" data-nav-page="p1-azure-gcp"><span class="pdot" data-done-dot="p1-azure-gcp"></span>Azure + GCP<em class="tag azure">AZURE</em></a><a class="" href="p1-terraform.html" data-nav-page="p1-terraform"><span class="pdot" data-done-dot="p1-terraform"></span>Terraform<em class="tag iac">IAC</em></a><a class="" href="p1-kubernetes.html" data-nav-page="p1-kubernetes"><span class="pdot" data-done-dot="p1-kubernetes"></span>Kubernetes<em class="tag k8s">K8S</em></a><a class="current" href="p1-cicd.html" data-nav-page="p1-cicd"><span class="pdot" data-done-dot="p1-cicd"></span>CI/CD<em class="tag cicd">CICD</em></a><a class="" href="p1-observability.html" data-nav-page="p1-observability"><span class="pdot" data-done-dot="p1-observability"></span>Observability<em class="tag obs">OBS</em></a><a class="" href="p1-multicloud.html" data-nav-page="p1-multicloud"><span class="pdot" data-done-dot="p1-multicloud"></span>Multicloud<em class="tag cloud">CLOUD</em></a><p class="navsec">Projects</p><a class="" href="projects.html" data-nav-page="projects"><span class="pdot" data-done-dot="projects"></span>Projects index<em class="tag proj">PROJ</em></a><a class="" href="proj-01-healthcare.html" data-nav-page="proj-01-healthcare"><span class="pdot" data-done-dot="proj-01-healthcare"></span>01 · Healthcare on a Linux VM<em class="tag proj">PROJ</em></a><a class="" href="proj-02-ecommerce.html" data-nav-page="proj-02-ecommerce"><span class="pdot" data-done-dot="proj-02-ecommerce"></span>02 · E-commerce in Docker<em class="tag docker">DOCKER</em></a><a class="" href="proj-03-banking.html" data-nav-page="proj-03-banking"><span class="pdot" data-done-dot="proj-03-banking"></span>03 · Banking with Terraform<em class="tag iac">IAC</em></a><a class="" href="proj-04-retail.html" data-nav-page="proj-04-retail"><span class="pdot" data-done-dot="proj-04-retail"></span>04 · Retail on ECS<em class="tag aws">AWS</em></a><a class="" href="proj-05-telecom.html" data-nav-page="proj-05-telecom"><span class="pdot" data-done-dot="proj-05-telecom"></span>05 · Telecom on Kubernetes<em class="tag k8s">K8S</em></a><a class="" href="proj-06-fintech.html" data-nav-page="proj-06-fintech"><span class="pdot" data-done-dot="proj-06-fintech"></span>06 · FinTech microservices<em class="tag sec">SEC</em></a><a class="" href="proj-07-insurance.html" data-nav-page="proj-07-insurance"><span class="pdot" data-done-dot="proj-07-insurance"></span>07 · Insurance on Azure DevOps<em class="tag azure">AZURE</em></a><a class="" href="proj-08-saas.html" data-nav-page="proj-08-saas"><span class="pdot" data-done-dot="proj-08-saas"></span>08 · SaaS multi-tenant<em class="tag aws">AWS</em></a><a class="" href="proj-09-multicloud.html" data-nav-page="proj-09-multicloud"><span class="pdot" data-done-dot="proj-09-multicloud"></span>09 · Multicloud<em class="tag cloud">CLOUD</em></a><a class="" href="proj-10-capstone.html" data-nav-page="proj-10-capstone"><span class="pdot" data-done-dot="proj-10-capstone"></span>10 · Capstone<em class="tag proj">PROJ</em></a><a class="" href="proj-11-mega.html" data-nav-page="proj-11-mega"><span class="pdot" data-done-dot="proj-11-mega"></span>11 · Mega project<em class="tag sec">SEC</em></a><p class="navsec">Phase 2 · DevSecOps</p><a class="" href="p2-devsecops-core.html" data-nav-page="p2-devsecops-core"><span class="pdot" data-done-dot="p2-devsecops-core"></span>DevSecOps core<em class="tag sec">SEC</em></a><a class="" href="p2-secrets-iam.html" data-nav-page="p2-secrets-iam"><span class="pdot" data-done-dot="p2-secrets-iam"></span>Secrets + IAM<em class="tag sec">SEC</em></a><a class="" href="p2-scanning.html" data-nav-page="p2-scanning"><span class="pdot" data-done-dot="p2-scanning"></span>Scanning + gates<em class="tag sec">SEC</em></a><a class="" href="p2-runtime-sec.html" data-nav-page="p2-runtime-sec"><span class="pdot" data-done-dot="p2-runtime-sec"></span>Runtime + K8s security<em class="tag sec">SEC</em></a><a class="" href="aiops.html" data-nav-page="aiops"><span class="pdot" data-done-dot="aiops"></span>AIOps on GCP<em class="tag gcp">GCP</em></a><a class="" href="mlops.html" data-nav-page="mlops"><span class="pdot" data-done-dot="mlops"></span>MLOps on GCP<em class="tag gcp">GCP</em></a><p class="navsec">Practice</p><a class="" href="labs.html" data-nav-page="labs"><span class="pdot" data-done-dot="labs"></span>Virtual labs<em class="tag lab">LAB</em></a><a class="" href="revision.html" data-nav-page="revision"><span class="pdot" data-done-dot="revision"></span>Revision sheets</a><a class="" href="test-me.html" data-nav-page="test-me"><span class="pdot" data-done-dot="test-me"></span>Test me<em class="tag test">TEST</em></a><p class="navsec">Career</p><a class="" href="interview.html" data-nav-page="interview"><span class="pdot" data-done-dot="interview"></span>Interview bank<em class="tag int">INT</em></a><a class="" href="interview-scenarios.html" data-nav-page="interview-scenarios"><span class="pdot" data-done-dot="interview-scenarios"></span>Scenario rounds<em class="tag int">INT</em></a><a class="" href="troubleshoot.html" data-nav-page="troubleshoot"><span class="pdot" data-done-dot="troubleshoot"></span>Troubleshooting<em class="tag ops">OPS</em></a><a class="" href="resume.html" data-nav-page="resume"><span class="pdot" data-done-dot="resume"></span>Resume + portfolio<em class="tag career">CAREER</em></a><p class="navsec">Site</p><a class="" href="resources.html" data-nav-page="resources"><span class="pdot" data-done-dot="resources"></span>Resources</a><a class="" href="deployment-guide.html" data-nav-page="deployment-guide"><span class="pdot" data-done-dot="deployment-guide"></span>Publish this site</a></nav>
+    <div class="sidefoot">
+      <p>Everything here is offline-first: no account, no tracking, no backend. Your progress and answers stay in this browser.</p>
+    </div>
+  </aside>
+  <main id="main">
+    <article class="page">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span>Phase 1 · Core DevOps<span>/</span><b>CI/CD</b></nav>
+      <header class="hero"><p class="kicker">Phase 1 · Core DevOps</p><h1>CI/CD: Jenkins, GitHub Actions, GitOps</h1><p class="herotext">One pipeline shape in three tools: declare every input, gate on quality, publish one artefact, promote it, verify after deploy.</p><div class="herometa"><span class="mchip">5 h</span><span class="mchip tag cicd">CICD</span></div></header>
+      <details class="toc" open><summary>On this page</summary><ul><li class="l2"><a href="#jenkins-the-industry-s-workhorse-learn-it-then-love-it-less-than-it-deserves">Jenkins: the industry&#x27;s workhorse (learn it, then love it less than it deserves)</a></li><li class="l3"><a href="#a-jenkinsfile-you-can-defend-in-review-modelled-on-devops-project-41">A Jenkinsfile you can defend in review — modelled on DevOps-Project-41</a></li><li class="l2"><a href="#github-actions-ci-as-a-code-review">GitHub Actions: CI as a code review</a></li><li class="l2"><a href="#the-pipeline-order-and-why-it-s-that-order">The pipeline order and why it&#x27;s that order</a></li><li class="l2"><a href="#production-scenario-a-successful-pipeline-that-shipped-nothing">Production scenario — a “successful” pipeline that shipped nothing</a></li><li class="l2"><a href="#common-mistakes">Common mistakes</a></li><li class="l2"><a href="#best-practices">Best practices</a></li><li class="l2"><a href="#interview-answer">Interview answer</a></li><li class="l2"><a href="#virtual-lab-build-the-pipeline-then-debug-it-simulated-terminal">Virtual lab — build the pipeline, then debug it (simulated terminal)</a></li><li class="l2"><a href="#commands-to-remember">Commands to remember</a></li></ul></details>
+      <div class="prose"><p class="lead">A pipeline is a machine that turns a commit into a decision. If it only turns a commit into a deployment, you have an expensive button. Everything on this page — Jenkins and GitHub Actions side by side — is organised around one idea: each stage must either produce evidence or stop the line.</p>
+<div class="flow"><span class="fnode">commit</span><span class="farrow">→</span><span class="fnode">build</span><span class="farrow">→</span><span class="fnode">test</span><span class="farrow">→</span><span class="fnode">scan</span><span class="farrow">→</span><span class="fnode">package</span><span class="farrow">→</span><span class="fnode">publish</span><span class="farrow">→</span><span class="fnode">deploy staging</span><span class="farrow">→</span><span class="fnode">verify</span><span class="farrow">→</span><span class="fnode"><strong>gate</strong></span><span class="farrow">→</span><span class="fnode">deploy prod</span><span class="farrow">→</span><span class="fnode">smoke</span><span class="farrow">→</span><span class="fnode">auto-rollback on failure</span><span class="farrow">→</span></div>
+<p><strong>The stages, in words an interviewer accepts:</strong> build (compile; the artefact name embeds the commit SHA so it's traceable) · test (unit + contract, deterministic, and the <em>coverage</em> is trended not demanded) · static analysis and dependency/secret scanning (cheap, early, blocking at severity) · package (image, SBOM, signature, provenance) · deploy to a real environment with a health-check wait · <strong>verify</strong> (<code>rollout status</code>, synthetic requests, smoke tests) · promote by <em>retagging and promoting the same artefact</em> — never rebuild for prod · gate (a human on prod, an SLO on auto-scaling decisions) · rollback on a red health signal.</p>
+<h2 id="jenkins-the-industry-s-workhorse-learn-it-then-love-it-less-than-it-deserves">Jenkins: the industry's workhorse (learn it, then love it less than it deserves)</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">text</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-text">Controller (the brain: plugins, credentials, config-as-code, JCasC)
+   ├── agent "linux"   ← your build box (labels = scheduling policy)
+   ├── agent "k8s"     ← pod templates: one ephemeral pod per build (the modern way)
+   └── agent "docker"  ← a runner with the Docker socket (danger: root-equivalent; prefer DinD-less
+                          BuildKit with a dedicated service account)</code></pre></div>
+<p><strong>Why it's everywhere:</strong> anything can be a Jenkins job. Legacy .NET on Windows, SSH deploys, Ansible, “the DBA's script”, on-prem VMs, jobs with human input steps, and pipelines that must run inside your firewall. <strong>Why teams leave:</strong> plugin churn, upgrades that break the world, controllers that accumulate snowflakes, and no security boundary between “run my job” and “read every secret”. Knowing both answers honestly is the interview-grade position: “I'd use GitHub Actions for anything GitHub-hosted and Jenkins where on-prem, Windows, or heavy orchestration of long-running manual steps is required.”</p>
+<div class="cols"><div class="col"><p><strong>Install it the way the reference project does</strong> (<code>DevOps-Project-41</code>): a <code>t2.large</code> EC2 with Docker, and a <code>docker-compose.yml</code> bringing up Jenkins (8080), an agent, SonarQube (9000) and the Trivy plugin path — port 50000 for agents.</p>
+<p><strong>Then four settings that decide your quality of life:</strong></p>
+<ol class="numlist"><li><em>Manage Jenkins → Security → Agent-to-controller access control</em> on.</li><li><em>Threats</em> configured for Sonar/OWASP-ZAP so “failed to push” is a build failure.</li><li>Global pipeline library in Git, not copy-pasted <code>sh</code> blocks.</li><li>Build retention: 30 builds max, 14 days — or <code>/var/lib/jenkins</code> fills the 30 GB EBS and <code>df -h</code> becomes your incident.</li></ol></div>
+<div class="col"><p><strong>Credentials, the only correct way:</strong></p>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">jenkinsfile</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-groovy">withCredentials([sshUserPrivateKey(credentialsId:'gh-deploy-key', keyFileVariable:'KEY'),
+                 usernamePassword(credentialsId:'ecr', usernameVariable:'U', passwordVariable:'P')]) {
+  sh 'aws ecr get-login-password | docker login -u $U --password-stdin ...'
+}</code></pre></div>
+<p>Never <code>sh "docker login -u ${env.USER} -p ${env.PASS}"</code> — it lands in the build log, which is world-readable to your whole org. Store secrets in the Credentials store backed by the HashiCorp Vault or AWS Secrets Manager plugin, so rotation happens in one place; and give each job a <em>scoped</em> credential, not the admin's.</p></div>
+<h3 id="a-jenkinsfile-you-can-defend-in-review-modelled-on-devops-project-41">A Jenkinsfile you can defend in review — modelled on <code>DevOps-Project-41</code></h3>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">jenkinsfile</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-groovy">#!/usr/bin/env groovy
+pipeline {
+  agent { label 'docker-agent' }
+
+  options {
+    timestamps(); disableConcurrentBuilds()
+    buildDiscarder(logRotator(numToKeepStr: '30', artifactNumToKeepStr: '10'))
+    timeout(time: 30, unit: 'MINUTES'); retry(1)
+  }
+
+  environment {
+    REGISTRY = '123456789012.dkr.ecr.eu-west-1.amazonaws.com'
+    IMAGE    = "${REGISTRY}/medbook"
+    TAG      = "${env.BRANCH_NAME}-${env.GIT_COMMIT?.take(7)}-${env.BUILD_NUMBER}"
+    TRIVY_SEVERITY = 'HIGH,CRITICAL'
+  }
+
+  stages {
+    stage('Checkout &amp; toolchain') {
+      steps {
+        checkout scm
+        sh 'java -version &amp;&amp; mvn -v &amp;&amp; docker --version'
+      }
+    }
+    stage('Build + unit tests') {
+      steps {
+        sh './mvnw -B -Dtest=failing test verify || true'   // pattern below explains the || true
+        junit allowEmptyResults: false, testResults: '**/target/surefire-reports/*.xml'
+      }
+      post { always { recordCoverage(tools: [[parser: 'JACOCO']], id: 'jacoco') } }
+    }
+    stage('Static analysis (SAST)') {
+      steps {
+        sh 'mvn -B sonar:sonar -Dsonar.projectKey=medbook -Dsonar.qualitygate.wait=true'
+      }
+    }
+    stage('Dependencies (SCA)') {
+      steps { sh "trivy fs . --severity ${TRIVY_SEVERITY} --exit-code 1 --ignore-unfixed=false" }
+    }
+    stage('Secret scan') {
+      steps { sh "gitleaks detect --source . --redact --exit-code 1 || " +
+                 "echo 'found; blocking' &amp;&amp; exit 1" }
+    }
+    stage('Image: build, scan, push') {
+      steps {
+        sh "docker build -t ${IMAGE}:${TAG} ."
+        sh "trivy image ${IMAGE}:${TAG} --severity ${TRIVY_SEVERITY} --exit-code 1"
+        withCredentials([usernamePassword(credentialsId:'ecr-push', usernameVariable:'U', passwordVariable:'P')]) {
+          sh 'aws ecr get-login-password | docker login --username AWS --password-stdin $REGISTRY'
+        }
+        sh "docker push ${IMAGE}:${TAG} &amp;&amp; cosign sign --yes ${IMAGE}:${TAG}"
+      }
+    }
+    stage('Deploy staging') {
+      steps {
+        sh "kubectl -n staging set image deploy/medbook medbook=${IMAGE}@$(docker buildx imagetools inspect --raw ${IMAGE}:${TAG} | jq -r .digest) " +
+           "&amp;&amp; kubectl -n staging rollout status deploy/medbook --timeout=240s"
+      }
+    }
+    stage('Verify') {
+      steps { sh './scripts/smoke.sh https://staging.medbook.example.com' }
+    }
+    stage('Promote to prod') {
+      when { expression { env.BRANCH_NAME == 'main' } }
+      options { timeout(time: 60, unit: 'MINUTES') }
+      input {
+        message "Promote ${env.TAG} to production?"
+        ok 'Ship it'; submitter 'leads,devops';
+        // and a parameter so the approver can attach the change number
+        parameters { text(name: 'CHANGE_REF', defaultValue: '', description: 'JIRA change id') }
+      }
+      steps { sh "./scripts/deploy.sh prod ${IMAGE}:${TAG}" }
+    }
+  }
+
+  post {
+    failure {
+      sh "./scripts/notify.sh '#devops-alerts' \"medbook build #${env.BUILD_NUMBER} failed on ${env.BRANCH_NAME}: ${env.BUILD_URL}\""
+      catchError { sh './scripts/rollback.sh staging' }     // auto-rollback where it's safe
+    }
+    success { sh "./scripts/tag-release.sh ${env.TAG}" }
+    always  { cleanWs(deleteDirs: true, notFailBuild: true) }
+  }
+}</code></pre></div>
+<div class="callout fix"><p class="ctitle"><strong>THE <code>|| true</code> TRICK THAT'S WORTH KNOWING (and its trap)</strong></p><p><code>sh './mvnw test || true'</code> + <code>junit allowEmptyResults: false</code> means <em>a test failure still publishes the report and then fails the build via the junit step</em>. Why bother? So the PR comment shows exactly which tests failed instead of “exit code 1”. The trap: if the build fails <em>before</em> tests, there are no report files and the job passes silently — hence <code>allowEmptyResults: false</code>, which makes the missing report itself a failure. This is the kind of nuance that separates “I have written a Jenkinsfile” from “I have debugged one at 11 p.m.”</p></div>
+<p><strong>Jenkins terms in one line each:</strong> <em>pipeline syntax</em> = scripted (Groovy you can abuse) vs declarative (stages, <code>post</code>, <code>when</code>, sane defaults — choose this); <em>agent vs label</em> = where a build runs, and the label is your queue management; <em>shared library</em> = <code>vars/*.groovy</code> functions so ten teams share one deploy step; <em>JCasC</em> = config as YAML, so a controller rebuild is 5 minutes not 3 days; <em>jobs vs folders</em> = organise by team, not by “everything in root”; <em>webhook</em> = GitHub App / GitHub plugin so builds start in 3 s not 60 s of polling.</p>
+<h2 id="github-actions-ci-as-a-code-review">GitHub Actions: CI as a code review</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">yaml</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-yaml"># .github/workflows/ci.yml  — the same pipeline, and note what's different
+name: ci
+on:
+  pull_request: { branches: [main] }
+  push: { branches: [main] }
+permissions: { contents: read }          # default-deny; every job opts in explicitly (do that!)
+concurrency: { group: ci-${{ github.ref }}, cancel-in-progress: true }   # PRs don't queue behind each other
+
+env: { REGISTRY: 123456789012.dkr.ecr.eu-west-1.amazonaws.com, IMAGE: medbook }
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }              # full history → gitleaks can scan commits, not just tree
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 17, cache: maven }
+      - run: ./mvnw -B verify
+      - uses: actions/upload-artifact@v4
+        with: { name: reports, path: target/surefire-reports/, retention-days: 5 }
+      - uses: gitleaks/gitleaks-action@v2
+        env: { GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} }
+      - uses: aquasecurity/trivy-action@0.24.0
+        with: { scan-type: fs, severity: HIGH,CRITICAL, exit-code: '1', ignore-unfixed: true }
+      - uses: mstksg/get-test-coverage@v1        # or a PR comment from the junit artifact
+        continue-on-error: true
+
+  image:
+    needs: quality
+    runs-on: ubuntu-latest
+    permissions: { id-token: write, contents: read, packages: write }   # OIDC for AWS, no stored keys
+    steps:
+      - uses: actions/checkout@v4
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::123456789012:role/gha-medbook-ci
+          aws-region: eu-west-1
+      - uses: aws-actions/amazon-ecr-login@v2
+        id: ecr
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.ecr.outputs.registry }}/medbook:sha-${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          provenance: true                    # SLSA attestations + SBOM, for free
+      - run: |
+          DIGEST=$(docker buildx imagetools inspect ${{ steps.ecr.outputs.registry }}/medbook:sha-${{ github.sha }} --format '{{json .Manifest}}' | jq -r .digest)
+          cosign sign --yes "${{ steps.ecr.outputs.registry }}/medbook@$DIGEST"
+  deploy-staging:
+    needs: image
+    uses: ./.github/workflows/deploy.yml      # a reusable workflow: ONE deploy implementation, many callers
+    with: { env: staging, image: "..." }
+    secrets: inherit
+
+  deploy-prod:
+    if: github.ref == 'refs/heads/main'
+    needs: deploy-staging
+    environment: { name: production, url: https://medbook.example.com }   # ← required reviewers live here
+    uses: ./.github/workflows/deploy.yml
+    with: { env: prod, image: "..." }
+    secrets: inherit</code></pre></div>
+<div class="grid2"><p><strong>The three features that change team behaviour:</strong> <strong>matrix</strong> (test 3 versions/OSes from 10 lines), <strong>reusable workflows</strong> (<code>on: workflow_call</code> — a deploy path shared by 11 repos, changed once), and <strong>environments</strong> (protection rules = required reviewers + a wait timer + a <em>separate</em> set of secrets, so <code>prod</code> creds literally aren't available to a PR build from a fork). <strong><code>pull_request</code> vs <code>pull_request_target</code>:</strong> the first runs with the fork's restricted token (safe, but no secrets); the second runs in the base repo with secrets — which is fine for <em>labeling</em>, catastrophic if you also <code>checkout</code> the PR code and run it. That one word has been the root cause of real supply-chain incidents; use a <code>pull_request</code> + a comment-free policy, or the trust model of your choice, consciously.</p></div>
+<h2 id="the-pipeline-order-and-why-it-s-that-order">The pipeline order and why it's that order</h2>
+<div class="tablewrap"><table><thead><tr><th class="al-left">Position</th><th class="al-left">Stage</th><th class="al-left">Why here, not later</th></tr></thead><tbody><tr><td class="al-left">1</td><td class="al-left"><code>fmt</code> + <code>validate</code> + <code>hadolint</code>/<code>yamllint</code></td><td class="al-left">5 seconds, catches 20 % of review noise, teaches the machine to be the pedant</td></tr><tr><td class="al-left">2</td><td class="al-left">Unit tests + coverage</td><td class="al-left">Feedback must be &lt; 5 min or developers route around the pipeline</td></tr><tr><td class="al-left">3</td><td class="al-left">SAST (SonarQube)</td><td class="al-left">Cheapest possible place to find a null-pointer or an injection sink — before it's compiled into an artefact</td></tr><tr><td class="al-left">4</td><td class="al-left">SCA (Trivy fs / OWASP dep-check / <code>npm audit</code>)</td><td class="al-left">A dependency CVE doesn't need a built image to be found</td></tr><tr><td class="al-left">5</td><td class="al-left">Secret scan (<code>gitleaks</code>, <code>trufflehog</code>, GH's own scanning)</td><td class="al-left">A committed secret is a <em>rotation</em> event, not a code event — find it before it's in a public commit</td></tr><tr><td class="al-left">6</td><td class="al-left">Build + Dockerfile lint</td><td class="al-left">Now the artefact exists; the scans that need it start here</td></tr><tr><td class="al-left">7</td><td class="al-left">Image scan (Trivy/Grype), SBOM, sign, provenance</td><td class="al-left">Scan the artefact you'll actually run, not a proxy for it; produce attestation so “was this built here?” is answerable</td></tr><tr><td class="al-left">8</td><td class="al-left">IaC scan (Checkov/tfsec, <code>kubeconform</code>, <code>kubectl diff</code>)</td><td class="al-left">Fail before <code>apply</code>; <code>terraform plan</code> output through <code>tfsec</code>/<code>checkov --var-file</code> catches the open SG in <em>this</em> change</td></tr><tr><td class="al-left">9</td><td class="al-left">Deploy staging → <strong>verify</strong> (rollout status, smoke)</td><td class="al-left">A deploy without verification is a prayer</td></tr><tr><td class="al-left">10</td><td class="al-left">DAST (OWASP ZAP baseline) on staging</td><td class="al-left">Needs a running app; finds <code>X-Frame-Options</code>, cookie flags, IDOR-ish behaviours</td></tr><tr><td class="al-left">11</td><td class="al-left">Gate (approval, SLO check)</td><td class="al-left">Humans approve <em>risk</em>, not <em>diffs</em></td></tr><tr><td class="al-left">12</td><td class="al-left">Deploy prod with health-gated rollout → auto-rollback</td><td class="al-left">Same as 9, with an alarm attached</td></tr></tbody></table></div>
+<div class="callout why"><p class="ctitle"><strong>“FAIL EARLY” IS A COST ARGUMENT, NOT A PURITY ARGUMENT</strong></p><p>The same class of bug costs, per stage it's caught in, roughly: style 1×, unit test 5×, staging 25×, production 200×. That's why SAST and secret scanning sit at the <em>front</em>, before a 9-minute build, and why an image scan sits right after the image exists. It's also why a gate you place after deploy is worth less than the same gate placed after build: by then the artefact is in the registry and someone's <code>docker pull</code>ing it into a laptop.</p></div>
+<h2 id="production-scenario-a-successful-pipeline-that-shipped-nothing">Production scenario — a “successful” pipeline that shipped nothing</h2>
+<p>Team reported “deploy didn't work” after a green build. Three findings, all worth memorising:</p>
+<ol class="numlist"><li>The deploy step ran <code>kubectl apply</code> and the pipeline counted the <em>exit code of the shell</em>, not the rollout: <code>deployment.apps/medbook configured</code> was enough for green. Fix: <code>kubectl rollout status --timeout=180s</code> as the last command, and <code>kubectl diff</code> in the PR.</li><li><code>on: push</code> + <code>paths-ignore: ['**.md']</code> had also been added — a docs PR that touched <code>Chart.yaml</code> still skipped CI, and the manifest change rode in on the <em>next</em> commit, deployed by someone else's build. This is why the config change “appeared to come from nowhere”. Fix: no path filters on jobs that deploy; path filters only for jobs that can't break anything.</li><li>Cache: <code>actions/cache</code> keyed on <code>$(date +%Y-%m)</code> for the Maven repo, so a poisoned <code>~/.m2</code> sat there for a month and half the team ran an old dependency. Fix: key on <code>hashFiles('**/pom.xml')</code> (plus an OS/arch suffix), and never let a cache be <em>required</em> for correctness.</li></ol>
+<p>Then prevention: a <code>verify</code> job that asserts “the image running in prod has digest X”, reading the deployment back and comparing to the artefact just built. Fifteen lines of YAML, and a whole category of “it said success” incidents dies.</p>
+<h2 id="common-mistakes">Common mistakes</h2>
+<ul class="checklist"><li class=''><span class='box'></span><span><strong>Trusting green.</strong> A pipeline that ends in <code>kubectl apply</code> without a status check is decoration. Verify the <em>cluster/VM</em>, not the shell exit code.</span></li><li class=''><span class='box'></span><span><strong>Rebuilding for prod.</strong> Staging and prod must run the same bytes; promotion = retag/approve, not “run the build again on main” (yes, that's why the diff you tested isn't the diff you ship).</span></li><li class=''><span class='box'></span><span><strong>Secrets in <code>environment:</code> blocks.</strong> They're masked in logs but readable by anything with write access to the repo — hence environments with <code>required reviewers</code>, and OIDC for cloud access.</span></li><li class=''><span class='box'></span><span><strong>Jenkinsfile committed to <code>master</code> only</strong> → every PR branch builds whatever's on master, and “the pipeline changed and I didn't touch it” becomes a mystery. Use multibranch and <code>when { branch 'main' }</code> for deploy stages.</span></li><li class=''><span class='box'></span><span><strong>Unbounded concurrency</strong> → 40 builds for one PR storm the cluster and the registry; use <code>disableConcurrentBuilds()</code> / <code>concurrency.group</code>.</span></li><li class=''><span class='box'></span><span><strong>Flaky tests “fixed” by <code>retry()</code></strong> — retry hides, quarantine + a ticket fixes.</span></li><li class=''><span class='box'></span><span><strong>A 22-minute pipeline with no parallelism.</strong> <code>needs:</code>/<code>parallel:</code> matrix and cache split it into 7. Speed is a security feature: slow pipelines get bypassed.</span></li><li class=''><span class='box'></span><span><strong>One mega job that does test + build + deploy</strong> → you can't retry the deploy, can't see what took the time, and can't reuse it. One concern per job.</span></li><li class=''><span class='box'></span><span><strong>DAST and secret scans that never block</strong> → findings no one reads; either gate them or delete them (an unread alarm is worse than none).</span></li><li class=''><span class='box'></span><span><strong>Deploying on a Friday at 18:00</strong> from an unattended “auto-promote main” rule. Gate after 16:00, or require the approver to be around for 30 minutes.</span></li></ul>
+<h2 id="best-practices">Best practices</h2>
+<div class="grid2"><p><strong>Idempotent deploys, always.</strong> <code>apply</code>/<code>helm upgrade --install</code>/<code>terraform apply</code> are safe to re-run; <code>for</code> loops of SSH commands aren't. If the pipeline can be re-run on the same commit and produce the same state, retries and rollbacks stop being scary. <strong>A green pipeline must mean something specific.</strong> Write the sentence: “green means the artefact is scanned, signed, running in staging and passing smoke tests.” If you can't, the pipeline has a hole. <strong>Deploy preview environments for PRs</strong> (a namespace per PR, or <code>--reuse-values</code> Cloud Run revisions with a PR URL). Reviewers test the <em>running thing</em>, not the diff; and “it works on my machine” becomes “it works at https://pr-142.staging.example.com”. <strong>Version everything in the pipeline itself.</strong> Pinned action SHAs or Dependabot for actions, <code>options { timeout }</code>, <code>RUNNER_DEBUG=1</code> for diagnosis, and one README section: “how to run this build locally” — because a pipeline you can't run locally is a pipeline you can't debug.</p></div>
+<h2 id="interview-answer">Interview answer</h2>
+<div class="callout aha"><p class="ctitle"><strong>“Design a CI/CD pipeline for a containerised service.”</strong></p><p>“Source is GitHub with branch protection and signed commits; PRs are the only path to main, with required status checks from Actions. The pipeline runs in that order: lint/format and <code>terraform validate</code> because they're free, unit tests with coverage trended as a comment, then three scans — SonarQube for SAST with <code>qualitygate.wait</code>, Trivy for dependencies, and gitleaks for secrets, all blocking on HIGH/CRITICAL — then the image build with BuildKit and layer caching, so the base image never floats: I pin it by digest and Renovate opens a PR to move it. Right after build, in the same job: Trivy on the image, an SBOM, and cosign signing with the job's OIDC token — no cloud keys in the repo, the job assumes a scoped role that can push to one repository and describe one log group. Deployment is Helm per environment with values in Git, promoted by digest rather than rebuilt, so staging and prod run identical bytes. Staging deploys automatically and <em>verifies</em> with <code>helm status</code> + <code>kubectl rollout status</code> + smoke tests + a ZAP baseline scan; production requires an environment approval from the service owners with a change reference, and the rollout itself is gated: maxSurge 1 / maxUnavailable 0, readiness probes, an Argo Rollouts or ALB weighted canary, and automatic rollback if 5xx or p99 crosses the SLO for 2 minutes. Everything logs to one place, and the pipeline publishes a deployment marker as an annotation so 'what changed at 14:32' is answerable. Jenkins is where I'd put the same stages if we needed on-prem, Windows agents or manual input steps — the shape doesn't change, only the YAML.”</p></div>
+<div class="grid2"><p><strong>Follow-up: “Blue/green or canary?”</strong> → blue/green is a fast, reversible whole-system switch (needs 2× capacity, and one clean moment of cutover); canary is gradual and statistically safer for risky changes, but needs traffic splitting and metrics you trust. Most teams want canary on the API tier and blue/green on the database-adjacent bits. <strong>Follow-up: “How do you handle DB migrations?”</strong> → expand/contract: add nullable column, deploy code that reads/writes both, backfill, then drop. Migration runs as an explicit gated job, never as an app side effect during a rollout. <strong>Follow-up: “Pipeline is red and prod is broken. Order of operations?”</strong> → stabilise first (rollback or feature-flag off), then reproduce, then fix forward with a test. Never debug a broken prod from the pipeline logs alone — take a snapshot: pod describe, last good deploy time, <code>git log</code> since. <strong>Follow-up: “What's your policy on merge queues?”</strong> → <code>merge_queue</code> on Actions or GitHub's queue with <code>group</code> locks, because “green on the PR” is not “green on main”; a queue also caps the number of concurrent deploys.</p></div>
+<h2 id="virtual-lab-build-the-pipeline-then-debug-it-simulated-terminal">Virtual lab — build the pipeline, then debug it (simulated terminal)</h2>
+<div class="labhost"><div class="labbar"><span class="labname">Virtual terminal</span><span class="labstep" data-lab-progress></span></div><div class="labterm" data-lab="lab" data-lab-id="cicd-1"></div></div>
+<h2 id="commands-to-remember">Commands to remember</h2>
+<div class="grid2"><div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash"># Jenkins: the debugging trio
+tail -f /var/log/jenkins/jenkins.log
+curl -s -u user:apitoken JENKINS/job/x/lastBuild/consoleText | tail -40
+jenkins-cli build job --wait-with-console</code></pre></div>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash"># Actions: the debugging trio
+gh run list --workflow=ci.yml --limit 10 --json status,conclusion
+gh run view 1234567890 --log-failed
+act push -j deploy-staging --secret GITHUB_TOKEN=...   # run locally</code></pre></div>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash"># the promote-by-digest pattern (both tools)
+cosign verify --key cosign.pub $REGISTRY/app@sha256:...
+cosign sign --yes $REGISTRY/app:prod-$SHA
+helm upgrade --install app ./chart --values values/prod.yaml \
+  --set image.digest=sha256:... --atomic --timeout 5m</code></pre></div></div>
+<div class="callout note"><p class="ctitle"><strong>WHAT I MUST REMEMBER</strong></p><ol class="numlist"><li>Every stage either produces evidence (report, artefact, attestation, health check) or it's theatre.</li><li>Order by cost: cheap static checks first, artefact scans after the artefact exists, runtime scans after deploy.</li><li>Promote artefacts; never rebuild for prod.</li><li>Green ≠ deployed. Verify with <code>rollout status</code> and a smoke test, or the pipeline will lie at the worst possible moment.</li></ol></div>
+<div class="revision"><p class="ctitle"><strong>REVISION — 5 minutes</strong></p><p><strong>Concepts:</strong> build/test/package/deploy/verify/promote/gate · CD vs “continuous deployment” (a gate is a design choice) · declarative Jenkinsfile + shared library + JCasC · Actions events, <code>permissions</code>, concurrency, environments, reusable workflows, matrix, OIDC · pin actions by SHA · SBOM + provenance + cosign · preview environments · flaky-test quarantine · cache keys · pipeline security (fork PRs, <code>pull_request_target</code>, secrets availability) · rollback as a first-class stage. <strong>Architecture to remember:</strong> PR → Actions/Jenkins (checks, scans, build, scan, sign, push) → registry with immutable digests → Argo/Helm applies to cluster → LB canary weights → metrics gate → promote by digest → alarms wired to auto-revert. <strong>Common mistakes:</strong> no <code>rollout status</code> · rebuild for prod · no timeouts/<code>disableConcurrentBuilds</code> · secrets as plain env in a fork-exposed job · path filters skipping deploy-critical files · 22-minute serial pipelines. <strong>Troubleshooting checklist:</strong> <code>gh run view --log-failed</code> (or consoleText) → which stage, which exit code → is it infra (<code>no space left</code>, DNS, runner killed) or code → re-run a single job with debug → is the artefact actually in the registry (<code>describe-images</code>) → did the rollout stall at <code>1 old replicas pending termination</code> → is the deployment pointing at the digest you pushed → and did a cache/lock make it a one-off.</p></div>
+<p>Next: <a href="p1-observability.html">Observability →</a></p></div></div>
+      <div class="pagefoot">
+        <p class="pagefootnote">Part of the DevOps Academy built from the 41-project reference repository · offline · no tracking</p>
+        <div class="pager">
+          <a class="pg prev" href="p1-kubernetes.html"><span>Previous</span><strong>Kubernetes</strong></a>
+          <a class="pg next" href="p1-observability.html"><span>Next</span><strong>Observability</strong></a>
+        </div>
+        <p class="markread"><label class="tickall"><input type="checkbox" data-mark-done> <span>Mark this page as done</span></label></p>
+      </div>
+    </article>
+  </main>
+</div>
+<div class="searchmodal" data-search-modal hidden>
+  <div class="searchbox">
+    <input type="search" data-search-input placeholder="Search the course: OOMKilled, terraform state lock, ALB 502, Jenkinsfile…" aria-label="Search">
+    <ul class="searchresults" data-search-results></ul>
+    <p class="searchhint">Press <kbd>Esc</kbd> to close · <kbd>/</kbd> to open</p>
+  </div>
+</div>
+</body>
+</html>
