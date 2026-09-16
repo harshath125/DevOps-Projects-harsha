@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>02 · E-commerce in Docker · DevOps Academy — learn DevOps by shipping 11 real projects</title>
+<meta name="description" content="Docker-only first pass: read a repository, write the Dockerfile, compose the app with its database, then build, scan and ship an image.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%230f172a%22/%3E%3Ctext%20x%3D%2216%22%20y%3D%2221%22%20font-family%3D%22ui-monospace%2Cmonospace%22%20font-size%3D%2212%22%20font-weight%3D%22700%22%20fill%3D%22%235eead4%22%20text-anchor%3D%22middle%22%3E%26gt%3B_%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="canonical" href="">
+<script src="assets/js/app.js" defer></script>
+<script>(function(){try{var t=localStorage.getItem("aca.theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}})();</script>
+</head>
+<body data-page="proj-02-ecommerce" data-kind="project">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <button class="iconbtn menubtn" data-drawer="1" aria-label="Open navigation">
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <a class="brand" href="index.html"><span class="mark">ACA</span><span class="brandtext">DevOps Academy</span></a>
+  <nav class="topnav"><a href="roadmap.html">Roadmap</a><a href="p1-cloud-core.html">Cloud core concepts</a><a href="projects.html">Projects index</a><a href="p2-devsecops-core.html">DevSecOps core</a><a href="labs.html">Virtual labs</a><a href="interview.html">Interview bank</a><a href="troubleshoot.html">Troubleshooting</a></nav>
+  <div class="topright">
+    <button class="iconbtn" data-search-open aria-label="Search" title="Search (/ )">
+      <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" d="M16 16l4.5 4.5"/></svg>
+    </button>
+    <button class="iconbtn" data-theme-toggle aria-label="Switch light or dark theme" title="Theme">
+      <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M12 3v2m0 14v2m9-9h-2M5 12H3m14.5-6.5-1.4 1.4M8.9 15.1l-1.4 1.4m0-12 1.4 1.4m6.2 6.2 1.4 1.4M12 8.2a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6Z"/></svg>
+    </button>
+  </div>
+</header>
+<div class="progress" data-progress-bar aria-hidden="true"></div>
+<div class="layout">
+  <aside class="sidebar" data-drawer-target>
+    <div class="sidehead">
+      <span class="sidetitle">Curriculum</span>
+      <span class="sideprogress" data-progress-label></span>
+    </div>
+    <nav class="nav"><p class="navsec">Start here</p><a class="" href="roadmap.html" data-nav-page="roadmap"><span class="pdot" data-done-dot="roadmap"></span>Roadmap</a><p class="navsec">Foundation</p><a class="" href="f-linux.html" data-nav-page="f-linux"><span class="pdot" data-done-dot="f-linux"></span>Linux<em class="tag linux">LINUX</em></a><a class="" href="f-networking.html" data-nav-page="f-networking"><span class="pdot" data-done-dot="f-networking"></span>Networking + shell<em class="tag net">NET</em></a><a class="" href="f-git-github.html" data-nav-page="f-git-github"><span class="pdot" data-done-dot="f-git-github"></span>Git + GitHub<em class="tag git">GIT</em></a><a class="" href="f-docker.html" data-nav-page="f-docker"><span class="pdot" data-done-dot="f-docker"></span>Docker + Compose<em class="tag docker">DOCKER</em></a><p class="navsec">Phase 1 · Core DevOps</p><a class="" href="p1-cloud-core.html" data-nav-page="p1-cloud-core"><span class="pdot" data-done-dot="p1-cloud-core"></span>Cloud core concepts<em class="tag cloud">CLOUD</em></a><a class="" href="p1-aws.html" data-nav-page="p1-aws"><span class="pdot" data-done-dot="p1-aws"></span>AWS<em class="tag aws">AWS</em></a><a class="" href="p1-azure-gcp.html" data-nav-page="p1-azure-gcp"><span class="pdot" data-done-dot="p1-azure-gcp"></span>Azure + GCP<em class="tag azure">AZURE</em></a><a class="" href="p1-terraform.html" data-nav-page="p1-terraform"><span class="pdot" data-done-dot="p1-terraform"></span>Terraform<em class="tag iac">IAC</em></a><a class="" href="p1-kubernetes.html" data-nav-page="p1-kubernetes"><span class="pdot" data-done-dot="p1-kubernetes"></span>Kubernetes<em class="tag k8s">K8S</em></a><a class="" href="p1-cicd.html" data-nav-page="p1-cicd"><span class="pdot" data-done-dot="p1-cicd"></span>CI/CD<em class="tag cicd">CICD</em></a><a class="" href="p1-observability.html" data-nav-page="p1-observability"><span class="pdot" data-done-dot="p1-observability"></span>Observability<em class="tag obs">OBS</em></a><a class="" href="p1-multicloud.html" data-nav-page="p1-multicloud"><span class="pdot" data-done-dot="p1-multicloud"></span>Multicloud<em class="tag cloud">CLOUD</em></a><p class="navsec">Projects</p><a class="" href="projects.html" data-nav-page="projects"><span class="pdot" data-done-dot="projects"></span>Projects index<em class="tag proj">PROJ</em></a><a class="" href="proj-01-healthcare.html" data-nav-page="proj-01-healthcare"><span class="pdot" data-done-dot="proj-01-healthcare"></span>01 · Healthcare on a Linux VM<em class="tag proj">PROJ</em></a><a class="current" href="proj-02-ecommerce.html" data-nav-page="proj-02-ecommerce"><span class="pdot" data-done-dot="proj-02-ecommerce"></span>02 · E-commerce in Docker<em class="tag docker">DOCKER</em></a><a class="" href="proj-03-banking.html" data-nav-page="proj-03-banking"><span class="pdot" data-done-dot="proj-03-banking"></span>03 · Banking with Terraform<em class="tag iac">IAC</em></a><a class="" href="proj-04-retail.html" data-nav-page="proj-04-retail"><span class="pdot" data-done-dot="proj-04-retail"></span>04 · Retail on ECS<em class="tag aws">AWS</em></a><a class="" href="proj-05-telecom.html" data-nav-page="proj-05-telecom"><span class="pdot" data-done-dot="proj-05-telecom"></span>05 · Telecom on Kubernetes<em class="tag k8s">K8S</em></a><a class="" href="proj-06-fintech.html" data-nav-page="proj-06-fintech"><span class="pdot" data-done-dot="proj-06-fintech"></span>06 · FinTech microservices<em class="tag sec">SEC</em></a><a class="" href="proj-07-insurance.html" data-nav-page="proj-07-insurance"><span class="pdot" data-done-dot="proj-07-insurance"></span>07 · Insurance on Azure DevOps<em class="tag azure">AZURE</em></a><a class="" href="proj-08-saas.html" data-nav-page="proj-08-saas"><span class="pdot" data-done-dot="proj-08-saas"></span>08 · SaaS multi-tenant<em class="tag aws">AWS</em></a><a class="" href="proj-09-multicloud.html" data-nav-page="proj-09-multicloud"><span class="pdot" data-done-dot="proj-09-multicloud"></span>09 · Multicloud<em class="tag cloud">CLOUD</em></a><a class="" href="proj-10-capstone.html" data-nav-page="proj-10-capstone"><span class="pdot" data-done-dot="proj-10-capstone"></span>10 · Capstone<em class="tag proj">PROJ</em></a><a class="" href="proj-11-mega.html" data-nav-page="proj-11-mega"><span class="pdot" data-done-dot="proj-11-mega"></span>11 · Mega project<em class="tag sec">SEC</em></a><p class="navsec">Phase 2 · DevSecOps</p><a class="" href="p2-devsecops-core.html" data-nav-page="p2-devsecops-core"><span class="pdot" data-done-dot="p2-devsecops-core"></span>DevSecOps core<em class="tag sec">SEC</em></a><a class="" href="p2-secrets-iam.html" data-nav-page="p2-secrets-iam"><span class="pdot" data-done-dot="p2-secrets-iam"></span>Secrets + IAM<em class="tag sec">SEC</em></a><a class="" href="p2-scanning.html" data-nav-page="p2-scanning"><span class="pdot" data-done-dot="p2-scanning"></span>Scanning + gates<em class="tag sec">SEC</em></a><a class="" href="p2-runtime-sec.html" data-nav-page="p2-runtime-sec"><span class="pdot" data-done-dot="p2-runtime-sec"></span>Runtime + K8s security<em class="tag sec">SEC</em></a><a class="" href="aiops.html" data-nav-page="aiops"><span class="pdot" data-done-dot="aiops"></span>AIOps on GCP<em class="tag gcp">GCP</em></a><a class="" href="mlops.html" data-nav-page="mlops"><span class="pdot" data-done-dot="mlops"></span>MLOps on GCP<em class="tag gcp">GCP</em></a><p class="navsec">Practice</p><a class="" href="labs.html" data-nav-page="labs"><span class="pdot" data-done-dot="labs"></span>Virtual labs<em class="tag lab">LAB</em></a><a class="" href="revision.html" data-nav-page="revision"><span class="pdot" data-done-dot="revision"></span>Revision sheets</a><a class="" href="test-me.html" data-nav-page="test-me"><span class="pdot" data-done-dot="test-me"></span>Test me<em class="tag test">TEST</em></a><p class="navsec">Career</p><a class="" href="interview.html" data-nav-page="interview"><span class="pdot" data-done-dot="interview"></span>Interview bank<em class="tag int">INT</em></a><a class="" href="interview-scenarios.html" data-nav-page="interview-scenarios"><span class="pdot" data-done-dot="interview-scenarios"></span>Scenario rounds<em class="tag int">INT</em></a><a class="" href="troubleshoot.html" data-nav-page="troubleshoot"><span class="pdot" data-done-dot="troubleshoot"></span>Troubleshooting<em class="tag ops">OPS</em></a><a class="" href="resume.html" data-nav-page="resume"><span class="pdot" data-done-dot="resume"></span>Resume + portfolio<em class="tag career">CAREER</em></a><p class="navsec">Site</p><a class="" href="resources.html" data-nav-page="resources"><span class="pdot" data-done-dot="resources"></span>Resources</a><a class="" href="deployment-guide.html" data-nav-page="deployment-guide"><span class="pdot" data-done-dot="deployment-guide"></span>Publish this site</a></nav>
+    <div class="sidefoot">
+      <p>Everything here is offline-first: no account, no tracking, no backend. Your progress and answers stay in this browser.</p>
+    </div>
+  </aside>
+  <main id="main">
+    <article class="page">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span>Projects<span>/</span><b>02 · E-commerce in Docker</b></nav>
+      <header class="hero"><p class="kicker">Projects</p><h1>Project 02 — CartFlow: Node + MongoDB packaged, scanned and Compose-tested</h1><p class="herotext">Docker-only first pass: read a repository, write the Dockerfile, compose the app with its database, then build, scan and ship an image.</p><div class="herometa"><span class="mchip">6 h</span><span class="mchip tag docker">DOCKER</span></div></header>
+      <details class="toc" open><summary>On this page</summary><ul><li class="l1"><a href="#part-a-get-the-application">PART A — GET THE APPLICATION</a></li><li class="l2"><a href="#overview">Overview</a></li><li class="l2"><a href="#business-scenario">Business scenario</a></li><li class="l2"><a href="#tech-stack-received">Tech stack (received)</a></li><li class="l2"><a href="#architecture-as-delivered">Architecture (as delivered)</a></li><li class="l2"><a href="#what-the-developer-will-build">What the developer will build</a></li><li class="l2"><a href="#copyable-developer-agent-prompt">Copyable Developer Agent Prompt</a></li><li class="l2"><a href="#developer-handoff">Developer handoff</a></li><li class="l1"><a href="#part-b-the-devops-journey">PART B — THE DEVOPS JOURNEY</a></li><li class="l2"><a href="#clone-and-inspect">Clone and inspect</a></li><li class="l2"><a href="#identify-dependencies-config-failure-surface">Identify dependencies, config, failure surface</a></li><li class="l2"><a href="#build-and-test-as-ci-would">Build and test as CI would</a></li><li class="l2"><a href="#dockerize">Dockerize</a></li><li class="l2"><a href="#build-image-push-run-the-pair">Build image, push, run the pair</a></li><li class="l2"><a href="#the-compose-file-that-mirrors-production">The Compose file that mirrors production</a></li><li class="l2"><a href="#registry-then-one-ecs-service">Registry, then one ECS service</a></li><li class="l2"><a href="#create-infrastructure-with-terraform">Create infrastructure with Terraform</a></li><li class="l2"><a href="#networking">Networking</a></li><li class="l2"><a href="#ci-cd-github-actions-because-the-app-is-on-github-and-oidc-is-free">CI/CD (GitHub Actions, because the app is on GitHub and OIDC is free)</a></li><li class="l2"><a href="#devsecops">DevSecOps</a></li><li class="l2"><a href="#monitoring">Monitoring</a></li><li class="l2"><a href="#failure-scenarios-break-these-on-purpose">Failure scenarios — break these on purpose</a></li><li class="l2"><a href="#troubleshooting-the-5xx-spike-you-can-only-see-in-traces">Troubleshooting (the 5xx spike you can only see in traces)</a></li><li class="l2"><a href="#scaling">Scaling</a></li><li class="l2"><a href="#rollback">Rollback</a></li><li class="l2"><a href="#final-architecture">Final architecture</a></li><li class="l2"><a href="#what-i-learned">What I learned</a></li><li class="l2"><a href="#interview-questions">Interview questions</a></li><li class="l2"><a href="#r-sum-bullets">Résumé bullets</a></li></ul></details>
+      <div class="prose"><p class="lead">CartFlow is where packaging stops being optional. A Node service with two stateful dependencies, a cache, a worker and a webhook — and one rule: the same image runs in Compose on your laptop, on a staging box, and in ECS. You never write the app; you make it reproducible, observable and safe to restart.</p>
+<h1 id="part-a-get-the-application">PART A — GET THE APPLICATION</h1>
+<h2 id="overview">Overview</h2>
+<p>An e-commerce catalogue + cart + orders API: TypeScript on Node 20, MongoDB for records, Redis for cache and short stock reservations, an outbox for events, and a mock payment provider that misbehaves on purpose (20 % declines, 5 % timeouts).</p>
+<h2 id="business-scenario">Business scenario</h2>
+<p>300 concurrent shoppers, 40 orders/minute peak, and one unforgivable outcome: selling an item you don't have. So the engineering requirements are not “fast”, they are <em>atomic stock decrement</em>, <em>idempotent webhook handling</em>, and <em>graceful degradation when Redis dies</em>. A DevOps engineer who understands the business rule writes better health checks and better alarms.</p>
+<h2 id="tech-stack-received">Tech stack (received)</h2>
+<div class="tablewrap"><table><thead><tr><th class="al-left">Layer</th><th class="al-left">Inherited</th><th class="al-left">What you must operate</th></tr></thead><tbody><tr><td class="al-left">Runtime</td><td class="al-left">Node 20, <code>npm ci</code></td><td class="al-left">Lockfile in Git → deterministic installs; <code>NODE_ENV</code>, memory flags</td></tr><tr><td class="al-left">API</td><td class="al-left">Express or Fastify</td><td class="al-left">Which one changes nothing for you except <code>server.keepAliveTimeout</code> advice</td></tr><tr><td class="al-left">Data</td><td class="al-left">MongoDB 7 (replica set for transactions)</td><td class="al-left">Connection strings, timeouts, and whether transactions are even available in a standalone instance</td></tr><tr><td class="al-left">Cache/locks</td><td class="al-left">Redis 7</td><td class="al-left">TTLs, eviction policy, what happens on eviction</td></tr><tr><td class="al-left">Async</td><td class="al-left">Outbox polling worker</td><td class="al-left">A <strong>second process</strong> → a second container, or a second deployment</td></tr><tr><td class="al-left">Ops surface</td><td class="al-left"><code>/health</code>, <code>/health/ready</code>, <code>/metrics</code></td><td class="al-left">The three endpoints your whole platform hangs on</td></tr></tbody></table></div>
+<h2 id="architecture-as-delivered">Architecture (as delivered)</h2>
+<div class="flow"><span class="fnode">shoppers</span><span class="farrow">→</span><span class="fnode">CDN/LB</span><span class="farrow">→</span><span class="fnode">API pods (stateless)</span><span class="farrow">→</span><span class="fnode">MongoDB replica set (data) + Redis (cache, short locks) ← outbox worker</span><span class="farrow">→</span><span class="fnode">payment provider webhook (HMAC)</span><span class="farrow">→</span><span class="fnode">order events</span><span class="farrow">→</span></div>
+<p>The API is horizontally scalable <em>because</em> nothing is in process memory — the cart lives in Mongo, the rate limiter in Redis. Verify that claim yourself: two containers, one request each, same user, and confirm the cart is shared.</p>
+<h2 id="what-the-developer-will-build">What the developer will build</h2>
+<p>Eight endpoint groups, atomic order creation with a real concurrency test (20 parallel requests for the last item, exactly one wins), webhook idempotency via a unique <code>eventId</code>, structured JSON logs with correlation ids, rate limits, graceful shutdown, 30+ tests, <code>docs/OPERATIONS.md</code> telling you the start command and the “what happens when Redis is down” behaviour. No Dockerfile, no CI, no infra — forbidden by the prompt.</p>
+<h2 id="copyable-developer-agent-prompt">Copyable Developer Agent Prompt</h2>
+<div class="promptbox" data-prompt="cartflow-ecommerce"><p class="ctitle"><strong>Developer Agent Prompt — ROLE</strong></p><pre class="prompttext"># ROLE
+You are a senior Node.js/TypeScript engineer building the backend for a small e-commerce store. You are the DEVELOPER only. A DevOps engineer owns containers, cloud, pipelines and security — do not touch any of that.
+
+# PRODUCT: CartFlow
+Catalogue, cart and orders for a store selling cycling gear: ~4 000 products, 300 concurrent shoppers at peak, ~40 orders/minute max.
+
+# FUNCTIONAL REQUIREMENTS (REST + JSON, no frontend)
+1. `POST /auth/register`, `POST /auth/login` (email+password → JWT, 60 min, bcrypt cost 12), `GET /auth/me`.
+2. `GET /products?search=&amp;category=&amp;minPrice=&amp;maxPrice=&amp;sort=price|newest&amp;page=&amp;limit=` — paginated, `limit` max 100; `GET /products/:id`.
+3. `GET /categories` — distinct categories with counts.
+4. Cart (per authenticated user, stored in MongoDB): `GET /cart`, `POST /cart/items {productId, qty}`, `PATCH /cart/items/:id {qty}`, `DELETE /cart/items/:id`, `POST /cart/clear`. Cart totals must be computed server-side from current prices, never trusted from the client.
+5. `POST /orders` — converts the cart into an order: checks stock, decrements it, snapshots item prices, creates `order{number, items[], subtotal, shipping, total, status=PENDING, address}`, and emits an outbox record. Must be **atomic** (Mongo transaction or a two-phase stock reservation — pick one, document the choice). Concurrent requests must never oversell.
+6. `GET /orders`, `GET /orders/:id`, `POST /orders/:id/pay` (mock payment provider: 20 % simulated decline, 5 % simulated timeout — configurable via env), `POST /orders/:id/cancel` (restores stock), `POST /webhooks/payment` (accepts a HMAC-SHA256 signature header `x-cartflow-signature` verified against `WEBHOOK_SECRET`; idempotent — repeated delivery of the same event id must not double-apply).
+7. `GET /admin/orders?status=&amp;from=&amp;to=`, `PATCH /admin/orders/:id/status` (PENDING → PAID → SHIPPED → DELIVERED; illegal transitions → 409).
+8. `GET /health`, `GET /health/ready` (checks Mongo + Redis), `GET /metrics` (Prometheus text format: http requests, duration histogram, cart→order conversion counter, stock reservation failures, event loop lag, Mongo connection state), `GET /openapi.json` (swagger).
+
+# DATA &amp; DEPENDENCIES
+- **MongoDB 7**: `users`, `products` (with `stock`, `price`, `category`, `searchable` text index), `carts`, `orders` (unique index on `number`, compound index for admin queries), `outbox` (for reliable event publishing), `paymentEvents` (unique index on `eventId` for idempotency).
+- **Redis 7**: product-listing cache with TTL 60 s and explicit invalidation on admin price changes; `stock:reserve:&lt;productId&gt;` short locks with TTL 10 s; rate-limit counters for login (10/min/IP) and order creation (20/min/user). Cache failures must degrade gracefully (hit Mongo), never 500.
+- Configuration **only** from environment variables, with a schema-validated loader ( zod / joi / envalid — your choice) that fails fast and prints *which* variable is wrong: `PORT` (3000), `MONGO_URL`, `REDIS_URL`, `JWT_SECRET`, `WEBHOOK_SECRET`, `PAYMENT_MODE` (`mock|stub-fail|stub-slow`), `LOG_LEVEL`, `SHIPPING_FLAT`, `TZ` (`UTC`).
+
+# NON-FUNCTIONAL REQUIREMENTS
+- TypeScript strict mode, Node 20 LTS, Express 4 or Fastify 4 (state which and why in one comment), layered structure: `api/` routes → `services/` → `repositories/` (no DB calls inside route handlers).
+- **Graceful shutdown**: on SIGTERM stop accepting new connections, finish in-flight requests, close Mongo/Redis, exit — within 25 s. Log shutdown reason.
+- **Logging**: structured JSON to stdout, one line per request (`method, path, status, dur_ms, user_id_masked, correlation_id, ip_hash`), with a `request-id` middleware honouring `x-request-id`; never log passwords, tokens or full card data; access logs must not include query strings containing `token=`.
+- **Errors**: consistent envelope `{error:{code,message,details}}` with stable codes (`VALIDATION_FAILED`, `OUT_OF_STOCK`, `NOT_FOUND`, `UNAUTHORIZED`, `FORBIDDEN`, `CONFLICT`, `RATE_LIMITED`, `DEPENDENCY_DOWN`), correct HTTP status, and a global error handler that logs stack traces at `error` and returns generic text for 5xx.
+- **Validation**: schema validation on every input, `helmet`-style security headers, CORS from `CORS_ORIGINS`, no `eval`, no `fs` writes anywhere in the request path.
+- **Performance**: p95 &lt; 150 ms for `GET /products` with the cache warm; add indexes for the queries you wrote and include an `explain()` in the README for the product search.
+- **Tests**: Vitest/Jest with 30+ tests — unit for cart totals and stock logic, integration for order creation concurrency (spawn 20 parallel requests for the last item and assert exactly one succeeds), and a webhook idempotency test. `npm test` must run against real Mongo/Redis via docker-compose (documented) or testcontainers-mongo.
+- **Seed**: `npm run seed` loads 400 products, 3 users (one admin), and 5 orders so every endpoint returns data.
+
+# DELIVERY
+Repository layout `src/{api,services,repositories,models,middleware,utils}`, `tests/`, `scripts/`, `.env.example`, `package.json`, `package-lock.json` (committed), `tsconfig.json`, `README.md`, `docs/OPERATIONS.md`.
+`README.md`: purpose, local run steps (Mongo/Redis via docker compose for development), the env-var table, endpoint list, how to run tests, seed command.
+`docs/OPERATIONS.md` — the file a DevOps engineer needs: exact start command (`npm run start:prod`), build command, port, health endpoints, migration/index script, cache semantics and TTLs, the outbox worker (if you implement one: how to run it, whether it's safe to run twice), the exact behaviour when Mongo or Redis is down, known limitations, and what must be true for graceful shutdown to work.
+`.editorconfig`, `.gitignore` (node_modules, dist, coverage, .env, *.log), ESLint + Prettier configs, no `TODO`s, no stubs.
+
+# HARD CONSTRAINTS — DEVELOPER ONLY
+You must NOT create or modify any of the following (the DevOps engineer does them; if you produce them anyway, the handoff is rejected):
+- No Dockerfile, `.dockerignore`, docker-compose for *production*, or any container build/registry/push instructions.
+- No Terraform/CloudFormation/Bicep/Pulumi, no cloud resources, no AWS/Azure/GCP SDK usage, no IAM, no CLI scripts that create infrastructure.
+- No Jenkinsfile, no `.github/workflows`, no GitLab CI, no Argo/Flux/Helm/Kubernetes manifests, no `k8s/` folder.
+- No SonarQube/Trivy/Checkov/ZAP configuration, no SBOM, signing or security-gate scripts.
+- No monitoring stack: no Prometheus scrape config, no Grafana dashboards, no Alertmanager, no cloudwatch/azure-monitor agents or config. (Exposing `/metrics` is required; the scraping is not yours.)
+- No Nginx/Caddy config, no TLS certificates, no systemd units, no `deploy.sh`, no shell scripts that provision machines.
+- No `git init`, no remote repository creation, no branches/tags/pushes. Deliver files only.
+
+Where a requirement seems to need one of the above, implement only the application-side hook (e.g. `/metrics`, `WEBHOOK_SECRET`, graceful shutdown) and describe in `docs/OPERATIONS.md` what the DevOps engineer must configure.
+
+# OUTPUT FORMAT
+1. Plan: list of files (max 15 lines).
+2. All code, file by file, each under a `// path/to/file.ts` header so it can be written verbatim.
+3. `README.md` and `docs/OPERATIONS.md`.
+4. A final `DEVOPS HANDOFF NOTES` section: build command, start command, port, every env var + default + whether it is required, health endpoints, test command, seed command, external dependencies (MongoDB 7, Redis 7), expected cold-start time, and every assumption you made.
+
+Target 30–45 files. Boring, readable code over clever code.
+</pre><div class="promptmeta"><span class="pwords">1033 words</span><button class="copybtn" data-prompt-copy="cartflow-ecommerce">COPY PROMPT</button></div></div>
+<h2 id="developer-handoff">Developer handoff</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">git clone https://github.com/harshath125/cartflow.git &amp;&amp; cd cartflow
+cat docs/OPERATIONS.md | head -40
+npm ci &amp;&amp; npm test                       # the handoff is only real if tests pass
+grep -RIn "process.env" src/config* src/*.ts | head   # the full env contract, from the source
+npm run seed &amp;&amp; npm run start:prod &amp;      # local smoke, then kill it
+curl -s localhost:3000/health/ready | jq</code></pre></div>
+<p>Ask the developer (or re-prompt the agent) the five handoff questions, and write <code>docs/handoff.md</code>: run command, port, required env, what runs before traffic, disk usage, and “what is the one thing that must never happen” (overselling).</p>
+<h1 id="part-b-the-devops-journey">PART B — THE DEVOPS JOURNEY</h1>
+<h2 id="clone-and-inspect">Clone and inspect</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">git ls-files | wc -l ; git ls-files | grep -iE "env|pem|key|secret"
+du -sh node_modules 2&gt;/dev/null ; test -f package-lock.json &amp;&amp; echo "lockfile: OK"
+grep -n '"engines"' -A3 package.json ; node -v
+find . -name "*.ts" -path "*test*" | wc -l          # how much of this is actually verified?
+grep -RIn "MONGO_URL\|REDIS_URL" src/ | head</code></pre></div>
+<p>Two inspection habits that save hours later: confirm the <strong>lockfile exists</strong> (without it, <code>npm install</code> gives a different image every build), and confirm there's <strong>no <code>.env</code> in history</strong> (<code>git log --all --name-only | grep .env</code>).</p>
+<h2 id="identify-dependencies-config-failure-surface">Identify dependencies, config, failure surface</h2>
+<div class="tablewrap"><table><thead><tr><th class="al-left">Question</th><th class="al-left">Answer, and why it changes your design</th></tr></thead><tbody><tr><td class="al-left">Which ports?</td><td class="al-left"><code>PORT</code> (3000) — internal; publish nothing until the LB is in front</td></tr><tr><td class="al-left">Which external services must exist <em>before</em> the app is ready?</td><td class="al-left">Mongo (hard), Redis (soft) → so <code>/health/ready</code> should fail on Mongo, and <em>succeed with a degraded flag</em> on Redis. Ask the developer to confirm; if readiness fails on Redis, your readiness will restart-loop pods whenever a node bounces</td></tr><tr><td class="al-left">What must run first?</td><td class="al-left">Index creation (<code>npm run migrate:indexes</code>) — an idempotent pre-deploy job</td></tr><tr><td class="al-left">What writes to disk?</td><td class="al-left">Nothing, and that's why we can set <code>readOnlyRootFilesystem</code> in 3 lines</td></tr><tr><td class="al-left">Secrets?</td><td class="al-left"><code>JWT_SECRET</code>, <code>WEBHOOK_SECRET</code> → runtime injection only; the webhook secret is also a <em>partner</em> contract, so rotating it is a two-step deploy</td></tr><tr><td class="al-left">Long-lived connections?</td><td class="al-left">Mongo driver pool 50 → with 20 pods that's 1 000 connections: check your server limit <em>before</em> autoscaling</td></tr></tbody></table></div>
+<h2 id="build-and-test-as-ci-would">Build and test as CI would</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">npm ci                 # not install: the lockfile or nothing
+npm run lint &amp;&amp; npm test
+npm run build &amp;&amp; node -e "require('./dist/main.js')" --check 2&gt;/dev/null || node --check dist/main.js
+npm audit --omit=dev ; npm ls mongoose            # who pulls what, and is it duplicated?</code></pre></div>
+<p><strong>What just happened:</strong> <code>npm ci</code> gives you a reproducible <code>node_modules</code>; <code>--check</code> proves the compiled entry at least parses (cheap, and it catches a bad <code>tsconfig</code> output path); <code>npm audit</code> is a <em>report</em>, not a gate — Trivy is the gate, because <code>npm audit</code> uses the npm advisory DB, which ands its own rules and never sees transitive binaries. Note that <code>npm ls</code> showing <strong>two copies of mongoose</strong> is an image-size and behaviour bug, and exactly the kind of thing you can catch once in review and then enforce forever.</p>
+<h2 id="dockerize">Dockerize</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">dockerfile</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-dockerfile">FROM node:20.12.2-alpine3.19 AS deps
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
+
+FROM node:20.12.2-alpine3.19 AS build
+WORKDIR /app
+COPY package.json package-lock.json tsconfig.json ./
+RUN npm ci
+COPY src src
+RUN npm run build &amp;&amp; npm prune --omit=dev
+
+FROM node:20.12.2-alpine3.19
+ENV NODE_ENV=production
+RUN addgroup -g 10001 app &amp;&amp; adduser -u 10001 -G app -S -s /sbin/nologin appuser
+WORKDIR /app
+COPY --from=build --chown=10001:10001 /app/dist ./dist
+COPY --from=deps  --chown=10001:10001 /app/node_modules ./node_modules
+COPY package.json ./
+USER 10001
+EXPOSE 3000
+HEALTHCHECK --interval=10s --timeout=2s --start-period=15s --retries=5 \
+  CMD wget -qO- http://127.0.0.1:3000/health/ready || exit 1
+ENTRYPOINT ["node","dist/main.js"]</code></pre></div>
+<p>Three deliberate decisions to be able to defend: <strong><code>npm ci</code> twice</strong> (dev deps for the build, prod-only for the run — the second stage is why the image is 145 MB instead of 620 MB); <strong><code>wget</code> not <code>curl</code></strong> (alpine's busybox has wget; a missing binary in a health check is a <em>silent</em> failure: the check always fails, and in Compose a failing health check makes <code>depends_on: service_healthy</code> wait forever); and <strong>COPY the lockfile before installing</strong> so a source-only change reuses the dependency layer.</p>
+<h2 id="build-image-push-run-the-pair">Build image, push, run the pair</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">docker build -t cartflow:sha-a1f9c2d .
+docker run --rm cartflow:sha-a1f9c2d node -e "console.log(process.version)"   # 3-second sanity check
+# compose harness: app + worker + mongo (replica set) + redis + seeded data
+docker compose -f docker-compose.test.yml up -d --wait
+docker compose ps
+curl -s localhost:3000/health/ready | jq '.checks'</code></pre></div>
+<p><code>--wait</code> honours every service's health check, so “up” means <em>ready</em>, not <em>started</em>. That flag alone removes the flakiest step in most CI pipelines.</p>
+<h2 id="the-compose-file-that-mirrors-production">The Compose file that mirrors production</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">yaml</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-yaml">services:
+  api:
+    image: registry.local/cartflow:sha-a1f9c2d
+    command: ["node","dist/main.js"]
+    environment:
+      MONGO_URL: mongodb://mongo:27017/cartflow?replicaSet=rs0
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: ${JWT_SECRET:?required}
+    ports: ["127.0.0.1:3000:3000"]
+    depends_on: { mongo: { condition: service_healthy }, redis: { condition: service_started } }
+    healthcheck: { test: ["CMD","wget","-qO-","http://127.0.0.1:3000/health/ready"], interval: 10s, retries: 5 }
+    deploy: { resources: { limits: { cpus: "1.0", memory: 512M } } }
+    read_only: true
+    tmpfs: ["/tmp"]
+    logging: { driver: json-file, options: { max-size: 10m, max-file: "3" } }
+  worker:
+    image: registry.local/cartflow:sha-a1f9c2d
+    command: ["node","dist/worker/outbox.js"]
+    depends_on: { api: { condition: service_started } }
+  mongo:
+    image: mongo:7.0.6
+    command: ["--replSet","rs0","--bind_ip_all"]
+    healthcheck: { test: ["CMD","mongosh","--quiet","--eval","db.adminCommand('ping').ok"], interval: 5s, retries: 20 }
+  redis:
+    image: redis:7.2.4-alpine
+    command: ["redis-server","--maxmemory","256mb","--maxmemory-policy","allkeys-lru","--appendonly","no"]
+volumes: { mongodata: {} }</code></pre></div>
+<p>Read the last two lines of <code>redis</code>: <code>allkeys-lru</code> means Redis <em>evicts</em> under pressure (a cache), and <code>appendonly no</code> means it loses everything on restart — which is <strong>correct</strong> here because a lost lock or a lost rate-limit counter is tolerable and a stalled eviction is not. Every “why is Redis not durable?” answer is a design decision you can now make out loud.</p>
+<h2 id="registry-then-one-ecs-service">Registry, then one ECS service</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">aws ecs create-cluster --cluster-name cartflow --capacity-providers FARGATE_SPOT,FARGATE \
+  --default-capacity-provider-strategy strategy=FARGATE_SPOT,weight=1
+aws ecs register-task-definition --cli-input-json file://task.json    # image by DIGEST, not tag
+aws ecs run-task --cluster cartflow --task-definition cartflow:12 --network-configuration \
+  "awsvpcConfiguration={subnets=[subnet-a,subnet-b],securityGroups=[sg-app],assignPublicIp=DISABLED}"
+aws ecs wait tasks-stopped --tasks $(aws ecs list-tasks --cluster cartflow --query taskArns[0] --output text)</code></pre></div>
+<p><code>awsvpc</code> network mode gives the task its own ENI and IP — so <strong>the security group is on the task</strong>, which is better than EC2-mode where every task on a host shares the host's SG. Log that difference in your notes; it's an AKS/GKE/ECS-comparison question in disguise.</p>
+<h2 id="create-infrastructure-with-terraform">Create infrastructure with Terraform</h2>
+<p><code>modules/network</code> (public subnets for the ALB, private for tasks, one NAT for dev / per-AZ NAT for prod, S3 + ECR + Logs endpoints), <code>modules/data</code> (DocumentDB or a self-managed Mongo replica <em>only</em> if the business accepts it — the honest default here is Atlas or EC2 + your own backup story, and a written risk note), <code>modules/app-service</code> (ECS service, ALB, target group on <code>/health/ready</code>, autoscaling on <code>cpu 70 %</code> and <code>rc:requests 900</code> on the ALB metric, an SQS+DLQ for the outbox fan-out). Read the plan line by line; <code>terraform plan</code> on a Redis <code>parameter_group_name</code> change should not be a surprise.</p>
+<h2 id="networking">Networking</h2>
+<p>ALB on 443 with an ACM cert, tasks in private subnets, <code>sg-alb → 443 from 0.0.0.0/0</code>, <code>sg-task → 3000 from sg-alb</code>, <code>sg-mongo → 27017 from sg-task</code> (and <strong>only</strong> VPC peering or a private link to Atlas; never <code>0.0.0.0/0</code>, which has happened to real companies). Redis: same pattern, 6379 from <code>sg-task</code>, <code>auth_token</code> on or a subnet so tight it doesn't need one. Add <code>aws elbv2 describe-listeners</code> to your docs so the next engineer sees the health path immediately.</p>
+<h2 id="ci-cd-github-actions-because-the-app-is-on-github-and-oidc-is-free">CI/CD (GitHub Actions, because the app is on GitHub and OIDC is free)</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">text</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-text">lint + test (ubuntu, node 20, cache key = hashFiles('package-lock.json'))
+→ trivy fs (HIGH,CRITICAL) + gitleaks
+→ docker build (buildx, gha cache) → trivy image → cosign sign → push immutable tag + sha tag
+→ deploy dev (auto) → verify: /health/ready + 12 smoke requests → deploy staging (auto) → [prod: environment approval]
+→ deploy prod with aws ecs deploy --service cartflow --task-definition … (or CodeDeploy blue/green) → verify + 5-min soak on 5xx rate → done</code></pre></div>
+<p>One thing to notice: the worker is deployed <strong>in the same release</strong> as the API, and the pipeline asserts the two images have the <em>same digest</em>. Two digests is how you ship a worker that writes events the API can't read.</p>
+<h2 id="devsecops">DevSecOps</h2>
+<p>Trivy fs on <code>package-lock.json</code> (SBOM from it with <code>syft</code>), <code>gitleaks</code> over full history (<code>.env</code> in a commit is a rotation event, not a code fix), npm provenance check (<code>npm audit signatures</code>) to catch a typosquatted dependency, image scan + cosign + a Kyverno policy in the cluster that refuses unsigned images, <code>hadolint</code>/<code>dockle</code> on the Dockerfile, and Checkov on the Terraform (it will find the Redis <code>security_group</code> with <code>0.0.0.0/0</code> if you leave one). Order matters: secret scan before build so a leaked token never reaches a public registry log.</p>
+<h2 id="monitoring">Monitoring</h2>
+<p>Prometheus scrapes <code>/metrics</code>: request rate, p95/p99, 5xx ratio, <code>cart_to_order_conversion</code>, <code>stock_reservation_failures_total</code>, <code>event_loop_lag</code>, <code>mongo_up</code>/<code>redis_up</code> gauges. <strong>Two of those are business signals</strong>, and a DevOps engineer who graphs them is the person in the room: <code>stock_reservation_failures_total</code> rising <em>before</em> 5xx moves is a whole 20 minutes of lead time. Alert set: p99 &gt; 500 ms 5m, 5xx &gt; 1 %, <code>redis_up == 0</code> for 2m (warning: degraded, not page — that's the design decision from the readiness discussion), <code>event_loop_lag &gt; 0.3</code> (the “Node is blocked” alarm people never set), Mongo connection pool saturation, and an <code>outbox_lag_seconds &gt; 30</code> alarm that catches a stopped worker — which otherwise produces <em>no</em> error anywhere.</p>
+<h2 id="failure-scenarios-break-these-on-purpose">Failure scenarios — break these on purpose</h2>
+<div class="tablewrap"><table><thead><tr><th class="al-left">Break</th><th class="al-left">Symptom</th><th class="al-left">Diagnosis → fix</th></tr></thead><tbody><tr><td class="al-left">Redis stopped</td><td class="al-left">Latency up 4×, no 5xx</td><td class="al-left"><code>redis_up == 0</code>, <code>GET /health/ready</code> shows <code>cache: degraded</code>; correct: warning + autoscale off. Wrong: restarting pods, which changes nothing</td></tr><tr><td class="al-left">Mongo primary steps down</td><td class="al-left">5 s of <code>NodeSelectionTimeoutError</code>, then self-heal</td><td class="al-left">driver <code>retryWrites=true</code>, <code>maxPoolSize</code>, and a readiness probe that <em>tolerates 3 failures</em> — an aggressive liveness here restarts everything during a failover</td></tr><tr><td class="al-left">Oversell attempt (20 parallel for 1 item)</td><td class="al-left">19 × <code>409 OUT_OF_STOCK</code></td><td class="al-left">good; if you see 2 successes, the transaction isn't atomic — that's a <strong>developer</strong> bug you found with a DevOps test, and the conversation you have with them is the job</td></tr><tr><td class="al-left">Webhook replayed 5×</td><td class="al-left"><code>200</code> + <code>x-idempotent-replay: true</code></td><td class="al-left">verify <code>paymentEvents</code> unique index exists; if <code>E11000 duplicate key error</code> bubbles up as 500, the handler isn't idempotent</td></tr><tr><td class="al-left">Bad <code>WEBHOOK_SECRET</code> on one replica</td><td class="al-left">~50 % of webhooks 401</td><td class="al-left">rolling deploy left an old task with the old secret → <code>deploymentController</code> rollout verified with <code>aws ecs describe-services</code>; never patch a secret onto one task</td></tr><tr><td class="al-left">Image tag deleted</td><td class="al-left"><code>CannotPullContainerError: request access denied for ...</code></td><td class="al-left"><code>aws ecr describe-images --image-ids imageTag=…</code>; re-push; add a post-push existence check in CI</td></tr><tr><td class="al-left">Disk full on a host (logs)</td><td class="al-left">containers fine, host <code>Evicted</code>/<code>DiskPressure</code></td><td class="al-left"><code>df -h</code>, `du -x -h /var/lib/docker/containers</td></tr></tbody></table></div>
+<h2 id="troubleshooting-the-5xx-spike-you-can-only-see-in-traces">Troubleshooting (the 5xx spike you can only see in traces)</h2>
+<p><code>describe-services</code> → tasks healthy, so the platform is fine. <code>/health/ready</code> fine. Traces show 4.1 s in <code>POST /orders</code>, all of it in <code>stock:reserve</code> waiting. <code>redis-cli --latency</code> fine; <code>SLOWLOG GET 10</code> shows <code>EVALSHA … 380ms</code> — a Lua script doing <code>KEYS *</code>. Cause: a developer changed the reservation script to scan; under 4 000 products it became O(n). <strong>Fix forward:</strong> the script uses a prefix index, <code>redis-cli --bigkeys</code> becomes a CI check on staging, and an alert on <code>stock_reserve_duration_seconds_p99 &gt; 50ms</code> so next time you page before users notice. This is the pattern for every “everything is green but users are unhappy” incident: <strong>look one layer below your dashboard, in the dependency.</strong></p>
+<h2 id="scaling">Scaling</h2>
+<p>Requests per task from the load test (a single 0.5 vCPU/1 GB task holds ~120 rps at p95 &lt; 150 ms); so 400 rps → 4 tasks with headroom → target-tracking <code>cpu 60 %</code> + <code>requests_per_task 100</code>, <code>min=2</code> (never 1 in two AZs), <code>max=12</code>, plus <strong>scheduled scale</strong> for the 20:00 drop sale, and <code>scale-in</code> protection during a deploy (<code>--enable-execute-command</code> off, <code>deploymentMaximumPercent 25</code>). DB side: read preference <code>secondaryPreferred</code> for <code>GET /products</code>, and if <code>DatabaseConnections</code> approaches Mongo's <code>maxIncomingConnections</code>, that's a PgBouncer-equivalent (mongos/router or a shorter idle timeout) — a conversation to have <em>before</em> Black Friday.</p>
+<h2 id="rollback">Rollback</h2>
+<p>Rollback = point the ECS service at the previous task-definition revision, because the <em>task definition</em> is the versioned deployment object (<code>aws ecs update-service --task-definition cartflow:11</code>) and image digests make it exact. Mongo is the constraint: the index migration was additive and backward-compatible, so no data rollback is needed — which was the <em>rule</em> you enforced in review (“migrations must not break the previous release for one deploy window”), not luck. And the rollback path is exercised in staging with the same command, timed: “under 60 seconds, no dropped requests beyond in-flight”.</p>
+<h2 id="final-architecture">Final architecture</h2>
+<div class="flow"><span class="fnode">internet</span><span class="farrow">→</span><span class="fnode">Route 53</span><span class="farrow">→</span><span class="fnode">ALB (TLS from ACM, /health/ready target checks)</span><span class="farrow">→</span><span class="fnode">ECS Fargate service (api, awsvpc, sg from ALB only, 2 AZ, requests/limits, log driver awslogs 30d, read-only fs)</span><span class="farrow">→</span><span class="fnode">DocumentDB/Mongo RS (private subnet, KMS, snapshots, no public IP) + ElastiCache Redis (cluster-mode off, 2 replicas)</span><span class="farrow">→</span><span class="fnode">outbox worker (same image, different command)</span><span class="farrow">→</span><span class="fnode">SNS</span><span class="farrow">→</span><span class="fnode">order email lambda</span><span class="farrow">→</span><span class="fnode">Grafana (RED + business panels)</span><span class="farrow">→</span><span class="fnode">all of it from Terraform with a locked backend, applied only by the pipeline</span><span class="farrow">→</span></div>
+<h2 id="what-i-learned">What I learned</h2>
+<p>The image is the unit of deployment (worker and API share it, or you shipped two truths); health checks must match the app's real dependency semantics or autoscaling fights your dependency; and a business metric on the dashboard shortens incidents more than another log pipeline does.</p>
+<h2 id="interview-questions">Interview questions</h2>
+<div class="grid2"><p><strong>“Why two <code>npm ci</code> in a Dockerfile?”</strong> → the build needs devDependencies (typescript, test runner), the runtime must not ship them: the multi-stage split is where the 4× size and CVE reduction comes from, plus a smaller attack surface. <strong>“How do you keep a Node app alive when Redis dies?”</strong> → readiness distinguishes hard vs soft dependencies, cache calls are wrapped with a short timeout + fallback to Mongo, <code>redis_up</code> drives a warning and a pause on autoscaling, and a load test in staging that simply stops Redis proves the behaviour instead of assuming it. <strong>“Your ECS tasks are restarting. Steps?”</strong> → <code>describe-tasks --include-events</code> for the stop reason and exit code, <code>stoppedReason</code> (<code>OutOfMemoryError</code> vs a health check vs a scale-in), the task's log stream around the restart, and whether a deploy or an instance drained underneath them. <strong>“What's the difference between <code>depends_on</code> and a health check?”</strong> → <code>depends_on</code> orders <em>start</em>, <code>service_healthy</code> gates on <em>readiness</em>, and neither is a substitute for the app's own retry logic when the dependency dies later.</p></div>
+<h2 id="r-sum-bullets">Résumé bullets</h2>
+<div class="callout note"><p class="ctitle"><strong>ONLY WHAT YOU ACTUALLY BUILT</strong></p><ul class="plain"><li>Containerised a TypeScript order-management API (Node 20, MongoDB, Redis) with multi-stage Alpine images: 145 MB, non-root, read-only filesystem, health-checked; enforced <code>npm ci</code> from the lockfile and BuildKit layer caching to cut builds from 9 to 3 minutes.</li><li>Built a GitHub Actions pipeline (lint, test, gitleaks, Trivy fs + image, cosign sign, immutable ECR tags) with auto-deploy to dev and staging, environment-approved production behind <code>aws ecs deploy</code>, smoke verification, and a 5-minute error-rate soak before a release is marked successful.</li><li>Ran CartFlow on ECS Fargate in <code>awsvpc</code> mode behind an ALB with readiness-based target health, target-tracking autoscaling on CPU and requests, and scheduled scaling for sales events; rollback to the previous task-definition revision in under 60 seconds, verified in staging.</li><li>Defined SLOs with Prometheus/Grafana (p95 &lt; 150 ms, 99.5 % availability) including business signals (cart→order conversion, stock-reservation failures, outbox lag), and turned a 4× latency regression into a <code>redis</code> slowlog finding before users filed tickets.</li></ul></div>
+<div class="revision"><p class="ctitle"><strong>QUICK REVISION — 5 minutes</strong></p><p><strong>Concepts:</strong> lockfile-driven builds · two-stage <code>npm ci</code> · distroless/alpine trade-offs (wget vs curl, no shell, <code>USER 10001</code> needs <code>--chown</code>) · hard vs soft dependencies in readiness · <code>awsvpc</code> task ENIs and per-task SGs · immutable tags + digest promotion · outbox worker = second deployment, same image · scale-in protection during deploys · task-definition revision as the rollback unit · Redis eviction policy as a design decision. <strong>Commands:</strong> <code>npm ci &amp;&amp; npm test</code> · <code>docker buildx build --cache-from type=gha</code> · <code>docker compose -f … up -d --wait</code> · <code>aws ecs register-task-definition --cli-input-json file://task.json</code> · <code>aws ecs update-service --service cartflow --task-definition cartflow:11</code> · <code>aws ecs describe-tasks --tasks $T --include-events</code> · <code>redis-cli --latency</code> / <code>SLOWLOG GET 10</code> · <code>mongosh --eval 'db.currentOp()'</code>. <strong>Architecture:</strong> LB → API tasks (stateless, shared state in Mongo/Redis) → outbox worker → events; two dependencies with <em>different</em> failure semantics, and the probes/alarms reflect that. <strong>Common mistakes:</strong> <code>npm install</code> in Docker (no lockfile respect) · health check on a shell tool that isn't in the image · readiness that fails on a soft dependency · deploying API and worker from different digests · <code>0.0.0.0/0</code> on Mongo “for the pipeline” · log rotation forgotten on the host. <strong>Troubleshooting checklist:</strong> <code>describe-services</code>/<code>describe-tasks</code> → events + exit code → log stream → <code>/health/ready</code> components → dependency latency (<code>redis-cli --latency</code>, Mongo <code>currentOp</code>) → traces for the slow span → is the <em>cache</em> cold after a deploy (a 10-minute p95 hump is normal; a 10-hour one is not).</p></div>
+<p>Next: <a href="proj-03-banking.html">Project 03 — LedgerPay (AWS + Terraform) →</a></p></div>
+      <div class="pagefoot">
+        <p class="pagefootnote">Part of the DevOps Academy built from the 41-project reference repository · offline · no tracking</p>
+        <div class="pager">
+          <a class="pg prev" href="proj-01-healthcare.html"><span>Previous</span><strong>01 · Healthcare on a Linux VM</strong></a>
+          <a class="pg next" href="proj-03-banking.html"><span>Next</span><strong>03 · Banking with Terraform</strong></a>
+        </div>
+        <p class="markread"><label class="tickall"><input type="checkbox" data-mark-done> <span>Mark this page as done</span></label></p>
+      </div>
+    </article>
+  </main>
+</div>
+<div class="searchmodal" data-search-modal hidden>
+  <div class="searchbox">
+    <input type="search" data-search-input placeholder="Search the course: OOMKilled, terraform state lock, ALB 502, Jenkinsfile…" aria-label="Search">
+    <ul class="searchresults" data-search-results></ul>
+    <p class="searchhint">Press <kbd>Esc</kbd> to close · <kbd>/</kbd> to open</p>
+  </div>
+</div>
+</body>
+</html>

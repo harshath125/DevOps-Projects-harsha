@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>01 · Healthcare on a Linux VM · DevOps Academy — learn DevOps by shipping 11 real projects</title>
+<meta name="description" content="Your first end-to-end handoff: developer prompt → repository → clone → inspect → build → run → systemd → Nginx → three-tier on AWS.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%230f172a%22/%3E%3Ctext%20x%3D%2216%22%20y%3D%2221%22%20font-family%3D%22ui-monospace%2Cmonospace%22%20font-size%3D%2212%22%20font-weight%3D%22700%22%20fill%3D%22%235eead4%22%20text-anchor%3D%22middle%22%3E%26gt%3B_%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="canonical" href="">
+<script src="assets/js/app.js" defer></script>
+<script>(function(){try{var t=localStorage.getItem("aca.theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}})();</script>
+</head>
+<body data-page="proj-01-healthcare" data-kind="project">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <button class="iconbtn menubtn" data-drawer="1" aria-label="Open navigation">
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <a class="brand" href="index.html"><span class="mark">ACA</span><span class="brandtext">DevOps Academy</span></a>
+  <nav class="topnav"><a href="roadmap.html">Roadmap</a><a href="p1-cloud-core.html">Cloud core concepts</a><a href="projects.html">Projects index</a><a href="p2-devsecops-core.html">DevSecOps core</a><a href="labs.html">Virtual labs</a><a href="interview.html">Interview bank</a><a href="troubleshoot.html">Troubleshooting</a></nav>
+  <div class="topright">
+    <button class="iconbtn" data-search-open aria-label="Search" title="Search (/ )">
+      <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" d="M16 16l4.5 4.5"/></svg>
+    </button>
+    <button class="iconbtn" data-theme-toggle aria-label="Switch light or dark theme" title="Theme">
+      <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M12 3v2m0 14v2m9-9h-2M5 12H3m14.5-6.5-1.4 1.4M8.9 15.1l-1.4 1.4m0-12 1.4 1.4m6.2 6.2 1.4 1.4M12 8.2a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6Z"/></svg>
+    </button>
+  </div>
+</header>
+<div class="progress" data-progress-bar aria-hidden="true"></div>
+<div class="layout">
+  <aside class="sidebar" data-drawer-target>
+    <div class="sidehead">
+      <span class="sidetitle">Curriculum</span>
+      <span class="sideprogress" data-progress-label></span>
+    </div>
+    <nav class="nav"><p class="navsec">Start here</p><a class="" href="roadmap.html" data-nav-page="roadmap"><span class="pdot" data-done-dot="roadmap"></span>Roadmap</a><p class="navsec">Foundation</p><a class="" href="f-linux.html" data-nav-page="f-linux"><span class="pdot" data-done-dot="f-linux"></span>Linux<em class="tag linux">LINUX</em></a><a class="" href="f-networking.html" data-nav-page="f-networking"><span class="pdot" data-done-dot="f-networking"></span>Networking + shell<em class="tag net">NET</em></a><a class="" href="f-git-github.html" data-nav-page="f-git-github"><span class="pdot" data-done-dot="f-git-github"></span>Git + GitHub<em class="tag git">GIT</em></a><a class="" href="f-docker.html" data-nav-page="f-docker"><span class="pdot" data-done-dot="f-docker"></span>Docker + Compose<em class="tag docker">DOCKER</em></a><p class="navsec">Phase 1 · Core DevOps</p><a class="" href="p1-cloud-core.html" data-nav-page="p1-cloud-core"><span class="pdot" data-done-dot="p1-cloud-core"></span>Cloud core concepts<em class="tag cloud">CLOUD</em></a><a class="" href="p1-aws.html" data-nav-page="p1-aws"><span class="pdot" data-done-dot="p1-aws"></span>AWS<em class="tag aws">AWS</em></a><a class="" href="p1-azure-gcp.html" data-nav-page="p1-azure-gcp"><span class="pdot" data-done-dot="p1-azure-gcp"></span>Azure + GCP<em class="tag azure">AZURE</em></a><a class="" href="p1-terraform.html" data-nav-page="p1-terraform"><span class="pdot" data-done-dot="p1-terraform"></span>Terraform<em class="tag iac">IAC</em></a><a class="" href="p1-kubernetes.html" data-nav-page="p1-kubernetes"><span class="pdot" data-done-dot="p1-kubernetes"></span>Kubernetes<em class="tag k8s">K8S</em></a><a class="" href="p1-cicd.html" data-nav-page="p1-cicd"><span class="pdot" data-done-dot="p1-cicd"></span>CI/CD<em class="tag cicd">CICD</em></a><a class="" href="p1-observability.html" data-nav-page="p1-observability"><span class="pdot" data-done-dot="p1-observability"></span>Observability<em class="tag obs">OBS</em></a><a class="" href="p1-multicloud.html" data-nav-page="p1-multicloud"><span class="pdot" data-done-dot="p1-multicloud"></span>Multicloud<em class="tag cloud">CLOUD</em></a><p class="navsec">Projects</p><a class="" href="projects.html" data-nav-page="projects"><span class="pdot" data-done-dot="projects"></span>Projects index<em class="tag proj">PROJ</em></a><a class="current" href="proj-01-healthcare.html" data-nav-page="proj-01-healthcare"><span class="pdot" data-done-dot="proj-01-healthcare"></span>01 · Healthcare on a Linux VM<em class="tag proj">PROJ</em></a><a class="" href="proj-02-ecommerce.html" data-nav-page="proj-02-ecommerce"><span class="pdot" data-done-dot="proj-02-ecommerce"></span>02 · E-commerce in Docker<em class="tag docker">DOCKER</em></a><a class="" href="proj-03-banking.html" data-nav-page="proj-03-banking"><span class="pdot" data-done-dot="proj-03-banking"></span>03 · Banking with Terraform<em class="tag iac">IAC</em></a><a class="" href="proj-04-retail.html" data-nav-page="proj-04-retail"><span class="pdot" data-done-dot="proj-04-retail"></span>04 · Retail on ECS<em class="tag aws">AWS</em></a><a class="" href="proj-05-telecom.html" data-nav-page="proj-05-telecom"><span class="pdot" data-done-dot="proj-05-telecom"></span>05 · Telecom on Kubernetes<em class="tag k8s">K8S</em></a><a class="" href="proj-06-fintech.html" data-nav-page="proj-06-fintech"><span class="pdot" data-done-dot="proj-06-fintech"></span>06 · FinTech microservices<em class="tag sec">SEC</em></a><a class="" href="proj-07-insurance.html" data-nav-page="proj-07-insurance"><span class="pdot" data-done-dot="proj-07-insurance"></span>07 · Insurance on Azure DevOps<em class="tag azure">AZURE</em></a><a class="" href="proj-08-saas.html" data-nav-page="proj-08-saas"><span class="pdot" data-done-dot="proj-08-saas"></span>08 · SaaS multi-tenant<em class="tag aws">AWS</em></a><a class="" href="proj-09-multicloud.html" data-nav-page="proj-09-multicloud"><span class="pdot" data-done-dot="proj-09-multicloud"></span>09 · Multicloud<em class="tag cloud">CLOUD</em></a><a class="" href="proj-10-capstone.html" data-nav-page="proj-10-capstone"><span class="pdot" data-done-dot="proj-10-capstone"></span>10 · Capstone<em class="tag proj">PROJ</em></a><a class="" href="proj-11-mega.html" data-nav-page="proj-11-mega"><span class="pdot" data-done-dot="proj-11-mega"></span>11 · Mega project<em class="tag sec">SEC</em></a><p class="navsec">Phase 2 · DevSecOps</p><a class="" href="p2-devsecops-core.html" data-nav-page="p2-devsecops-core"><span class="pdot" data-done-dot="p2-devsecops-core"></span>DevSecOps core<em class="tag sec">SEC</em></a><a class="" href="p2-secrets-iam.html" data-nav-page="p2-secrets-iam"><span class="pdot" data-done-dot="p2-secrets-iam"></span>Secrets + IAM<em class="tag sec">SEC</em></a><a class="" href="p2-scanning.html" data-nav-page="p2-scanning"><span class="pdot" data-done-dot="p2-scanning"></span>Scanning + gates<em class="tag sec">SEC</em></a><a class="" href="p2-runtime-sec.html" data-nav-page="p2-runtime-sec"><span class="pdot" data-done-dot="p2-runtime-sec"></span>Runtime + K8s security<em class="tag sec">SEC</em></a><a class="" href="aiops.html" data-nav-page="aiops"><span class="pdot" data-done-dot="aiops"></span>AIOps on GCP<em class="tag gcp">GCP</em></a><a class="" href="mlops.html" data-nav-page="mlops"><span class="pdot" data-done-dot="mlops"></span>MLOps on GCP<em class="tag gcp">GCP</em></a><p class="navsec">Practice</p><a class="" href="labs.html" data-nav-page="labs"><span class="pdot" data-done-dot="labs"></span>Virtual labs<em class="tag lab">LAB</em></a><a class="" href="revision.html" data-nav-page="revision"><span class="pdot" data-done-dot="revision"></span>Revision sheets</a><a class="" href="test-me.html" data-nav-page="test-me"><span class="pdot" data-done-dot="test-me"></span>Test me<em class="tag test">TEST</em></a><p class="navsec">Career</p><a class="" href="interview.html" data-nav-page="interview"><span class="pdot" data-done-dot="interview"></span>Interview bank<em class="tag int">INT</em></a><a class="" href="interview-scenarios.html" data-nav-page="interview-scenarios"><span class="pdot" data-done-dot="interview-scenarios"></span>Scenario rounds<em class="tag int">INT</em></a><a class="" href="troubleshoot.html" data-nav-page="troubleshoot"><span class="pdot" data-done-dot="troubleshoot"></span>Troubleshooting<em class="tag ops">OPS</em></a><a class="" href="resume.html" data-nav-page="resume"><span class="pdot" data-done-dot="resume"></span>Resume + portfolio<em class="tag career">CAREER</em></a><p class="navsec">Site</p><a class="" href="resources.html" data-nav-page="resources"><span class="pdot" data-done-dot="resources"></span>Resources</a><a class="" href="deployment-guide.html" data-nav-page="deployment-guide"><span class="pdot" data-done-dot="deployment-guide"></span>Publish this site</a></nav>
+    <div class="sidefoot">
+      <p>Everything here is offline-first: no account, no tracking, no backend. Your progress and answers stay in this browser.</p>
+    </div>
+  </aside>
+  <main id="main">
+    <article class="page">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span>Projects<span>/</span><b>01 · Healthcare on a Linux VM</b></nav>
+      <header class="hero"><p class="kicker">Projects</p><h1>Project 01 — MediBook: a Spring Boot app on a Linux VM, then on AWS</h1><p class="herotext">Your first end-to-end handoff: developer prompt → repository → clone → inspect → build → run → systemd → Nginx → three-tier on AWS.</p><div class="herometa"><span class="mchip">6 h</span><span class="mchip tag proj">PROJ</span></div></header>
+      <details class="toc" open><summary>On this page</summary><ul><li class="l1"><a href="#part-a-get-the-application">PART A — GET THE APPLICATION</a></li><li class="l2"><a href="#overview">Overview</a></li><li class="l2"><a href="#business-scenario">Business scenario</a></li><li class="l2"><a href="#tech-stack-received-not-chosen-by-you">Tech stack (received, not chosen by you)</a></li><li class="l2"><a href="#architecture-before-you-touch-anything">Architecture (before you touch anything)</a></li><li class="l2"><a href="#what-the-developer-will-build">What the developer will build</a></li><li class="l2"><a href="#copyable-developer-agent-prompt">Copyable Developer Agent Prompt</a></li><li class="l2"><a href="#developer-handoff">Developer handoff</a></li><li class="l1"><a href="#part-b-the-devops-journey">PART B — THE DEVOPS JOURNEY</a></li><li class="l2"><a href="#clone-and-inspect">Clone and inspect</a></li><li class="l2"><a href="#identify-dependencies-config-and-failure-surface">Identify dependencies, config and failure surface</a></li><li class="l2"><a href="#build-and-test-as-ci-would">Build and test (as CI would)</a></li><li class="l2"><a href="#dockerize-packaging-someone-else-s-application">Dockerize — packaging someone else&#x27;s application</a></li><li class="l2"><a href="#build-image-push-to-a-registry-run-it-on-the-vm">Build image, push to a registry, run it on the VM</a></li><li class="l2"><a href="#deploy-on-the-linux-vm-the-one-box-version-do-this-before-aws">Deploy on the Linux VM (the “one box” version — do this before AWS)</a></li><li class="l2"><a href="#create-the-aws-infrastructure-terraform-one-module-each">Create the AWS infrastructure (Terraform, one module each)</a></li><li class="l2"><a href="#networking-and-the-security-group-chain">Networking, and the security-group chain</a></li><li class="l2"><a href="#database">Database</a></li><li class="l2"><a href="#deploy-and-prove-it">Deploy, and prove it</a></li><li class="l2"><a href="#ci-cd-jenkins-first-because-you-must-be-able-to-read-one">CI/CD — Jenkins first (because you must be able to read one)</a></li><li class="l2"><a href="#devsecops-gates-the-same-six-every-project">DevSecOps gates (the same six, every project)</a></li><li class="l2"><a href="#monitoring">Monitoring</a></li><li class="l2"><a href="#failure-scenarios-cause-them-on-purpose">Failure scenarios — cause them on purpose</a></li><li class="l2"><a href="#troubleshooting-the-3-tier-version-of-it-s-down">Troubleshooting — the 3-tier version of “it&#x27;s down”</a></li><li class="l2"><a href="#scaling">Scaling</a></li><li class="l2"><a href="#rollback">Rollback</a></li><li class="l2"><a href="#final-architecture">Final architecture</a></li><li class="l2"><a href="#what-i-learned-write-yours-before-reading-this">What I learned (write yours before reading this)</a></li><li class="l2"><a href="#interview-questions-this-project-s-set">Interview questions (this project&#x27;s set)</a></li><li class="l2"><a href="#r-sum-bullets-components-you-actually-built">Résumé bullets (components you actually built)</a></li></ul></details>
+      <div class="prose"><p class="lead">Your first complete journey. A clinic's appointment service, delivered by a developer (your coding agent), arrives as a Git repository — and you take a <code>target/*.jar</code> on a Linux VM to a health-checked, monitored, three-tier AWS deployment, twice: once by hand so you understand every step, once by pipeline so you never do it by hand again.</p>
+<div class="callout note"><p class="ctitle"><strong>THE SHAPE OF EVERY PROJECT PAGE (read this once)</strong></p><p><strong>PART A</strong> is the developer's job: you hand a prompt to an AI coding agent and it produces the application. <strong>PART B</strong> is yours: from <code>git clone</code> to rollback. You never write application code here, and you never let the agent do DevOps. That separation is the whole training.</p></div>
+<h1 id="part-a-get-the-application">PART A — GET THE APPLICATION</h1>
+<h2 id="overview">Overview</h2>
+<p>MediBook is a Spring Boot 3 REST API for a small clinic: patients, doctors, 30-minute appointment slots, and a daily report. Postgres underneath, JWT auth, Flyway migrations, Actuator health. It is deliberately ordinary — the same shape as a thousand real job ticket-queues — so the only difficulty you meet is <em>operational</em>.</p>
+<h2 id="business-scenario">Business scenario</h2>
+<p>A 12-doctor clinic books about 260 appointments a day. Nobody's phone line should die at 09:00. Double-booking is a compliance and human problem, not a UX inconvenience. Records must not be lost, and a receptionist must be able to answer “did Dr Rao finish her day list?” in one query. Those three sentences are why we want health checks, unique constraints, backups and a report endpoint — not because a tutorial said so.</p>
+<h2 id="tech-stack-received-not-chosen-by-you">Tech stack (received, not chosen by you)</h2>
+<div class="tablewrap"><table><thead><tr><th class="al-left">Layer</th><th class="al-left">What you inherit</th><th class="al-left">What a DevOps engineer must notice</th></tr></thead><tbody><tr><td class="al-left">Language / runtime</td><td class="al-left">Java 17, Spring Boot 3.2</td><td class="al-left">The JVM's memory model: you'll set <code>MaxRAMPercentage</code>, not <code>-Xmx</code> guesses</td></tr><tr><td class="al-left">Build</td><td class="al-left">Maven wrapper <code>./mvnw</code></td><td class="al-left">It's committed, so CI needs no global Maven install; <code>target/</code> is not in Git</td></tr><tr><td class="al-left">Data</td><td class="al-left">PostgreSQL 16, Flyway SQL migrations</td><td class="al-left">Migrations are a <strong>deploy step</strong>, not an app side effect; the unique index encodes a business rule</td></tr><tr><td class="al-left">API</td><td class="al-left">JSON REST, springdoc OpenAPI</td><td class="al-left"><code>context-path</code> matters for health checks behind a proxy</td></tr><tr><td class="al-left">Config</td><td class="al-left">env vars + <code>application.yml</code></td><td class="al-left">Good: no <code>config/prod.properties</code> in Git to leak</td></tr><tr><td class="al-left">Ops surface</td><td class="al-left">Actuator health/liveness/readiness/metrics</td><td class="al-left">The only monitoring surface you get for free; the rest is yours to wire</td></tr></tbody></table></div>
+<h2 id="architecture-before-you-touch-anything">Architecture (before you touch anything)</h2>
+<div class="flow"><span class="fnode">Browser / clinic app</span><span class="farrow">→</span><span class="fnode">HTTPS</span><span class="farrow">→</span><span class="fnode">Nginx reverse proxy (TLS, headers, access log)</span><span class="farrow">→</span><span class="fnode">Spring Boot :8080</span><span class="farrow">→</span><span class="fnode">JDBC pool (HikariCP)</span><span class="farrow">→</span><span class="fnode">PostgreSQL :5432</span><span class="farrow">→</span><span class="fnode">WAL + nightly snapshot to S3</span><span class="farrow">→</span></div>
+<p>Everything on the right of Nginx is inside one Linux box for step 1, then split across a load balancer, an Auto Scaling group and RDS for step 2. Keep that two-frame picture in your head: it's the same system, one is “a machine you own”, the other is “a managed platform you describe in code”.</p>
+<h2 id="what-the-developer-will-build">What the developer will build</h2>
+<p>Ten endpoints, three entities with a unique <code>(doctor_id, scheduled_at)</code> constraint, JWT + role checks, RFC-7807 error bodies with a <code>code</code>, JSON logs to stdout with a correlation id, ~30 tests including a Testcontainers integration test, and <code>docs/OPERATIONS.md</code> for you. Nothing else. <strong>No Dockerfile, no Jenkinsfile, no cloud code</strong> — the prompt forbids it, so the operational work stays yours.</p>
+<h2 id="copyable-developer-agent-prompt">Copyable Developer Agent Prompt</h2>
+<div class="promptbox" data-prompt="medbook-healthcare"><p class="ctitle"><strong>Developer Agent Prompt — ROLE</strong></p><pre class="prompttext"># ROLE
+
+You are a senior Java/Spring Boot engineer. Build a complete, runnable backend application for a small healthcare clinic. You are the DEVELOPER. A separate DevOps engineer will handle everything about deployment, containers, cloud, CI/CD and security — that is not your job here.
+
+# PRODUCT: MediBook
+
+A clinic appointment-booking service. Patients book, reschedule and cancel appointments with doctors. Receptionists manage the schedule. A small reporting endpoint gives daily counts.
+
+# FUNCTIONAL REQUIREMENTS
+
+Implement these REST endpoints (JSON only, no server-rendered HTML, no mobile app):
+
+1. `POST /api/auth/login` — email + password, returns a short-lived JWT. Also `POST /api/auth/register` restricted to a seed role.
+2. `GET /api/doctors` — list doctors with `?specialty=&amp;page=&amp;size=`.
+3. `GET /api/doctors/{id}/availability?date=` — 30-minute slots between the doctor's working hours, excluding already-booked slots.
+4. `POST /api/appointments` — body `{patientId, doctorId, scheduledAt, reason}`; reject double-booking of the same doctor with a `409`; validate that the slot is in the future and inside working hours.
+5. `GET /api/appointments?patientId=|doctorId=&amp;from=&amp;to=&amp;page=&amp;size=` — paginated, sorted by `scheduledAt`.
+6. `PATCH /api/appointments/{id}` — reschedule (same slot rules) or cancel (`status=CANCELLED`).
+7. `GET /api/appointments/{id}` — only the owning patient, the doctor, or role `RECEPTIONIST`; otherwise `403`.
+8. `POST /api/appointments/{id}/no-show` and `POST /api/appointments/{id}/complete` — status transitions with validation.
+9. `GET /api/reports/day?date=` — counts of booked / completed / cancelled / no-show per doctor, for one day.
+10. `GET /actuator/health`, `GET /actuator/health/liveness`, `GET /actuator/health/readiness`, `GET /actuator/metrics`, `GET /swagger-ui.html` (OpenAPI).
+
+Data model (JPA entities with Flyway migrations, no `ddl-auto` in production):
+`Patient(id, firstName, lastName, email unique, phone, dob, passwordHash, role)` · `Doctor(id, name, specialty, workStart, workEnd, room)` · `Appointment(id, patient, doctor, scheduledAt, durationMinutes default 30, status enum SCHEDULED|COMPLETED|CANCELLED|NO_SHOW, reason, version, createdAt, updatedAt)` with a unique constraint on `(doctor_id, scheduled_at)`.
+
+# NON-FUNCTIONAL REQUIREMENTS (these matter as much as the features)
+
+- **Configuration via environment variables only.** Every setting must be overridable by env var (Spring's relaxed binding is fine): `DB_URL`, `DB_USER`, `DB_PASSWORD`, `JWT_SECRET` (min 32 chars, fail fast if missing), `SERVER_PORT` (default 8080), `CORS_ALLOWED_ORIGINS`, `LOG_LEVEL`, `APP_TIMEZONE`. Provide `application.yml` with safe local defaults and **no real credentials**.
+- **Database:** PostgreSQL 16. Flyway migrations under `src/main/resources/db/migration` (`V1__init.sql`, `V2__seed_doctors.sql`). Include a seed script runnable with `psql -f` for local use.
+- **Health:** actuator health with a DB check; expose `/actuator/health/liveness` and `/actuator/health/readiness` via `management.endpoint.health.probes.enabled=true`.
+- **Errors:** RFC-7807 style problem responses with a stable `code` field (`SLOT_TAKEN`, `VALIDATION_FAILED`, `UNAUTHORIZED`, `FORBIDDEN`, `NOT_FOUND`), plus an X-Correlation-Id echoed and generated if absent.
+- **Logging:** JSON lines to **stdout** (no file appenders, no rolling files): timestamp, level, logger, message, `correlation_id`, `patient_id_masked`. Never log passwords, tokens or full patient identifiers.
+- **Validation &amp; security basics:** Bean Validation on all inputs; BCrypt password hashing; JWT HS256 with a 30-minute expiry; role-based authorization (`PATIENT`, `DOCTOR`, `RECEPTIONIST`); parameterised queries only; rate limit on `/api/auth/login` (5/min per IP, in-memory is fine); `server.shutdown=graceful` with a 20 s timeout; `spring.mvc.problemdetails.enabled=true`.
+- **Performance:** p99 &lt; 300 ms for `GET /api/appointments` with 100 k appointments; add indexes for the queries you actually write.
+- **Tests:** JUnit 5 + AssertJ; unit tests for slot-availability and double-booking rules; `@SpringBootTest` slice tests for each controller; one Testcontainers-based integration test against real PostgreSQL; `mvn verify` must pass with the tests wired to a container (use Testcontainers so no local DB is required).
+- **Build:** Maven wrapper committed (`mvnw`, `.mvn/`), Java 17, Spring Boot 3.2.x, single module. `target/` must not be committed. Package name `com.clinic.medibook`. Main class `MediBookApplication`.
+- **Docs:** a root `README.md` with: what it is, how to run locally (`docker run` for Postgres + `./mvnw spring-boot:run`), the full environment-variable table, the endpoint list, how to run the tests, and a `docs/OPERATIONS.md` you would hand to whoever deploys it: startup command, port, health endpoints, migration command, what to check if the DB connection fails, and known limitations.
+
+# DELIVERY DEFINITION (this is the handoff)
+
+- Repository layout: standard Maven, `src/main/java`, `src/main/resources/db/migration`, `src/test/java`, `README.md`, `docs/`, `LICENSE`.
+- `docker-compose.yml` **for local development only** (app + Postgres, so a developer can run it) — no production Dockerfile, no Kubernetes manifests, no cloud files. If you think a Dockerfile is useful for development, add `docker-compose.dev.yml` and say so in the README.
+- `.editorconfig`, `.gitignore` (Maven/IDE/logs/`.env`), `.env.example`.
+- Seed data: 6 doctors, 3 patients, one receptionist, ~40 appointments across next week so screens and reports are not empty. Password for seeds documented in the README (`ChangeMe123!`).
+- No TODOs, no stubbed methods, no `println` debugging, no hard-coded `localhost` or credentials in code.
+
+# HARD CONSTRAINTS — READ CAREFULLY
+
+You are **only** the developer. Do NOT do any of the following, even if you think it helps:
+
+- No Dockerfile, no `.dockerignore`, no container build or registry work.
+- No Terraform, CloudFormation, Bicep, Pulumi or any infrastructure code.
+- No AWS / Azure / GCP resources, SDKs, CLI scripts, IAM policies, security groups, load balancers, RDS or S3 code.
+- No Jenkinsfile, no `.github/workflows`, no GitLab CI, no Argo/GitOps files, no Helm charts, no Kubernetes or Docker Compose *production* manifests.
+- No SonarQube, Trivy, Checkov, OWASP ZAP configuration, no security-gate scripts, no signing or SBOM work.
+- No monitoring or alerting setup (no Prometheus scrape config, no Grafana dashboards, no CloudWatch/Alertmanager config).
+- No Nginx/Caddy/Traefik reverse-proxy configuration, no TLS certificates, no systemd units, no shell “deploy.sh” scripts.
+- Do not create GitHub repositories, branches, releases or tags; do not run `git init` and do not push anywhere. Return the files; the human owns the repository.
+
+If something in the requirements seems to need one of those, implement the application-side part only (e.g. expose a metrics endpoint) and write a short note in `docs/OPERATIONS.md` for the DevOps engineer about what they will need to decide.
+
+# OUTPUT FORMAT
+
+1. First, a short plan (max 15 lines) of the files you will create.
+2. Then the code, file by file, each with a path header so it can be written to disk verbatim.
+3. Then `README.md` and `docs/OPERATIONS.md`.
+4. Then a final section titled `DEVOPS HANDOFF NOTES` listing: the exact build command, the exact run command, every environment variable with its default, the port, the health endpoints, the migration command, the test command, external dependencies (PostgreSQL only), and anything you had to make an assumption about.
+
+Keep the whole implementation focused: roughly 25–40 files. Prefer boring, standard Spring Boot over clever abstractions.
+</pre><div class="promptmeta"><span class="pwords">1034 words</span><button class="copybtn" data-prompt-copy="medbook-healthcare">COPY PROMPT</button></div></div>
+<p>Paste that into Claude Code, GitHub Copilot, Cursor or Codex in an empty folder. Review the result as a DevOps engineer would — <code>README.md</code>, the env-var table, <code>docs/OPERATIONS.md</code>, the migrations — and only then hand it to Git.</p>
+<h2 id="developer-handoff">Developer handoff</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">git init medibook &amp;&amp; cd medibook
+# copy the agent's files in; read README.md and docs/OPERATIONS.md first
+git add -A &amp;&amp; git commit -m "feat: MediBook v1.0.0 (backend, migrations, tests, ops notes)"
+git branch -M main
+git remote add origin git@github.com:harshath125/medibook.git
+git push -u origin main &amp;&amp; git tag -a v1.0.0 -m "first handoff" &amp;&amp; git push origin v1.0.0</code></pre></div>
+<p><strong>The handoff checklist — five questions, asked of the developer (or of the agent, in a follow-up):</strong></p>
+<ol class="numlist"><li>What's the exact run command, and which port does it listen on?</li><li>Which env vars are required for production, and which fail startup if missing?</li><li>What must run before the app serves traffic — migrations? seeding?</li><li>Which endpoint is safe to use as a readiness probe, and which one ignores external dependencies for liveness?</li><li>Does anything write to disk, and if so, where? (Log files → we'll kill that. Uploads → we'll talk about object storage.)</li></ol>
+<p>Write the answers into your repo's <code>docs/handoff.md</code>. Ten projects later, that file habit is why you can onboard onto an unknown service in an afternoon.</p>
+<h1 id="part-b-the-devops-journey">PART B — THE DEVOPS JOURNEY</h1>
+<h2 id="clone-and-inspect">Clone and inspect</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">git clone git@github.com:harshath125/medibook.git &amp;&amp; cd medibook
+git log --oneline -5
+ls -a                                  # pom.xml, mvnw, src/, docs/, .gitignore, .env.example?
+find . -name "*.java" | wc -l
+cat docs/OPERATIONS.md
+grep -RIn "8080\|context-path\|actuator" src/main/resources/ pom.xml | head -20
+git ls-files | grep -iE "env|secret|pem|key"          # red flag check, before anything else
+du -sh .git &amp;&amp; git count-objects -vH                    # did the agent commit a fat repo?</code></pre></div>
+<p><code>grep -RIn</code> on the resources folder is how you find the port and context path without reading 25 files. The <code>git ls-files</code> line is the check a real engineer does on day one — an application repo with <code>.env</code> in history gets cleaned before it's ever public.</p>
+<h2 id="identify-dependencies-config-and-failure-surface">Identify dependencies, config and failure surface</h2>
+<div class="tablewrap"><table><thead><tr><th class="al-left">What you need</th><th class="al-left">Where to find it in the repo</th></tr></thead><tbody><tr><td class="al-left">Runtime</td><td class="al-left"><code>pom.xml</code> → <code>&lt;java.version&gt;17</code> and the Spring Boot parent version</td></tr><tr><td class="al-left">Build command</td><td class="al-left"><code>README.md</code> → <code>./mvnw -B -DskipTests package</code>; verify it</td></tr><tr><td class="al-left">Port &amp; context root</td><td class="al-left"><code>application.yml</code> → <code>server.port</code>, <code>server.servlet.context-path</code></td></tr><tr><td class="al-left">External services</td><td class="al-left"><code>spring.datasource.url</code> (Postgres), nothing else — a <em>dependency map</em> you can draw in 30 seconds</td></tr><tr><td class="al-left">Required env vars</td><td class="al-left"><code>README.md</code>'s env table + <code>grep -RIn \${.*:} src/main/resources/</code></td></tr><tr><td class="al-left">Health endpoints</td><td class="al-left"><code>/actuator/health</code>, <code>/readiness</code>, <code>/liveness</code> — confirm the probe config is enabled</td></tr><tr><td class="al-left">Data on disk</td><td class="al-left">none (logs go to stdout) → the app is stateless, so a second instance is legitimate</td></tr><tr><td class="al-left">Startup time</td><td class="al-left">cold JVM with 12 migrations ≈ 25–45 s → sets your probe timings later</td></tr></tbody></table></div>
+<h2 id="build-and-test-as-ci-would">Build and test (as CI would)</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">./mvnw -B -DskipTests package            # fast loop: does it compile?
+./mvnw -B verify                          # the real gate: unit + Testcontainers integration
+java -jar target/medibook-0.0.1-SNAPSHOT.jar   # smoke locally with docker run for Postgres
+docker run -d --name pg -e POSTGRES_PASSWORD=pw -e POSTGRES_DB=medibook -p 5432:5432 postgres:16.2
+curl -s localhost:8080/actuator/health | jq</code></pre></div>
+<p><strong>What just happened:</strong> <code>package</code> proves the compiler and tests-as-build-dependency are satisfied; <code>verify</code> is what the pipeline will run, and Testcontainers needs a Docker socket on the build agent — that single fact will decide your Jenkins agent design later. <code>curl /actuator/health</code> returning <code>{"status":"UP"}</code> with a <code>db</code> component is your first <em>evidence</em>, and the same URL becomes the health check at every layer above.</p>
+<h2 id="dockerize-packaging-someone-else-s-application">Dockerize — packaging someone else's application</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">dockerfile</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-dockerfile">FROM eclipse-temurin:17.0.10_7-jdk-jammy AS builder
+WORKDIR /workspace
+COPY pom.xml mvnw ./ ; COPY .mvn .mvn
+RUN ./mvnw -B dependency:go-offline          # cached until pom.xml changes
+COPY src src
+RUN ./mvnw -B -DskipTests package
+
+FROM eclipse-temurin:17.0.10_7-jre-jammy
+RUN useradd -r -u 10001 -s /usr/sbin/nologin appuser
+WORKDIR /app
+COPY --from=builder --chown=10001 /workspace/target/medibook-*.jar app.jar
+ENV JAVA_OPTS="-XX:MaxRAMPercentage=70 -XX:+ExitOnOutOfMemoryError"
+EXPOSE 8080
+USER 10001
+HEALTHCHECK --interval=15s --timeout=3s --start-period=40s --retries=3 \
+  CMD curl -fsS http://127.0.0.1:8080/actuator/health/readiness || exit 1
+ENTRYPOINT ["sh","-c","exec java $JAVA_OPTS -jar /app/app.jar"]</code></pre></div>
+<p>Then <code>.dockerignore</code> with <code>.git</code>, <code>target/</code>, <code>.env</code>, <code>docs/</code> and <code>*.log</code>, and:</p>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">docker build -t medibook:local .
+docker history medibook:local | head -8        # see the layers; the jre base is most of it
+docker run --rm -e DB_URL=jdbc:postgresql://host.docker.internal:5432/medibook \
+  -e DB_USER=postgres -e DB_PASSWORD=pw -e JWT_SECRET=0123456789abcdef0123456789abcdef \
+  -p 8080:8080 medibook:local</code></pre></div>
+<p><strong>Common failure here:</strong> <code>java: command not found</code> or a <code>127.0.0.1</code> health check passing while the pod fails — because <code>curl</code> isn't in the JRE base image (add it, or use <code>wget --spider</code>, or move the health check to the platform), and inside a container <code>127.0.0.1</code> means <em>this container</em>, not the host.</p>
+<h2 id="build-image-push-to-a-registry-run-it-on-the-vm">Build image, push to a registry, run it on the VM</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">IMG=123456789012.dkr.ecr.eu-west-1.amazonaws.com/medibook:v1.0.0
+aws ecr describe-repositories --repository-names medibook || \
+  aws ecr create-repository --repository-name medibook \
+    --image-scanning-configuration scanOnPush=true --image-tag-mutability IMMUTABLE
+aws ecr get-login-password | docker login --username AWS --password-stdin ${IMG%%/*}
+docker tag medibook:local $IMG &amp;&amp; docker push $IMG
+ssh -i ~/.ssh/lab.pem ec2-user@IP 'sudo docker pull '"$IMG"</code></pre></div>
+<p>Registry first, <code>docker run</code> second — never <code>docker save | ssh docker load</code> as a habit. The registry is where scanning, signing and immutable tags exist; skipping it is how you get a build you can't audit.</p>
+<h2 id="deploy-on-the-linux-vm-the-one-box-version-do-this-before-aws">Deploy on the Linux VM (the “one box” version — do this before AWS)</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">sudo tee /etc/systemd/system/medibook.service &gt;/dev/null &lt;&lt;'UNIT'
+[Unit]
+Description=MediBook API
+After=network-online.target docker.service
+Wants=network-online.target
+[Service]
+Restart=always
+RestartSec=5
+ExecStartPre=-/usr/bin/docker rm -f medibook
+ExecStart=/usr/bin/docker run --rm --name medibook \
+  --env-file /etc/medibook/prod.env -p 127.0.0.1:8080:8080 \
+  --memory 768m --cpus 1.5 --log-opt max-size=10m --log-opt max-file=3 \
+  --read-only --tmpfs /tmp \
+  REGISTRY/medibook:v1.0.0
+ExecStop=/usr/bin/docker stop -t 25 medibook
+TimeoutStopSec=40
+[Install]
+WantedBy=multi-user.target
+UNIT
+sudo systemctl daemon-reload &amp;&amp; sudo systemctl enable --now medibook
+sudo journalctl -u medibook -f</code></pre></div>
+<p>Then Nginx in front — TLS, the health path, and timeouts that don't fight the JVM:</p>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">nginx</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-nginx">upstream medibook { server 127.0.0.1:8080 keepalive 32; }
+server {
+  listen 443 ssl http2;
+  server_name app.clinic.example.com;
+  ssl_certificate     /etc/letsencrypt/live/app.clinic.example.com/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/app.clinic.example.com/privkey.pem;
+  add_header Strict-Transport-Security "max-age=31536000" always;
+  access_log /var/log/nginx/medibook.access.log combined;
+  location /actuator/health { proxy_pass http://medibook; access_log off; }
+  location / {
+    proxy_pass http://medibook;
+    proxy_set_header Host $host; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_connect_timeout 3s; proxy_read_timeout 60s; proxy_next_upstream off;
+  }
+}</code></pre></div>
+<p><strong>Why each line earns its place:</strong> <code>127.0.0.1:8080</code> publishing means the app is only reachable through Nginx (a <code>0.0.0.0:8080</code> binding with a permissive security group is the #1 audit finding on student projects) · <code>proxy_read_timeout 60s</code> must exceed the app's slowest legitimate request or you'll “see” 502s that aren't the app's fault · <code>proxy_next_upstream off</code> on a single box prevents double-POSTing a booking · <code>--read-only --tmpfs /tmp</code> proves the app truly doesn't write to disk · <code>ExecStop=docker stop -t 25</code> + <code>server.shutdown=graceful</code> means in-flight bookings finish instead of erroring on restart.</p>
+<h2 id="create-the-aws-infrastructure-terraform-one-module-each">Create the AWS infrastructure (Terraform, one module each)</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terraform</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-hcl">module "network" {
+  source = "../modules/network"
+  vpc_cidr = "10.0.0.0/16"
+  azs      = ["eu-west-1a", "eu-west-1b"]
+  public_subnet_cidrs  = ["10.0.0.0/24", "10.0.1.0/24"]
+  private_subnet_cidrs = ["10.0.10.0/24", "10.0.11.0/24"]
+  data_subnet_cidrs    = ["10.0.20.0/24", "10.0.21.0/24"]
+  enable_vpc_endpoints = ["s3", "ecr", "ecr-messages", "ecr-docker", "logs", "ssm", "ssmmessages"]
+}
+
+module "app" {
+  source = "../modules/app-service"
+  name                 = "medibook"
+  vpc_id               = module.network.vpc_id
+  subnet_ids           = module.network.private_app_subnet_ids
+  image                = "${local.registry}/medibook:v1.0.0"
+  instance_type        = "t3.small"
+  min_size, desired…   = 2, 2, 4
+  env_secret_refs        = ["prod/medibook/db-url", "prod/medibook/jwt-secret"]
+  health_check_path    = "/actuator/health/readiness"
+  graceful_stop_seconds = 30
+}
+
+module "data" {
+  source = "../modules/postgres"
+  engine_version = "16.3"  instance_class = "db.t4g.micro"
+  multi_az = true  storage_encrypted = true  backup_retention_days = 7
+  deletion_protection = true  db_subnet_group = module.network.data_subnet_group_name
+}</code></pre></div>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">terraform -chdir=envs/prod init
+terraform -chdir=envs/prod plan  -out=tfplan
+terraform -chdir=envs/prod show tfplan | grep -E "will be|forces replacement" # read the plan
+terraform -chdir=envs/prod apply tfplan</code></pre></div>
+<h2 id="networking-and-the-security-group-chain">Networking, and the security-group chain</h2>
+<div class="flow"><span class="fnode">internet</span><span class="farrow">→</span><span class="fnode">Route 53</span><span class="farrow">→</span><span class="fnode">ALB (<code>sg-lb</code>: 443 from 0.0.0.0/0)</span><span class="farrow">→</span><span class="fnode">target group</span><span class="farrow">→</span><span class="fnode">EC2 (<code>sg-app</code>: 8080 from <code>sg-lb</code> only, 22 from <code>sg-bastion</code> only)</span><span class="farrow">→</span><span class="fnode">RDS (<code>sg-db</code>: 5432 from <code>sg-app</code> only)</span><span class="farrow">→</span></div>
+<p>That chain is the single most reviewed part of any AWS project: source is a <strong>security group id</strong>, never a CIDR, so no instance ever “temporarily” opens 5432 to the world. <code>sg-app</code> still needs egress 443 (ECR, SSM, CloudWatch) — which is why “0.0.0.0/0 outbound, 8080 inbound from ALB only” is the correct-looking answer in a design review. No NAT for the <em>data</em> tier; VPC endpoints for ECR/S3/Logs so pulls don't pay NAT twice.</p>
+<h2 id="database">Database</h2>
+<p>RDS Postgres, <code>multi_az = true</code>, subnet group of the two private <strong>data</strong> subnets, <code>publicly_accessible = false</code>, KMS CMK, <code>performance_insights_enabled = true</code>, retention 7 days, and a parameter group with <code>log_min_duration_statement = 500</code> so slow queries are discoverable. Credentials in Secrets Manager with rotation disabled for a lab (enabled in prod), never in <code>user_data</code>. Migrations run <strong>from the pipeline as their own step</strong>, not from <code>spring.flyway.auto-migrate</code> on boot — otherwise N instances race to migrate and you learn about it during a scale-out.</p>
+<h2 id="deploy-and-prove-it">Deploy, and prove it</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash">kubectl-free version: aws elbv2 describe-target-health --target-group-arn $TG --query \
+ 'TargetHealthDescriptions[].TargetHealth.State'
+curl -sS https://app.clinic.example.com/actuator/health | jq '.status, .components.db.status'
+curl -sS -X POST https://app.clinic.example.com/api/auth/login -H 'content-type: application/json' \
+  -d '{"email":"recep@clinic.test","password":"ChangeMe123!"}' -o /dev/null -w '%{http_code}\n'
+ab -n 300 -c 20 https://app.clinic.example.com/api/doctors   # a 30-second load sanity check</code></pre></div>
+<p>A deploy “is” these three lines: healthy targets, healthy app-with-DB, and one authenticated request that returns 200. Everything else is detail.</p>
+<h2 id="ci-cd-jenkins-first-because-you-must-be-able-to-read-one">CI/CD — Jenkins first (because you must be able to read one)</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">text</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-text">Checkout → Build+Test (./mvnw -B verify, junit report) → SonarQube gate → Trivy fs (HIGH,CRITICAL)
+→ gitleaks → Docker build (layer cache) → Trivy image → push (immutable tag + sha tag)
+→ deploy staging (systemd restart or ECS task update) → verify (health + smoke) → [approval] → deploy prod</code></pre></div>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">jenkinsfile</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-groovy">stage('Deploy + verify') {
+  steps {
+    sh """
+      aws ssm send-command --document-name AWS-RunShellScript --instance-ids $INSTANCE_ID \
+        --parameters 'commands=["aws ecr pull-per-images &gt;/dev/null 2&gt;&amp;1 || docker pull ${IMAGE} &amp;&amp; systemctl restart medibook"]' \
+        --query Command.CommandId --output text
+    """
+    timeout(5) { sh "./scripts/wait-for-health.sh https://staging.clinic.example.com/actuator/health" }
+    sh "./scripts/smoke.sh https://staging.clinic.example.com"
+  }
+  post { failure { sh "./scripts/rollback.sh staging" } }
+}</code></pre></div>
+<p>The pattern: <strong>deploy, then verify, then auto-rollback on failure.</strong> <code>wait-for-health.sh</code> is a <code>curl --retry-connrefused --retry 30 --retry-delay 2</code> loop, and it is the reason your pipeline tells the truth. Then rebuild the same flow in GitHub Actions with OIDC for the credentials and nothing else changes — which is the point of learning the stages rather than the tool.</p>
+<h2 id="devsecops-gates-the-same-six-every-project">DevSecOps gates (the same six, every project)</h2>
+<div class="tablewrap"><table><thead><tr><th class="al-left">Gate</th><th class="al-left">Tool</th><th class="al-left">Blocks on</th><th class="al-left">Placed here because</th></tr></thead><tbody><tr><td class="al-left">SAST</td><td class="al-left">SonarQube quality gate</td><td class="al-left">new code smells, block/critical bugs</td><td class="al-left">before any artefact exists</td></tr><tr><td class="al-left">SCA</td><td class="al-left">Trivy fs / OWASP dep-check</td><td class="al-left">HIGH, CRITICAL CVEs</td><td class="al-left">a <code>pom.xml</code> change is findable in 4 s</td></tr><tr><td class="al-left">Secrets</td><td class="al-left">gitleaks + GitHub push protection</td><td class="al-left">any verified secret</td><td class="al-left">history, not just the tree</td></tr><tr><td class="al-left">Container</td><td class="al-left">Trivy image (scan-on-push in ECR too)</td><td class="al-left">CRITICAL, HIGH unfixed</td><td class="al-left">the bytes you'll actually run</td></tr><tr><td class="al-left">IaC</td><td class="al-left">Checkov / tfsec</td><td class="al-left">P0/P1 (public DB, unencrypted volume, open 22)</td><td class="al-left">before <code>apply</code> creates the hole</td></tr><tr><td class="al-left">Runtime</td><td class="al-left">Falco or CloudWatch + alarms (Phase 2)</td><td class="al-left">exec into pod, new privileged container</td><td class="al-left">nothing static can see this</td></tr></tbody></table></div>
+<p>Plus two non-tool rules that make gates real: <strong>no gate without an owner and a documented override with an expiry</strong>, and <strong>the gate lives in the pipeline, not in a person's discipline</strong> — a <code>merge check</code> on the PR for scans, an environment approval for prod.</p>
+<h2 id="monitoring">Monitoring</h2>
+<p>CloudWatch agent for memory and disk (<code>mem_util</code>, <code>df -u -x</code>), <code>log_opt</code> on Docker so <code>/var/lib/docker</code> can't fill the 30 GB EBS, structured app logs to CloudWatch Logs with 30-day retention, and these alarms (the list is from the reference project's own troubleshooting guide, generalised):</p>
+<ul class="plain"><li><code>CPUUtilization &gt; 85</code> for 3×5 min · <code>StatusCheckFailed</code> (system or instance) 2×1 min · <code>MemoryUtilization &gt; 90</code> · <code>DiskSpaceUtilization &gt; 85</code></li><li>ALB: <code>HTTPCode_Target_5XX_Count</code> &gt; 1 % of <code>RequestCount</code>, <code>TargetResponseTime p99 &gt; 2 s</code>, <code>SurgeQueueLength &gt; 0</code></li><li>RDS: <code>FreeableMemory &lt; 256 MB</code>, <code>DatabaseConnections</code> &gt; 80 % of the pool ceiling, <code>CPUUtilization &gt; 90</code>, <code>BurstBalance &lt; 20</code> (a burstable volume's last warning before a stall)</li></ul>
+<p>One dashboard, three rows: RED for the service, USE for the box, saturation for the DB. And a <code>logs</code> insight query saved: <code>filter @message like /ERROR|Exception/ | stats count() by bin(5m)</code>.</p>
+<h2 id="failure-scenarios-cause-them-on-purpose">Failure scenarios — cause them on purpose</h2>
+<div class="tablewrap"><table><thead><tr><th class="al-left">You break it by</th><th class="al-left">You should see</th><th class="al-left">You should do</th></tr></thead><tbody><tr><td class="al-left"><code>systemctl stop medibook</code></td><td class="al-left">ALB target <code>draining → unused</code>, 503 from Nginx</td><td class="al-left"><code>journalctl -u medibook</code>, <code>docker ps</code>, start, watch the target recover</td></tr><tr><td class="al-left">Wrong <code>DB_PASSWORD</code> in <code>/etc/medibook/prod.env</code></td><td class="al-left">app exits: <code>FATAL: password authentication failed</code>, restarts each time</td><td class="al-left"><code>docker logs</code>, compare Secrets Manager value, redeploy — never edit the server by hand</td></tr><tr><td class="al-left">Security group 5432 source changed to <code>sg-lb</code></td><td class="al-left"><code>Connection refused</code>/timeout, app <code>DB_CONNECTION_UNAVAILABLE</code></td><td class="al-left"><code>telnet &lt;rds-endpoint&gt; 5432</code> from the instance, then <code>aws ec2 authorize-security-group-ingress --group-id sg-db --port 5432 --source-group sg-app</code></td></tr><tr><td class="al-left"><code>/tmp</code> full (a heap dump)</td><td class="al-left"><code>No space left on device</code>, health flaps</td><td class="al-left"><code>df -h</code>, `du -x -h /</td></tr><tr><td class="al-left">Image tag deleted from ECR</td><td class="al-left"><code>ImagePullBackOff</code>/<code>pull access denied</code></td><td class="al-left"><code>aws ecr describe-images --repository-name medibook --image-ids imageTag=v1.0.0</code>, push again or retag</td></tr><tr><td class="al-left">Nginx <code>proxy_read_timeout 5s</code></td><td class="al-left">504 on the report endpoint only</td><td class="al-left">compare ALB <code>TargetResponseTime</code> with nginx's <code>$request_time</code> — that pair localises the delay in one step</td></tr><tr><td class="al-left">Scale to 0 by mistake / ASG min 0</td><td class="al-left">nothing answers, but no alarm fires</td><td class="al-left">an alarm on <code>GroupInServiceInstances &lt; 1</code> — the “missing capacity” alarm people forget</td></tr></tbody></table></div>
+<h2 id="troubleshooting-the-3-tier-version-of-it-s-down">Troubleshooting — the 3-tier version of “it's down”</h2>
+<div class="codewrap with-shell"><div class="codehead"><span class="lang">terminal</span><button class="copybtn" data-copy>copy</button></div><pre><code class="lang-bash"># 1 · is DNS/TLS the problem?
+dig +short app.clinic.example.com ; curl -vI https://app.clinic.example.com/actuator/health 2&gt;&amp;1 | tail -6
+# 2 · is the load balancer seeing anything?
+aws elbv2 describe-target-health --target-group-arn $TG
+aws cloudwatch get-metric-statistics --namespace AWS/ApplicationELB \
+  --metric-name HTTPCode_Target_5XX_Count --dimensions Name=LoadBalancer,Value=$LB_ARN \
+  --start-time $(date -u -d '-30 min' +%FT%TZ) --end-time $(date -u +%FT%TZ) --period 60 --statistics Sum
+# 3 · is the box alive, and how?
+aws ssm start-session --target i-xxx   # or ssh
+sudo systemctl status medibook --no-pager ; sudo journalctl -u medibook --since '-15 min' | tail -40
+df -h ; free -m ; top -bn1 | head -15 ; sudo docker inspect medibook --format '{{.State.ExitCode}} {{.State.OOMKilled}}'
+# 4 · can the app reach its database?
+timeout 5 bash -c '&lt;/dev/tcp/medibook-db.cluster-ro-cxy.eu-west-1.rds.amazonaws.com/5432' &amp;&amp; echo OPEN || echo BLOCKED
+# 5 · can I reproduce a request locally, with the same env?
+sudo docker exec -it medibook curl -s localhost:8080/actuator/health/readiness</code></pre></div>
+<p>The order is the lesson: <strong>edge → LB → host → process → dependency → request.</strong> Skip a step and you'll “fix” the app when the security group was wrong.</p>
+<h2 id="scaling">Scaling</h2>
+<p>One box doesn't scale; the ASG does. <code>t3.small</code> → <code>t3.medium</code> is the <em>first</em> lever (vertical, cheap, a reboot), then desired 2 → 4 (horizontal, needs the app to be stateless — which you proved when nothing wrote to disk), then scheduled scaling for Monday 08:00 (a 200 % morning spike is predictable, so don't wait for CPU to react), then RDS read replica for <code>/api/reports/day</code> only (a report query on the primary is how a busy 09:00 becomes a full outage). Every step justified by a metric, never by a vibe: <code>CPUUtilization</code> plus <code>TargetResponseTime</code> plus <code>DatabaseConnections</code>.</p>
+<h2 id="rollback">Rollback</h2>
+<p>VM/systemd: retag and restart — <code>/etc/medibook/prod.env</code> points at <code>IMAGE_TAG</code>, so <code>deploy.sh</code> takes the tag as an argument and rollback is <code>deploy.sh v0.9.7</code>. Two rules you should already feel: <strong>a DB migration must be backward-compatible</strong> (add column, deploy code, then drop; the pipeline rejects <code>DROP</code>/<code>RENAME</code> in a migration PR without a second release) and <strong>rollback is rehearsed in staging every release</strong>, because a rollback nobody has run is a rumour.</p>
+<h2 id="final-architecture">Final architecture</h2>
+<div class="flow"><span class="fnode">users</span><span class="farrow">→</span><span class="fnode">Route 53 (alias, 30s TTL)</span><span class="farrow">→</span><span class="fnode">ACM cert</span><span class="farrow">→</span><span class="fnode">ALB in public subnets (2 AZs)</span><span class="farrow">→</span><span class="fnode">target group (readiness probe /actuator/health/readiness)</span><span class="farrow">→</span><span class="fnode">ASG: t3.small×2 in private-app subnets (sg-app from sg-lb, IMDSv2, docker + cloudwatch agent, --env-file from SSM)</span><span class="farrow">→</span><span class="fnode">Secrets Manager + Parameter Store (via VPC endpoint)</span><span class="farrow">→</span><span class="fnode">RDS Postgres 16 Multi-AZ in private-data (sg-db from sg-app), snapshots to S3 with KMS</span><span class="farrow">→</span><span class="fnode">VPC endpoints: ECR, S3, Logs, SSM</span><span class="farrow">→</span><span class="fnode">CloudWatch logs+metrics+alarms</span><span class="farrow">→</span><span class="fnode">SNS</span><span class="farrow">→</span><span class="fnode">Slack/email</span><span class="farrow">→</span><span class="fnode">all created by Terraform with a locked remote state, applied only by CI after a reviewed plan</span><span class="farrow">→</span></div>
+<h2 id="what-i-learned-write-yours-before-reading-this">What I learned (write yours before reading this)</h2>
+<p>Three sentences I'd expect: the health endpoint is the contract between the app and everything above it; the security-group chain is what makes “no ports open to the world” a fact instead of a hope; and a deploy without verification is a guess. Add your own incident — usually the one where the ALB marked a healthy app unhealthy because of the <code>/api</code> context path.</p>
+<h2 id="interview-questions-this-project-s-set">Interview questions (this project's set)</h2>
+<div class="grid2"><p><strong>“How do you deploy a Spring Boot app without Kubernetes?”</strong> → a container or a JAR, but the important parts are the same: a non-root runtime user, config from env/secret store, graceful shutdown matched by the proxy and LB timeouts, a readiness endpoint that includes the DB, an auto-restart supervisor, logs to stdout, and a rollback path that keeps migrations backward-compatible. <strong>“A user says the site is down. Your first five commands?”</strong> → <code>curl -v https://…/actuator/health</code>, <code>dig +short</code>, <code>aws elbv2 describe-target-health</code>, <code>systemctl status</code>, <code>journalctl --since -15m | tail -40</code>. Then explain how each one halves the search space. <strong>“What's the difference between Nginx here and the ALB?”</strong> → both proxy; the ALB is managed, does TLS from ACM, health-checks and re-registers ASG instances, and you never patch it. Nginx is cheaper and gives you file-level control of headers and caching, but it's a box you own and a thing that can fill its own disk. <strong>“Why is <code>0.0.0.0/0</code> inbound on 8080 a finding?”</strong> → it bypasses TLS, WAF and access logs, and exposes actuator endpoints to the internet; the only inbound path should be the ALB SG on 8080 or the LB on 443.</p></div>
+<h2 id="r-sum-bullets-components-you-actually-built">Résumé bullets (components you actually built)</h2>
+<div class="callout note"><p class="ctitle"><strong>USE THESE WORDS, NOT BIGGER ONES</strong></p><ul class="plain"><li>Deployed a Spring Boot appointment API on AWS: Terraform-managed VPC with public/private subnets across two AZs, ALB with readiness-based health checks, and an Auto Scaling group of hardened t3.small instances (IMDSv2, non-root container, read-only filesystem).</li><li>Replaced manual deployment with a Jenkins pipeline: Maven build, JUnit + Testcontainers verification, SonarQube quality gate, Trivy dependency and image scanning, gitleaks secret scan, immutable ECR tags with scan-on-push, automated staging deploy and smoke verification, production behind a manual approval with auto-rollback.</li><li>Added CloudWatch logs, memory/disk metrics and nine alarms covering latency, 5xx rate, saturation and status checks, reducing time-to-detection for a failed deploy from “user report” to under 2 minutes. <em>(Only include the “2 minutes” if you measured it in a drill.)</em></li><li>Designed least-privilege access: chained security groups, IAM roles instead of access keys, secrets in Secrets Manager injected at deploy time, and VPC endpoints that removed all NAT-path traffic for ECR, S3 and CloudWatch.</li></ul></div>
+<div class="revision"><p class="ctitle"><strong>QUICK REVISION — 5 minutes</strong></p><p><strong>Concepts:</strong> JAR vs image · <code>MaxRAMPercentage</code> vs <code>-Xmx</code> · graceful shutdown and <code>TimeoutStopSec</code> · Flyway as a deploy step · Nginx vs ALB timeouts · SG chaining · readiness vs liveness · RDS Multi-AZ and backup retention · <code>log_opt</code> and the 30 GB EBS · instance profile vs access key · VPC endpoints vs NAT · <code>describe-target-health</code> · alarms on symptoms · backward-compatible migrations. <strong>Commands to remember:</strong> <code>./mvnw -B verify</code> · <code>docker build -t reg/app:v1.0.0 .</code> · <code>aws ecr get-login-password | docker login --username AWS --password-stdin REG</code> · <code>terraform plan -out=tfplan &amp;&amp; terraform apply tfplan</code> · <code>aws elbv2 describe-target-health --target-group-arn $TG</code> · <code>timeout 5 bash -c '&lt;/dev/tcp/host/5432'</code> · <code>journalctl -u medibook --since -15m</code> · <code>systemctl restart medibook &amp;&amp; curl -s .../actuator/health</code>. <strong>Architecture:</strong> DNS → ALB → ASG (private) → RDS (private) + secret/param/config sidecars, all from reviewed Terraform plans, all shipping to one dashboard. <strong>Common mistakes:</strong> <code>0.0.0.0:8080</code> published · health check on <code>/</code> instead of the readiness endpoint · migrations auto-run at boot on N instances · secrets in user data or Git · no drain on <code>systemctl stop</code> · “deployed” decided by <code>curl -I /</code> on localhost · ALB idle timeout shorter than the app's longest request · log rotation forgotten. <strong>Troubleshooting checklist:</strong> edge → LB → host → process → dependency → request. Then the alarm that should have fired, and the runbook line you're adding so it fires next time.</p></div>
+<div class="learn"><p class="ctitle"><strong>WHAT I LEARNED (your version)</strong></p><p>Write, in this file in your own repo: the one command that surprised you, the one failure that took more than 30 minutes, and the one thing you'd automate first if the clinic paid you. That paragraph becomes your interview story and your résumé bullet. Nobody can write it for you.</p></div>
+<p>Next: <a href="proj-02-ecommerce.html">Project 02 — CartFlow (Docker → AWS + CI/CD) →</a></p></div>
+      <div class="pagefoot">
+        <p class="pagefootnote">Part of the DevOps Academy built from the 41-project reference repository · offline · no tracking</p>
+        <div class="pager">
+          <a class="pg prev" href="projects.html"><span>Previous</span><strong>Projects index</strong></a>
+          <a class="pg next" href="proj-02-ecommerce.html"><span>Next</span><strong>02 · E-commerce in Docker</strong></a>
+        </div>
+        <p class="markread"><label class="tickall"><input type="checkbox" data-mark-done> <span>Mark this page as done</span></label></p>
+      </div>
+    </article>
+  </main>
+</div>
+<div class="searchmodal" data-search-modal hidden>
+  <div class="searchbox">
+    <input type="search" data-search-input placeholder="Search the course: OOMKilled, terraform state lock, ALB 502, Jenkinsfile…" aria-label="Search">
+    <ul class="searchresults" data-search-results></ul>
+    <p class="searchhint">Press <kbd>Esc</kbd> to close · <kbd>/</kbd> to open</p>
+  </div>
+</div>
+</body>
+</html>
